@@ -31,3 +31,6 @@
 [submodule "LLM-Wiki"]
 	path = resources/lucasastorian/LLM-Wiki
 	url = https://github.com/lucasastorian/llmwiki.git
+[submodule "Karpathy-LLM-Wiki"]
+	path = resources/Astro-Han/Karpathy-LLM-Wiki
+	url = https://github.com/Astro-Han/karpathy-llm-wiki.git

@@ -17,3 +17,4 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 9   | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       |
 | 10  | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       |
 | 11  | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       |
+| 12  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       |
