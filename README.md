@@ -9,4 +9,5 @@
 | 4   | Synthadoc                            | https://github.com/axoviq-ai/synthadoc                | Significant |
 | 5   | OmegaWiki                            | https://github.com/skyllwt/OmegaWiki                  | Significant |
 | 6   | LLM Wiki Manager                     | https://github.com/sametbrr/llm-wiki-manager          | Small       |
+| 7   | PulseOS-Lite                         | https://github.com/jp-carrilloe/pulseOS-lite          | Small       |
 
