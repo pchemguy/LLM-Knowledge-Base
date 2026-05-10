@@ -49,3 +49,6 @@
 [submodule "Understand-Anything"]
 	path = resources/Lum1104/Understand-Anything
 	url = https://github.com/Lum1104/Understand-Anything.git
+[submodule "AgentMemory"]
+	path = resources/rohitg00/AgentMemory
+	url = https://github.com/rohitg00/agentmemory.git
