@@ -19,3 +19,6 @@
 [submodule "PulseOS-Lite"]
 	path = resources/jp-carrilloe/PulseOS-Lite
 	url = https://github.com/jp-carrilloe/pulseOS-lite.git
+[submodule "Second-Brain"]
+	path = resources/NicholasSpisak/Second-Brain
+	url = https://github.com/NicholasSpisak/second-brain
