@@ -4,3 +4,6 @@
 [submodule "SwarmVault"]
 	path = resources/SwarmClawAI/SwarmVault
 	url = https://github.com/swarmclawai/swarmvault.git
+[submodule "andrej-karpathy-llm-wiki"]
+	path = resources/zhurudong/andrej-karpathy-llm-wiki
+	url = https://github.com/zhurudong/andrej-karpathy-llm-wiki.git
