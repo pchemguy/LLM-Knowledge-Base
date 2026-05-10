@@ -10,3 +10,4 @@
 | 6   | LLM Wiki Manager                     | https://github.com/sametbrr/llm-wiki-manager          | Small       |
 | 7   | PulseOS-Lite                         | https://github.com/jp-carrilloe/pulseOS-lite          | Small       |
 | 8   | Second Brain                         | https://github.com/NicholasSpisak/second-brain        | Small       |
+| 9   | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       |

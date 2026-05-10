@@ -22,3 +22,6 @@
 [submodule "Second-Brain"]
 	path = resources/NicholasSpisak/Second-Brain
 	url = https://github.com/NicholasSpisak/second-brain
+[submodule "Obsidian-Wiki"]
+	path = resources/Ar9av/Obsidian-Wiki
+	url = https://github.com/Ar9av/obsidian-wiki
