@@ -10,3 +10,6 @@
 [submodule "Synthadoc"]
 	path = resources/axoviq-ai/Synthadoc
 	url = https://github.com/axoviq-ai/synthadoc.git
+[submodule "OmegaWiki"]
+	path = resources/skyllwt/OmegaWiki
+	url = https://github.com/skyllwt/OmegaWiki.git

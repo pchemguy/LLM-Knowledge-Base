@@ -7,4 +7,5 @@
 | 2   | SwarmVault                           | https://github.com/swarmclawai/swarmvault             | Significant |
 | 3   | Karpathy-Inspired LLM Knowledge Base | https://github.com/zhurudong/andrej-karpathy-llm-wiki | Small       |
 | 4   | Synthadoc                            | https://github.com/axoviq-ai/synthadoc                | Significant |
+| 5   | OmegaWiki                            | https://github.com/skyllwt/OmegaWiki                  | Significant |
 
