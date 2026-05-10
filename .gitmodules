@@ -28,3 +28,6 @@
 [submodule "LLM-Wiki-Compiler"]
 	path = resources/ussumant/LLM-Wiki-Compiler
 	url = https://github.com/ussumant/llm-wiki-compiler.git
+[submodule "LLM-Wiki"]
+	path = resources/lucasastorian/LLM-Wiki
+	url = https://github.com/lucasastorian/llmwiki.git
