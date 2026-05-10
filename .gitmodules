@@ -13,3 +13,6 @@
 [submodule "OmegaWiki"]
 	path = resources/skyllwt/OmegaWiki
 	url = https://github.com/skyllwt/OmegaWiki.git
+[submodule "LLM-Wiki-Manager"]
+	path = resources/sametbrr/LLM-Wiki-Manager
+	url = https://github.com/sametbrr/llm-wiki-manager.git
