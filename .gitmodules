@@ -46,3 +46,6 @@
 [submodule "LLM-Wiki-MehmetGoekce"]
 	path = resources/MehmetGoekce/LLM-Wiki-MehmetGoekce
 	url = https://github.com/MehmetGoekce/llm-wiki.git
+[submodule "Understand-Anything"]
+	path = resources/Lum1104/Understand-Anything
+	url = https://github.com/Lum1104/Understand-Anything.git
