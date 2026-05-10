@@ -21,3 +21,4 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 13  | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       |
 | 14  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       |
 | 15  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       |
+| 16  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       |

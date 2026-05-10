@@ -43,3 +43,6 @@
 [submodule "yopedia"]
 	path = resources/yologdev/yopedia
 	url = https://github.com/yologdev/karpathy-llm-wiki.git
+[submodule "LLM-Wiki-MehmetGoekce"]
+	path = resources/MehmetGoekce/LLM-Wiki-MehmetGoekce
+	url = https://github.com/MehmetGoekce/llm-wiki.git
