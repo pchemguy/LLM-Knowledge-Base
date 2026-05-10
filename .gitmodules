@@ -40,3 +40,6 @@
 [submodule "LLM-Wiki-Ss1024sS"]
 	path = resources/Ss1024sS/LLM-Wiki-Ss1024sS
 	url = https://github.com/Ss1024sS/LLM-wiki.git
+[submodule "yopedia"]
+	path = resources/yologdev/yopedia
+	url = https://github.com/yologdev/karpathy-llm-wiki.git
