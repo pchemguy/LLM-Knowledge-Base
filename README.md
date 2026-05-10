@@ -19,4 +19,4 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 11  | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       |
 | 12  | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       |
 | 13  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       |
-
+| 14  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       |

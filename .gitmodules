@@ -37,3 +37,6 @@
 [submodule "LLM-Wiki-nvk"]
 	path = resources/nvk/LLM-Wiki-nvk
 	url = https://github.com/nvk/llm-wiki.git
+[submodule "LLM-Wiki-Ss1024sS"]
+	path = resources/Ss1024sS/LLM-Wiki-Ss1024sS
+	url = https://github.com/Ss1024sS/LLM-wiki.git
