@@ -1,3 +1,7 @@
+---
+url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
+---
+
 # LLM-Knowledge-Base
 
 | #   | Name                                 | URL                                                   | Class       |
