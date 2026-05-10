@@ -10,7 +10,7 @@ tags:
 ---
 > [!WARNING] Usage
 > 
-> **The right way to use this is to share it with your LLM agent and work together to instantiate a version that fits your needs. The document's only job is to communicate the pattern. Your LLM can figure out the rest.**
+> The right way to use this is to share it with your LLM agent and work together to instantiate a version that fits your needs. The document's only job is to communicate the pattern. Your LLM can figure out the rest.
 
 ## LLM Wiki
 
