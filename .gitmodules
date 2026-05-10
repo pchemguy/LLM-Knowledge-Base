@@ -25,3 +25,6 @@
 [submodule "Obsidian-Wiki"]
 	path = resources/Ar9av/Obsidian-Wiki
 	url = https://github.com/Ar9av/obsidian-wiki
+[submodule "LLM-Wiki-Compiler"]
+	path = resources/ussumant/LLM-Wiki-Compiler
+	url = https://github.com/ussumant/llm-wiki-compiler.git

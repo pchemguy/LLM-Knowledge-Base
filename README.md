@@ -11,3 +11,4 @@
 | 7   | PulseOS-Lite                         | https://github.com/jp-carrilloe/pulseOS-lite          | Small       |
 | 8   | Second Brain                         | https://github.com/NicholasSpisak/second-brain        | Small       |
 | 9   | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       |
+| 10  | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       |
