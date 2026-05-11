@@ -23,7 +23,7 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 12  | Second Brain                         | https://github.com/NicholasSpisak/second-brain        | Small       | [README](resources/NicholasSpisak/Second-Brain/README.md)        |
 | 13  | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       | [README](resources/Ar9av/Obsidian-Wiki/README.md)                |
 | 14  | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       | [README](resources/ussumant/LLM-Wiki-Compiler/README.md)         |
-| 15  | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       |                                                                  |
+| 15  | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       | [README](resources/lucasastorian/LLM-Wiki/README.md)             |
 | 16  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       |                                                                  |
 | 17  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       |                                                                  |
 | 18  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       |                                                                  |
