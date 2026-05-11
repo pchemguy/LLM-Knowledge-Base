@@ -4,6 +4,9 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 
 # LLM-Knowledge-Base
 
+[Karpathy's LLM Wiki](docs/karpathy/llm-wiki.md)
+[LLM Wiki v2 — extending Karpathy's LLM Wiki pattern](LLM%20Wiki%20v2%20—%20extending%20Karpathy's%20LLM%20Wiki%20pattern%20with%20lessons%20from%20building%20agent%20memory.md)
+
 | #   | Name                                 | URL                                                   | Class       | README                                                           |
 | --- | ------------------------------------ | ----------------------------------------------------- | ----------- | ---------------------------------------------------------------- |
 | 1   | Link                                 | https://github.com/gowtham0992/link                   | Significant |                                                                  |
