@@ -409,7 +409,67 @@ If you run your AI stack via Docker or WSL2 on Windows, Windows spins up a backg
 * You want your full 16 GB of VRAM unlocked.
 * You want to run **vLLM** flawlessly with 4-bit/8-bit mixed KV caching, PagedAttention, and infinite background context summarization without fighting Windows configuration files. 
 
+---
 
+## Prompt/Prefix Caching
 
+> [!NOTE] Prompt
+> 
+> So, processing input is expensive? I mean, with commercial LLM vendors provide significant discount on cached tokens. Can I improve performance with some kind of input caching?
 
+Yes, absolutely. The exact reason commercial vendors like Anthropic and OpenAI give you massive discounts on "cached tokens" is because of the **KV Cache**. 
 
+When a commercial API caches your prompt, they are essentially saving the pre-calculated memory states (the Keys and Values) to their servers so they don't have to spend expensive GPU compute re-evaluating them. 
+
+You can do the exact same thing locally on your RTX 5070 Ti and 64 GB DDR5 setup. In the open-source world, this is called **Prompt Caching** (or **Prefix Caching**). Because you are heavily bottlenecked by your DDR5 RAM speeds during the "Prefill" phase (reading the prompt), prompt caching will transform your workflow from unbearably slow to instantaneous.
+
+Here is how local prompt caching works, how to enable it, and the golden rules for making it actually hit.
+
+### 1. The Performance Difference
+
+When you load a massive 100,000-token codebase into Qwen3.6-35B-A3B:
+* **Cold Start (No Cache):** The engine has to pull all 37 GB of 8-bit model weights through your CPU to process those 100K tokens. This "Time to First Token" (TTFT) might take **30 to 60 seconds** before it types a single word.
+* **Warm Start (Cached):** The engine realizes it already calculated the KV states for those 100K tokens. It skips them entirely, only evaluating your new 20-word question. TTFT drops to **less than 1 second**.
+
+### 2. How to Enable Local Caching
+
+Depending on the backend you chose from our previous discussions, here is how you turn it on:
+
+**If using vLLM (WSL2 / Linux):**
+vLLM uses **Automatic Prefix Caching (APC)**. It is incredibly smart and manages the cache in chunks directly in your RAM/VRAM.
+* **The Command:** Add the flag `--enable-prefix-caching` when starting your server.
+* *Bonus:* Because you have 64 GB of RAM, you can pair this with `--swap-space 16`. vLLM will automatically dump older cached prefixes into your system RAM and pull them back to the GPU instantly when you ask a question about an old codebase.
+
+**If using llama.cpp (Native Windows or Linux):**
+`llama.cpp` handles caching slightly differently by literally writing the computed KV cache states to your super-fast NVMe SSD. 
+* **The Command:** Add `--prompt-cache prompt.cache` to your launch command. 
+* *Bonus:* Add `--prompt-cache-all` to ensure the model's generated replies are also injected back into the cache automatically.
+
+**If using Ollama or LM Studio:**
+Good news: Both of these tools **enable KV Cache reuse by default**. As long as you do not unload the model from memory, and as long as you append your new messages to the end of the chat, they will reuse the existing context automatically.
+
+### 3. The Golden Rule of Prompt Caching (Crucial)
+To actually get the "cache hit" (the performance boost), you must structure your prompts like a tree. 
+
+**Local engines match caches by checking the exact string of tokens from the absolute beginning.** The moment the engine finds a single token that is different from the cache, *it invalidates everything after that point and recalculates it.*
+
+**The WRONG way to prompt:**
+1.  *User:* "Can you rewrite this specific function?"
+2.  *User:* `[Paste 100,000 token codebase here]`
+*Why this fails:* In your next message, your new question will come *before* the codebase, or the system prompt will shift. The engine sees a change at token #10 and dumps the 100,000-token cache. You wait 60 seconds again.
+
+**The RIGHT way to prompt (The Cache-Friendly Structure):**
+1.  **Top:** System Prompt ("You are an expert coder...")
+2.  **Middle (The massive static data):** `[Paste 100,000 token codebase here]`
+3.  **Bottom:** Chat History & New User Question ("Can you rewrite the function on line 40?")
+
+If you structure it this way, the next time you ask a question, the engine sees that the first 100,050 tokens (System + Codebase + Chat History) are identical to its cache. It only processes the 15 tokens of your new question.
+
+### 4. Taking it further: The "Disk Snapshot" trick
+If you are working on a massive project over several days, you don't want to re-evaluate the 100K codebase every morning when you boot up your PC. 
+
+If you use `llama.cpp`'s `--prompt-cache` feature, it saves a literal `.cache` file to your NVMe drive. 
+* On Monday, you load your codebase. It takes 60 seconds. You work, you close the app, you turn off the PC.
+* On Tuesday, you open the app and point it at the same prompt cache file. The engine reads the file from your PCIe Gen 4/5 SSD straight into your RTX 5070 Ti's VRAM in about **3 seconds**. You bypass the prompt processing phase completely, across power cycles.
+
+---
