@@ -25,24 +25,37 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 14  | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       | [README](resources/ussumant/LLM-Wiki-Compiler/README.md)         |
 | 15  | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       | [README](resources/lucasastorian/LLM-Wiki/README.md)             |
 | 16  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       | [README](resources/Astro-Han/Karpathy-LLM-Wiki/README.md)        |
-| 17  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       |                                                                  |
-| 18  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       |                                                                  |
+| 17  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       | [README](resources/Ss1024sS/LLM-Wiki-Ss1024sS/README.md)         |
+| 18  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       | [README](resources/MehmetGoekce/LLM-Wiki-MehmetGoekce/README.md) |
 
-## Karpathy-Inspired LLM Knowledge Base - zhurudong
+## 9. Karpathy-Inspired LLM Knowledge Base - zhurudong
 
 **repo**: zhurudong/andrej-karpathy-llm-wiki
 
 Note: the entire project is in a single file [CLAUDE.en.md](resources/zhurudong/andrej-karpathy-llm-wiki/templates/CLAUDE.en.md).
 
-## LLM Wiki App - lucasastorian
+## 11. PulseOS-Lite - jp-carrilloe
+
+**repo**: jp-carrilloe/pulseOS-lite
+
+Note: Involves SQLite.
+
+## 15. LLM Wiki App - lucasastorian
 
 **repo**: lucasastorian/llmwiki
 
 Note: TypeScript application (https://llmwiki.app)
 
-## Karpathy LLM Wiki - Astro-Han
+## 16. Karpathy LLM Wiki - Astro-Han
 
 **repo**: Astro-Han/karpathy-llm-wiki
 
 Note: the entire project is in a single file [SKILL.md](resources/Astro-Han/Karpathy-LLM-Wiki/SKILL.md).
+
+
+## 17. LLM Wiki - Ss1024sS
+
+**repo**: Ss1024sS/LLM-wiki
+
+Note: Python app 
 
