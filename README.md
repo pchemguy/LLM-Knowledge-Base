@@ -9,7 +9,7 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 
 | #   | Name                                 | URL                                                   | Class       | README                                                           |
 | --- | ------------------------------------ | ----------------------------------------------------- | ----------- | ---------------------------------------------------------------- |
-| 1   | Link                                 | https://github.com/gowtham0992/link                   | Significant |                                                                  |
+| 1   | Link                                 | https://github.com/gowtham0992/link                   | Significant | [README](resources/gowtham0992/Link/README.md)                   |
 | 2   | SwarmVault                           | https://github.com/swarmclawai/swarmvault             | Significant |                                                                  |
 | 3   | Synthadoc                            | https://github.com/axoviq-ai/synthadoc                | Significant |                                                                  |
 | 4   | OmegaWiki                            | https://github.com/skyllwt/OmegaWiki                  | Significant |                                                                  |
@@ -27,6 +27,12 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 16  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       | [README](resources/Astro-Han/Karpathy-LLM-Wiki/README.md)        |
 | 17  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       | [README](resources/Ss1024sS/LLM-Wiki-Ss1024sS/README.md)         |
 | 18  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       | [README](resources/MehmetGoekce/LLM-Wiki-MehmetGoekce/README.md) |
+
+## 1. Link - gowtham0992
+
+**repo**: gowtham0992/link
+
+Note: Python app; key LLM instructions in [LINK.md](resources/gowtham0992/Link/LINK.md).
 
 ## 9. Karpathy-Inspired LLM Knowledge Base - zhurudong
 
