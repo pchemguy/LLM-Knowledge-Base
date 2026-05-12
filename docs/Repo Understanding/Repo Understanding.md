@@ -180,6 +180,45 @@ Explain WHY the architecture likely exists in this form.
 
 ---
 
+## Architectural Identity
+
+Characterize the repository’s dominant architectural identity.
+
+Examples:
+- orchestration-centric;
+- workflow-engine-centric;
+- event-driven;
+- tool-routing-centric;
+- memory-centric;
+- provider-abstraction-centric;
+- plugin-platform;
+- execution-runtime;
+- state-machine-oriented;
+- pipeline-oriented;
+- actor-oriented;
+- dataflow-oriented.
+
+Explain which architectural concerns dominate the implementation.
+
+---
+## Identify Semantic Centers
+
+Identify the parts of the repository that contain the primary semantic and architectural complexity.
+
+Distinguish between:
+
+- foundational infrastructure;
+- orchestration/control logic;
+- domain semantics;
+- integration glue;
+- boilerplate/framework code.
+
+Explain where the repository’s actual behavioral intelligence resides.
+
+Prioritize these areas during analysis.
+
+---
+
 ## Trace Real Execution Paths
 
 Trace important end-to-end flows such as:
@@ -197,6 +236,47 @@ Trace important end-to-end flows such as:
 - shutdown.
 
 Show which modules participate and how control/data move.
+
+---
+
+## Repository Archaeology
+
+Identify evidence of:
+
+- unfinished migrations;
+- deprecated abstractions;
+- unused infrastructure;
+- aspirational architecture;
+- partially implemented systems;
+- abandoned patterns;
+- legacy compatibility layers;
+- dead extension points;
+- divergence between documentation and implementation.
+
+Distinguish actively used mechanisms from nominal structure.
+
+If the repository is incomplete, partially implemented, experimental, or structurally inconsistent:  
+  
+- identify implemented vs aspirational systems;  
+- distinguish runtime-critical systems from scaffolding;  
+- explain what appears production-grade vs exploratory;  
+- identify probable future intended architecture.
+
+---
+
+## Analysis Prioritization
+
+Prioritize analysis effort according to architectural significance:
+
+1. Core orchestration and execution semantics.
+2. State ownership and lifecycle behavior.
+3. Primary domain abstractions and contracts.
+4. Runtime coordination and control flow.
+5. Extension and integration mechanisms.
+6. Configuration and operational infrastructure.
+7. Peripheral utilities and support tooling.
+
+Spend minimal effort on low-signal boilerplate.
 
 ---
 
@@ -228,17 +308,35 @@ Explain:
 
 ## 2. High-Level System Model
 
-Provide a concise but deep mental model of how the system fundamentally works, describing:
+Provide a concise but deep mental model describing what kind of system this repository fundamentally is.
 
-- major subsystems;
-- runtime topology;
-- control flow shape;
-- core execution model;
-- major abstractions;
-- architectural style;
-- operational philosophy.
+This section should help an engineer rapidly “see the machine” at a systems level before examining implementation details.
 
-This section should help an engineer “see the system”.
+Focus on:
+
+- the dominant architectural identity;
+- the primary execution paradigm;
+- the overall runtime topology;
+- the control-flow shape;
+- the major subsystems;
+- the primary abstractions;
+- the operational philosophy;
+- the relationship between orchestration, state, and execution.
+
+Explain:
+
+- what the system fundamentally behaves like;
+- how the major parts conceptually fit together;
+- where the repository’s primary semantic and architectural complexity appears to reside.
+
+Avoid detailed component walkthroughs.  
+Avoid step-by-step runtime tracing.
+
+This section should answer questions such as:
+
+- “What kind of machine is this?”
+- “What architectural pattern dominates the implementation?”
+- “Where does the system’s behavioral intelligence primarily live?”
 
 ---
 
@@ -253,56 +351,118 @@ For each major conceptual capability, describe:
 - tradeoffs;
 - extension implications.
 
+For each conceptual capability, explain:
+
+- which subsystem owns the capability;
+- which runtime flow realizes it;
+- which abstractions expose it;
+- where state related to it is managed;
+- whether the capability is centralized or cross-cutting.
+
 Use a structured table when useful.
 
 ---
 
 ## 4. Architecture and Component Analysis
 
-For each major subsystem:
+For each major subsystem or architectural component, explain:
 
-- purpose;
-- boundaries;
-- dependencies;
-- internal model and abstractions;
+- purpose and semantic responsibility;
+- ownership boundaries;
+- dependency relationships;
+- important abstractions and internal model;
 - lifecycle role;
-- architectural significance;
+- state/control relationships;
 - extension points;
 - hidden coupling;
-- important modules/files.
+- architectural significance;
+- important files/modules.
 
-Focus on:
+Focus on structural decomposition and responsibility boundaries.
 
-- semantic responsibilities;
-- ownership boundaries;
-- dependency direction;
-- state/control relationships.
+Explain:
 
+- what each major subsystem owns;
+- what it depends on;
+- what contracts or abstractions it exposes;
+- how responsibilities are divided across the repository;
+- where abstractions remain clean vs where boundaries leak.
+
+Distinguish between:
+
+- foundational infrastructure;
+- orchestration/control logic;
+- domain semantics;
+- integration glue;
+- framework/boilerplate code.
+
+Prioritize analysis effort toward architecturally significant components and semantic centers.
+
+Avoid converting this section into:
+- runtime tracing;
+- operational workflow explanation;
+- execution-sequence narration.
+
+This section should answer questions such as:
+
+- “What are the major parts of the system?”
+- “What responsibilities belong where?”
+- “Where are the real architectural boundaries?”
+- “Where does meaningful complexity live?”
 
 ---
 
 ## 5. Execution Flow Analysis
 
-Trace key runtime flows step-by-step.
+Trace important runtime behaviors step-by-step as they actually execute.
 
-Examples:
+Focus on dynamic runtime behavior rather than static architecture.
+
+Describe how control, data, state, and execution move through the system during real operation.
+
+Trace important flows such as:
 
 - startup;
 - initialization;
 - configuration loading;
 - dependency wiring;
-- request ingestion;
+- request/task ingestion;
 - orchestration;
-- memory retrieval;
-- request handling;
 - planning;
 - execution;
 - scheduling;
+- tool/provider invocation;
+- memory retrieval/update;
 - persistence;
+- error handling;
 - shutdown;
 - recovery.
 
-Reference concrete implementation locations.
+For each flow:
+
+- identify participating modules/components;
+- explain sequencing and transitions;
+- describe state mutations;
+- explain how control moves between subsystems;
+- identify synchronization or coordination points;
+- explain failure/recovery behavior where relevant.
+
+Reference concrete implementation locations where possible.
+
+Prioritize:
+- architecturally significant flows;
+- orchestration-critical paths;
+- lifecycle-critical paths;
+- state-critical paths.
+
+Compress repetitive or boilerplate flows.
+
+This section should answer questions such as:
+
+- “What actually happens at runtime?”
+- “How does execution move through the system?”
+- “What are the important lifecycle and orchestration paths?”
+- “Where are the critical runtime transitions?”
 
 ---
 
@@ -325,23 +485,51 @@ Explain:
 
 ## 7. Coordination and Control Semantics
 
-Explain:
+Explain how execution authority, coordination, scheduling, and control are organized across the system.
 
-- orchestration model;
-- delegation;
-- scheduling;
-- concurrency;
-- event handling;
-- retry semantics;
-- failure propagation;
-- cancellation semantics;
-- recovery behavior;
-- synchronization strategy;
-- queue/task semantics;
-- agent/tool coordination;
-- tool/provider routing.
+Focus on execution governance rather than runtime sequencing.
 
-Describe the real execution-control topology.
+Describe:
+
+- which components control or orchestrate others;
+- where execution authority resides;
+- how delegation occurs;
+- how work is routed and coordinated;
+- how concurrency and synchronization are managed;
+- how tasks, events, or messages are scheduled and propagated;
+- how failures propagate through control structures;
+- how retries, cancellation, and recovery are coordinated;
+- how tools/providers/agents are selected and controlled.
+
+Analyze mechanisms such as:
+
+- orchestration loops;
+- schedulers;
+- event systems;
+- queues;
+- task dispatch;
+- routing layers;
+- coordination abstractions;
+- synchronization primitives;
+- concurrency boundaries;
+- execution-control hierarchies.
+
+Explain the repository’s real execution-control topology:
+
+- centralized vs distributed coordination;
+- synchronous vs asynchronous control;
+- push vs pull orchestration;
+- reactive vs directive execution;
+- static vs dynamic routing;
+- state-driven vs event-driven coordination.
+
+This section should answer questions such as:
+
+- “Who controls whom?”
+- “How is work coordinated?”
+- “Where does orchestration authority reside?”
+- “How are execution decisions made?”
+- “How does the system govern runtime behavior?”
 
 ---
 
@@ -443,30 +631,25 @@ Ground all observations.
 
 ---
 
-## 13. Repository Navigation Guide
-
-Provide:
-
-- important entry points;
-- critical files/modules;
-- best reading order;
-- highest-value execution paths;
-- semantic centers of the system;
-- where core logic actually lives;
-- where abstractions become concrete;
-- where orchestration actually happens.
-
-Optimize for rapid onboarding.
-
----
-
-## 14. Practical Usage Guide
+## 13. Practical Usage Guide
 
 Provide a practical engineer-focused guide including:
 
 ### Minimal Viable Usage
 
 Smallest working setup.
+
+### Operational Assumptions
+
+Explain implicit operational assumptions such as:
+
+- expected scale;
+- expected operator expertise;
+- expected hardware environment;
+- expected deployment topology;
+- expected latency/cost assumptions;
+- expected workflow discipline;
+- expected persistence durability.
 
 ### Canonical Workflow
 
@@ -495,6 +678,23 @@ Most important operational failures and how the system behaves.
 ### Performance Considerations
 
 Bottlenecks, scaling assumptions, expensive paths.
+
+---
+
+## 14. Repository Navigation Guide
+
+Provide:
+
+- important entry points;
+- critical files/modules;
+- best reading order;
+- highest-value execution paths;
+- semantic centers of the system;
+- where core logic actually lives;
+- where abstractions become concrete;
+- where orchestration actually happens.
+
+Optimize for rapid onboarding.
 
 ---
 
