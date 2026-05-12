@@ -82,9 +82,9 @@ You MUST:
 
 - follow **Analysis Rules**
 - prepare information according to **Required Output Structure
-- generate:
-    - an onboarding report following **Onboarding Report Template** - the onboarding report is the detailed analysis artifact;
-    - **ONBOARDING.md** in the project root (update, if exists) - the persistent operational knowledge layer intended for future repository work..
+- generate in the project root:
+    - **OnboardingReport.md** following **Onboarding Report Template** - detailed full report;
+    - **ONBOARDING.md** - compact, high-signal, persistent operational knowledge layer intended for future repository work.
 
 
 ---
