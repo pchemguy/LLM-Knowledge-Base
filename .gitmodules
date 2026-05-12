@@ -1,54 +1,54 @@
 [submodule "Link"]
-	path = resources/gowtham0992/Link
+	path = implementations/gowtham0992/Link
 	url = https://github.com/gowtham0992/link.git
 [submodule "SwarmVault"]
-	path = resources/SwarmClawAI/SwarmVault
+	path = implementations/SwarmClawAI/SwarmVault
 	url = https://github.com/swarmclawai/swarmvault.git
 [submodule "andrej-karpathy-llm-wiki"]
-	path = resources/zhurudong/andrej-karpathy-llm-wiki
+	path = implementations/zhurudong/andrej-karpathy-llm-wiki
 	url = https://github.com/zhurudong/andrej-karpathy-llm-wiki.git
 [submodule "Synthadoc"]
-	path = resources/axoviq-ai/Synthadoc
+	path = implementations/axoviq-ai/Synthadoc
 	url = https://github.com/axoviq-ai/synthadoc.git
 [submodule "OmegaWiki"]
-	path = resources/skyllwt/OmegaWiki
+	path = implementations/skyllwt/OmegaWiki
 	url = https://github.com/skyllwt/OmegaWiki.git
 [submodule "LLM-Wiki-Manager"]
-	path = resources/sametbrr/LLM-Wiki-Manager
+	path = implementations/sametbrr/LLM-Wiki-Manager
 	url = https://github.com/sametbrr/llm-wiki-manager.git
 [submodule "PulseOS-Lite"]
-	path = resources/jp-carrilloe/PulseOS-Lite
+	path = implementations/jp-carrilloe/PulseOS-Lite
 	url = https://github.com/jp-carrilloe/pulseOS-lite.git
 [submodule "Second-Brain"]
-	path = resources/NicholasSpisak/Second-Brain
+	path = implementations/NicholasSpisak/Second-Brain
 	url = https://github.com/NicholasSpisak/second-brain
 [submodule "Obsidian-Wiki"]
-	path = resources/Ar9av/Obsidian-Wiki
+	path = implementations/Ar9av/Obsidian-Wiki
 	url = https://github.com/Ar9av/obsidian-wiki
 [submodule "LLM-Wiki-Compiler"]
-	path = resources/ussumant/LLM-Wiki-Compiler
+	path = implementations/ussumant/LLM-Wiki-Compiler
 	url = https://github.com/ussumant/llm-wiki-compiler.git
 [submodule "LLM-Wiki"]
-	path = resources/lucasastorian/LLM-Wiki
+	path = implementations/lucasastorian/LLM-Wiki
 	url = https://github.com/lucasastorian/llmwiki.git
 [submodule "Karpathy-LLM-Wiki"]
-	path = resources/Astro-Han/Karpathy-LLM-Wiki
+	path = implementations/Astro-Han/Karpathy-LLM-Wiki
 	url = https://github.com/Astro-Han/karpathy-llm-wiki.git
 [submodule "LLM-Wiki-nvk"]
-	path = resources/nvk/LLM-Wiki-nvk
+	path = implementations/nvk/LLM-Wiki-nvk
 	url = https://github.com/nvk/llm-wiki.git
 [submodule "LLM-Wiki-Ss1024sS"]
-	path = resources/Ss1024sS/LLM-Wiki-Ss1024sS
+	path = implementations/Ss1024sS/LLM-Wiki-Ss1024sS
 	url = https://github.com/Ss1024sS/LLM-wiki.git
 [submodule "yopedia"]
-	path = resources/yologdev/yopedia
+	path = implementations/yologdev/yopedia
 	url = https://github.com/yologdev/karpathy-llm-wiki.git
 [submodule "LLM-Wiki-MehmetGoekce"]
-	path = resources/MehmetGoekce/LLM-Wiki-MehmetGoekce
+	path = implementations/MehmetGoekce/LLM-Wiki-MehmetGoekce
 	url = https://github.com/MehmetGoekce/llm-wiki.git
 [submodule "Understand-Anything"]
-	path = resources/Lum1104/Understand-Anything
+	path = implementations/Lum1104/Understand-Anything
 	url = https://github.com/Lum1104/Understand-Anything.git
 [submodule "AgentMemory"]
-	path = resources/rohitg00/AgentMemory
+	path = implementations/rohitg00/AgentMemory
 	url = https://github.com/rohitg00/agentmemory.git

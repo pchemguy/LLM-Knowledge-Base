@@ -1,6 +1,6 @@
 # Add git submodule with custom folder name
 
-1. Create target folder, e.g., `resources/gowtham0992`. DO NOT CREATE `Link`
+1. Create target folder, e.g., `implementations/gowtham0992`. DO NOT CREATE `Link`
 2. Run using pattern:
 
 ```
