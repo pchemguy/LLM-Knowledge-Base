@@ -2691,3 +2691,427 @@ So the clean answer is:
 **Session history is managed explicitly by your application/frontend/agent. KV cache is an optimization used underneath, not the source of truth.**
 
 ---
+
+## Local LLM Frontend
+
+> [!NOTE] Prompt
+> 
+> I also want to use local model in either mode as a frontend for full models to save money. Basically, I would want use local model where it is sufficient and have the model to decide if it needs calling a paid model
+
+Yes — that is a very good architecture. Think of the local model as the **default controller/router**, and paid models as **escalation backends**.
+
+The key is: do **not** let the local model freely decide in an unbounded way. Give it an explicit routing policy.
+
+### Recommended architecture
+
+```text
+User
+ ↓
+Local model / local agent router
+ ↓
+Can handle locally?
+ ├─ yes → local answer / local tool use
+ └─ no  → prepare compact escalation packet
+           ↓
+        paid model
+           ↓
+        local model integrates result
+```
+
+### What the local model should do
+
+Use the local model for:
+
+* conversation continuity
+* repo indexing
+* file retrieval
+* summarization
+* first-pass code edits
+* simple debugging
+* prompt compression
+* deciding what context matters
+* building paid-model requests
+* validating paid-model output
+* maintaining memory
+
+Use paid models for:
+
+* hard reasoning
+* ambiguous architecture decisions
+* difficult code generation
+* large refactors
+* security-sensitive review
+* cases where local output fails tests
+* tasks needing high reliability
+* second opinion / critique
+
+### The important part: escalation packet
+
+Do not send the whole local session to the paid model. Have the local model construct a compact packet:
+
+```text
+Task:
+Relevant files:
+Relevant prior decisions:
+Constraints:
+What has already been tried:
+Known failure / uncertainty:
+Requested output:
+```
+
+This is where you save money. The local model acts as a **context compressor and relevance filter**.
+
+### Routing policy example
+
+Escalate only if one or more is true:
+
+```text
+- local model confidence is low
+- task requires multi-file architectural reasoning
+- generated patch fails tests twice
+- security/correctness risk is high
+- user explicitly requests best model
+- local model detects contradiction or missing context
+- output affects public API, database migration, auth, crypto, payments, or concurrency
+```
+
+### Avoid this mistake
+
+Do not ask the local model:
+
+```text
+Should I call GPT-5.5?
+```
+
+in a vague way.
+
+Instead ask it to classify:
+
+```text
+complexity: low / medium / high
+risk: low / medium / high
+missing context: yes / no
+local attempt likely sufficient: yes / no
+recommended route: local / paid / ask user
+reason:
+```
+
+That makes routing auditable.
+
+### Best practical setup
+
+For your local workstation:
+
+```text
+Open WebUI / custom frontend
+ ↓
+local Qwen model as default
+ ↓
+repo memory + RAG + session summaries
+ ↓
+router policy
+ ↓
+paid API only for escalations
+```
+
+### My recommendation
+
+Start with **manual approval escalation**:
+
+```text
+Local model: “This task is high-risk/high-complexity. I recommend escalating with this compact context packet.”
+User: approve
+Paid model call happens
+```
+
+Later, once you trust the routing, allow automatic escalation under a budget cap.
+
+That gives you cost savings without silently wasting API calls or leaking excessive repo/session context.
+
+---
+
+## Local LLM Frontend Reference
+
+> [!NOTE] Prompt
+> 
+> Have similar arrangements already been described, where I could learn? That also includes the necessity for local model managing big model session and constructing escalation packets for max cache hit of the paid model
+
+Yes — what you are describing is very much aligned with where advanced agent systems are evolving.
+
+Not necessarily as one clean unified “standard architecture,” but the individual ideas absolutely exist and are increasingly converging.
+
+The important thing is:
+
+### You are thinking in the correct systems direction.
+
+Especially these ideas:
+
+* local routing/triage model
+* escalation packets
+* prompt/prefix cache preservation
+* semantic memory separate from KV cache
+* stable prompt architecture
+* local-first orchestration
+* long-lived coding sessions
+* repo-aware agent memory
+* local drafting + cloud refinement
+
+These are all real directions.
+
+---
+
+### The single closest match to your thinking
+
+This paper is probably the most directly relevant:
+
+#### [Local-Splitter](https://arxiv.org/abs/2604.12301?utm_source=chatgpt.com)
+
+This is almost exactly:
+
+> local model in front of frontier model for coding-agent workloads
+
+It explicitly studies:
+
+* local routing
+* prompt compression
+* semantic caching
+* local drafting + cloud review
+* batching with vendor prompt caching
+* token/cost reduction architectures
+
+This is extremely aligned with your intended architecture. ([arXiv][1])
+
+---
+
+### Your “escalation packet” idea is also very real
+
+This is essentially:
+
+* prompt compression
+* structured intent extraction
+* context distillation
+* relevance filtering
+
+The local model becomes:
+
+* context manager
+* summarizer
+* retrieval orchestrator
+* cloud-call optimizer
+
+That is increasingly how serious systems are being built.
+
+---
+
+### Very important:
+
+### Claude Code / Codex already heavily rely on this style of architecture
+
+This article is informal but highly informative:
+
+#### [Prompt caching explained using Claude Code](https://www.linkedin.com/posts/avi-chawla_prompt-caching-in-llms-clearly-explained-activity-7450510831378927616-03Qd?utm_source=chatgpt.com)
+
+Key insight:
+
+* every turn resends massive context
+* system prompt
+* tools
+* project state
+* memory
+
+Prompt caching is therefore fundamental infrastructure.
+
+This matches your intuition almost exactly. ([LinkedIn][2])
+
+---
+
+### This article is especially important for you
+
+#### [How prompt caching works (vLLM/PagedAttention)](https://sankalp.bearblog.dev/how-prompt-caching-works/?utm_source=chatgpt.com)
+
+This is probably the best practical deep dive into:
+
+* KV reuse
+* prefix caching
+* paged attention
+* cache-friendly prompt engineering
+* long-lived coding sessions
+
+It explains the exact mechanics behind:
+
+> “stable prefix + dynamic suffix”
+
+which is central to your proposed architecture. ([sankalp's blog][3])
+
+---
+
+### This statement is especially aligned with your thinking
+
+From:
+
+#### [Building High-Quality AI Agents](https://dev.to/truongpx396/building-high-quality-ai-agents-a-comprehensive-actionable-field-guide-5m1?utm_source=chatgpt.com)
+
+> “Prompt cache is architecture, not optimization.”
+
+That is exactly correct for your use case. ([DEV Community][4])
+
+Your architecture should be designed around:
+
+* preserving stable prefixes
+* minimizing cache invalidation
+* separating stable and dynamic context
+
+---
+
+### What commercial coding agents are probably doing internally
+
+Not exactly public, but conceptually:
+
+```text
+stable system prompt
++ tool definitions
++ repo map
++ memory summaries
++ selected files
++ current task
++ recent interaction suffix
+```
+
+with:
+
+* retrieval
+* compression
+* prefix caching
+* partial replay
+* memory summarization
+
+NOT:
+
+> “entire repo dumped every turn”
+
+---
+
+### Your proposed architecture is actually stronger than many current hobby-agent setups
+
+Because you are already distinguishing:
+
+| Concern                   | Correct abstraction       |
+| ------------------------- | ------------------------- |
+| Long-term semantic memory | explicit storage/indexing |
+| Prompt cache              | performance optimization  |
+| Session state             | managed application state |
+| Escalation packet         | compressed working set    |
+| Agent startup context     | structured handoff        |
+
+That is much more mature than:
+
+> “just shove everything into the context window”
+
+which many systems still effectively do.
+
+---
+
+### The architecture you are converging toward
+
+Something like:
+
+```text
+Persistent storage
+    ├── repo
+    ├── embeddings
+    ├── BM25
+    ├── summaries
+    ├── session logs
+    ├── decisions
+    └── agent state
+
+↓ retrieval/compression
+
+Local orchestrator model
+    ├── routing
+    ├── summarization
+    ├── retrieval selection
+    ├── escalation construction
+    ├── cache preservation
+    └── local execution
+
+↓ optional escalation
+
+Cloud frontier model
+    ├── hard reasoning
+    ├── difficult codegen
+    ├── review
+    └── architecture work
+
+↓ integration
+
+Local model reintegrates results
+```
+
+That is a very sensible architecture.
+
+---
+
+### One crucial future insight for you
+
+Eventually, the important optimization is NOT:
+
+* “How do I fit more tokens?”
+
+It becomes:
+
+* “How do I maintain a stable working set?”
+
+That is:
+
+* cache engineering
+* retrieval engineering
+* context engineering
+* memory architecture
+
+This is where advanced agent systems are moving.
+
+---
+
+### The most useful practical lesson
+
+Do NOT think:
+
+```text
+session memory = giant transcript
+```
+
+Instead think:
+
+```text
+session memory =
+    stable instructions
+  + persistent decisions
+  + repo knowledge
+  + retrieved working set
+  + short rolling interaction window
+```
+
+That is vastly more scalable.
+
+---
+
+### Strong recommendation for your learning path
+
+Read/watch in roughly this order:
+
+1. [How prompt caching works (PagedAttention/vLLM)](https://sankalp.bearblog.dev/how-prompt-caching-works/?utm_source=chatgpt.com)
+2. [Local-Splitter paper](https://arxiv.org/abs/2604.12301?utm_source=chatgpt.com)
+3. [Prompt caching + Claude Code explanation](https://www.linkedin.com/posts/avi-chawla_prompt-caching-in-llms-clearly-explained-activity-7450510831378927616-03Qd?utm_source=chatgpt.com)
+4. [Don’t Break the Cache paper](https://arxiv.org/abs/2601.06007?utm_source=chatgpt.com)
+5. vLLM + SGLang architecture docs
+6. Open WebUI memory/RAG architecture
+7. Cursor/Codex/Claude Code behavior observations
+
+That sequence maps almost perfectly to the architecture direction you are exploring.
+
+[1]: https://arxiv.org/html/2604.12301v1?utm_source=chatgpt.com "Local-Splitter: A Measurement Study of Seven Tactics for ..."
+[2]: https://www.linkedin.com/posts/avi-chawla_prompt-caching-in-llms-clearly-explained-activity-7450510831378927616-03Qd?utm_source=chatgpt.com "LLM Prompt Caching Explained: Claude Code's Efficiency ..."
+[3]: https://sankalp.bearblog.dev/how-prompt-caching-works/?utm_source=chatgpt.com "How prompt caching works - Paged Attention and ..."
+[4]: https://dev.to/truongpx396/building-high-quality-ai-agents-a-comprehensive-actionable-field-guide-5m1?utm_source=chatgpt.com "🏗️ Building High-Quality AI Agents 🤖 — A Comprehensive ..."
+
