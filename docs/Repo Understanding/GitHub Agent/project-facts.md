@@ -7,3 +7,5 @@ project-facts.md
 - No package manifests, tests, or CI workflows; .github only contains Copilot prompt/agent metadata.
 ```
 
+Project Onboarding Agent Prompt
+Project Onboarding Agent Skill
