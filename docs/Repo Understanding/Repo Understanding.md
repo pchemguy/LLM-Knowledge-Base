@@ -37,9 +37,11 @@ Do NOT produce generic software-engineering commentary.
 Do NOT describe technologies without explaining their role in the system.
 
 Avoid shallow statements like:
+
 - “uses microservices”
 - “has modular architecture”
 - “follows MVC”
+
 unless you explain exactly how and where this manifests in the repository.
 
 ---
@@ -100,8 +102,11 @@ Mark uncertainty explicitly.
 ## Concept-to-Implementation Mapping
 
 Continuously map:
+
 - conceptual project ideas
+
 to
+
 - concrete implementation mechanisms.
 
 Explain HOW the repository realizes each conceptual capability.
@@ -179,28 +184,6 @@ Infer and explain:
 Explain WHY the architecture likely exists in this form.
 
 ---
-
-## Architectural Identity
-
-Characterize the repository’s dominant architectural identity.
-
-Examples:
-- orchestration-centric;
-- workflow-engine-centric;
-- event-driven;
-- tool-routing-centric;
-- memory-centric;
-- provider-abstraction-centric;
-- plugin-platform;
-- execution-runtime;
-- state-machine-oriented;
-- pipeline-oriented;
-- actor-oriented;
-- dataflow-oriented.
-
-Explain which architectural concerns dominate the implementation.
-
----
 ## Identify Semantic Centers
 
 Identify the parts of the repository that contain the primary semantic and architectural complexity.
@@ -264,6 +247,32 @@ If the repository is incomplete, partially implemented, experimental, or structu
 
 ---
 
+## Implementation Maturity Assessment
+
+Assess the apparent maturity of major subsystems.
+
+Distinguish between:
+
+- production-grade systems;
+- experimental implementations;
+- proof-of-concept logic;
+- scaffolding;
+- aspirational abstractions;
+- partially operational infrastructure.
+
+Use evidence such as:
+
+- runtime integration;
+- testing depth;
+- error handling;
+- operational tooling;
+- consistency of abstraction usage;
+- observability;
+- configuration completeness;
+- recovery semantics.
+
+---
+
 ## Analysis Prioritization
 
 Prioritize analysis effort according to architectural significance:
@@ -277,6 +286,86 @@ Prioritize analysis effort according to architectural significance:
 7. Peripheral utilities and support tooling.
 
 Spend minimal effort on low-signal boilerplate.
+
+---
+
+## Behavior Over Static Structure
+
+Do NOT infer architectural importance solely from:
+
+- directory structure;
+- abstraction layering;
+- interface presence;
+- naming conventions;
+- framework conventions.
+
+Prioritize:
+
+- runtime behavior;
+- execution participation;
+- state ownership;
+- orchestration involvement;
+- active integration paths;
+- actual control flow.
+
+A subsystem is important because of its behavioral role, not because of nominal structure.
+
+---
+
+## Evidence Hierarchy
+
+Prefer evidence in the following order:
+
+1. Runtime execution paths.
+2. Actively used orchestration/control logic.
+3. Concrete implementations.
+4. Integration points and state transitions.
+5. Tests demonstrating real behavior.
+6. Configuration wiring and dependency composition.
+7. Interfaces and abstractions.
+8. Documentation and comments.
+
+Treat documentation, naming, and abstractions as weaker evidence unless confirmed by runtime behavior or active usage.
+
+---
+
+## Abstraction Reality Check
+
+Distinguish between:
+
+- abstractions that materially govern runtime behavior;
+- abstractions that primarily organize code structure;
+- abstractions that appear aspirational or weakly enforced;
+- abstractions bypassed by concrete implementations.
+
+Identify where the repository’s real behavior diverges from its nominal abstraction model.
+
+---
+
+## Depth Allocation Policy
+
+Allocate analysis depth according to architectural and semantic significance.
+
+Spend most analysis effort on:
+
+- semantic centers;
+- orchestration and execution logic;
+- state ownership and lifecycle;
+- runtime coordination;
+- primary abstractions;
+- architecturally central execution paths.
+
+Compress or minimize discussion of:
+
+- boilerplate;
+- framework scaffolding;
+- repetitive adapters;
+- thin wrappers;
+- trivial utilities;
+- mechanically generated structure;
+- low-signal configuration.
+
+The objective is deep understanding of the repository’s behavioral core, not uniform coverage density.
 
 ---
 
@@ -328,6 +417,25 @@ Explain:
 - what the system fundamentally behaves like;
 - how the major parts conceptually fit together;
 - where the repository’s primary semantic and architectural complexity appears to reside.
+
+Characterize the repository’s dominant architectural identity.
+
+Examples:
+
+- orchestration-centric;
+- workflow-engine-centric;
+- event-driven;
+- tool-routing-centric;
+- memory-centric;
+- provider-abstraction-centric;
+- plugin-platform;
+- execution-runtime;
+- state-machine-oriented;
+- pipeline-oriented;
+- actor-oriented;
+- dataflow-oriented.
+
+Explain which architectural concerns dominate the implementation.
 
 Avoid detailed component walkthroughs.  
 Avoid step-by-step runtime tracing.
