@@ -2,18 +2,20 @@
 description: Perform local git project onboarding.
 ---
 
-You are performing deep repository comprehension, reverse-engineering, and operational workflow reconstruction.
+# Software Project Onboarding
+
+You are performing deep project comprehension, reverse-engineering, and operational workflow reconstruction.
 
 You will be given:
 
 1. A conceptual/abstract description of a project idea (user prompt).
-2. Access to the active workspace containing one repository implementing all or part of that idea.
+2. Access to the active workspace containing a project implementing all or part of that idea.
 
-Treat the active workspace as the target repository.
+Treat the active workspace as the target project.
 
 You MUST inspect the actual workspace contents before producing the analysis. Use available workspace tools to examine:
 
-- repository structure;
+- project structure;
 - README and documentation;
 - package/dependency manifests;
 - configuration files;
@@ -22,7 +24,7 @@ You MUST inspect the actual workspace contents before producing the analysis. Us
 - core source modules;
 - scripts and runtime commands.
 
-Do NOT assume the repository structure from the conceptual description alone.
+Do NOT assume the project structure from the conceptual description alone.
 Do NOT rely only on README-level information.
 
 Your task is to reconstruct BOTH:
@@ -30,11 +32,11 @@ Your task is to reconstruct BOTH:
 - the implementation architecture;
 - the intended practical usage model.
 
-Your task is NOT to summarize the repository.
+Your task is NOT to summarize the project.
 
 You are building an evidence-grounded mental model explaining:
 
-- what the repository actually does;
+- what the project actually does;
 - how it operationalizes the conceptual idea;
 - what architectural, semantic, and execution model it implements;
 - what assumptions, invariants, abstractions, and workflows exist;
@@ -46,7 +48,7 @@ You are building an evidence-grounded mental model explaining:
 - how developers/operators/users are expected to interact with it;
 - how it is configured, extended, debugged, and evolved.
 
-You MUST reason from the actual repository contents.
+You MUST reason from the actual project contents.
 
 Do NOT produce generic software-engineering commentary.
 
@@ -58,13 +60,13 @@ Avoid shallow statements like:
 - “has modular architecture”
 - “follows MVC”
 
-unless you explain exactly how and where this manifests in the repository.
+unless you explain exactly how and where this manifests in the project.
 
 ---
 
-# Primary Objective
+## Primary Objective
 
-Build an evidence-grounded mental model of the repository.
+Build an evidence-grounded mental model of the project.
 
 The result should allow an engineer to:
 
@@ -76,11 +78,20 @@ The result should allow an engineer to:
 - extend or modify the implementation safely;
 - identify implementation boundaries and extension points.
 
+You MUST:
+
+- follow **Analysis Rules**
+- prepare information according to **Required Output Structure
+- generate:
+    - an onboarding report following **Onboarding Report Template** - the onboarding report is the detailed analysis artifact;
+    - **ONBOARDING.md** in the project root (update, if exists) - the persistent operational knowledge layer intended for future repository work..
+
+
 ---
 
-# Analysis Rules
+## Analysis Rules
 
-## Evidence Grounding
+### Evidence Grounding
 
 Ground all important claims in:
 
@@ -103,7 +114,7 @@ Reference concrete workspace paths, files, symbols, commands, and execution path
 
 ---
 
-## Distinguish Observation vs Inference
+### Distinguish Observation vs Inference
 
 Clearly distinguish between:
 
@@ -115,7 +126,7 @@ Mark uncertainty explicitly.
 
 ---
 
-## Concept-to-Implementation Mapping
+### Concept-to-Implementation Mapping
 
 Continuously map:
 
@@ -125,13 +136,13 @@ to
 
 - concrete implementation mechanisms.
 
-Explain HOW the repository realizes each conceptual capability.
+Explain HOW the project realizes each conceptual capability.
 
 If some conceptual aspect is absent, partial, implicit, or externalized, state this explicitly.
 
 ---
 
-## Prioritize Semantics Over Labels
+### Prioritize Semantics Over Labels
 
 Avoid shallow statements like:
 
@@ -148,7 +159,7 @@ unless you explain:
 
 ---
 
-## Focus on Semantics and Behavior
+### Focus on Semantics and Behavior
 
 Prioritize:
 
@@ -183,7 +194,7 @@ Over:
 
 ---
 
-## Identify Architectural Shape
+### Identify Architectural Shape
 
 Infer and explain:
 
@@ -200,9 +211,9 @@ Infer and explain:
 Explain WHY the architecture likely exists in this form.
 
 ---
-## Identify Semantic Centers
+### Identify Semantic Centers
 
-Identify the parts of the repository that contain the primary semantic and architectural complexity.
+Identify the parts of the project that contain the primary semantic and architectural complexity.
 
 Distinguish between:
 
@@ -212,13 +223,13 @@ Distinguish between:
 - integration glue;
 - boilerplate/framework code.
 
-Explain where the repository’s actual behavioral intelligence resides.
+Explain where the project’s actual behavioral intelligence resides.
 
 Prioritize these areas during analysis.
 
 ---
 
-## Trace Real Execution Paths
+### Trace Real Execution Paths
 
 Trace important end-to-end flows such as:
 
@@ -238,7 +249,7 @@ Show which modules participate and how control/data move.
 
 ---
 
-## Repository Archaeology
+### Project Archaeology
 
 Identify evidence of:
 
@@ -254,7 +265,7 @@ Identify evidence of:
 
 Distinguish actively used mechanisms from nominal structure.
 
-If the repository is incomplete, partially implemented, experimental, or structurally inconsistent:  
+If the project is incomplete, partially implemented, experimental, or structurally inconsistent:  
   
 - identify implemented vs aspirational systems;  
 - distinguish runtime-critical systems from scaffolding;  
@@ -263,7 +274,7 @@ If the repository is incomplete, partially implemented, experimental, or structu
 
 ---
 
-## Implementation Maturity Assessment
+### Implementation Maturity Assessment
 
 Assess the apparent maturity of major subsystems.
 
@@ -289,7 +300,7 @@ Use evidence such as:
 
 ---
 
-## Analysis Prioritization
+### Analysis Prioritization
 
 Prioritize analysis effort according to architectural significance:
 
@@ -305,7 +316,7 @@ Spend minimal effort on low-signal boilerplate.
 
 ---
 
-## Behavior Over Static Structure
+### Behavior Over Static Structure
 
 Do NOT infer architectural importance solely from:
 
@@ -328,7 +339,7 @@ A subsystem is important because of its behavioral role, not because of nominal 
 
 ---
 
-## Evidence Hierarchy
+### Evidence Hierarchy
 
 Prefer evidence in the following order:
 
@@ -345,7 +356,7 @@ Treat documentation, naming, and abstractions as weaker evidence unless confirme
 
 ---
 
-## Abstraction Reality Check
+### Abstraction Reality Check
 
 Distinguish between:
 
@@ -354,11 +365,11 @@ Distinguish between:
 - abstractions that appear aspirational or weakly enforced;
 - abstractions bypassed by concrete implementations.
 
-Identify where the repository’s real behavior diverges from its nominal abstraction model.
+Identify where the project’s real behavior diverges from its nominal abstraction model.
 
 ---
 
-## Depth Allocation Policy
+### Depth Allocation Policy
 
 Allocate analysis depth according to architectural and semantic significance.
 
@@ -381,11 +392,11 @@ Compress or minimize discussion of:
 - mechanically generated structure;
 - low-signal configuration.
 
-The objective is deep understanding of the repository’s behavioral core, not uniform coverage density.
+The objective is deep understanding of the project’s behavioral core, not uniform coverage density.
 
 ---
 
-## Compression Discipline
+### Compression Discipline
 
 Avoid low-value exhaustive enumeration.
 
@@ -397,9 +408,9 @@ Instead:
 
 ---
 
-# Required Output Structure
+## Required Output Structure
 
-## 1. Repository Purpose
+### 1. Project Purpose
 
 Explain:
 
@@ -411,9 +422,9 @@ Explain:
 
 ---
 
-## 2. High-Level System Model
+### 2. High-Level System Model
 
-Provide a concise but deep mental model describing what kind of system this repository fundamentally is.
+Provide a concise but deep mental model describing what kind of system this project fundamentally is.
 
 This section should help an engineer rapidly “see the machine” at a systems level before examining implementation details.
 
@@ -432,9 +443,9 @@ Explain:
 
 - what the system fundamentally behaves like;
 - how the major parts conceptually fit together;
-- where the repository’s primary semantic and architectural complexity appears to reside.
+- where the project’s primary semantic and architectural complexity appears to reside.
 
-Characterize the repository’s dominant architectural identity.
+Characterize the project’s dominant architectural identity.
 
 Examples:
 
@@ -464,7 +475,7 @@ This section should answer questions such as:
 
 ---
 
-## 3. Conceptual Capability Mapping
+### 3. Conceptual Capability Mapping
 
 For each major conceptual capability, describe:
 
@@ -487,7 +498,7 @@ Use a structured table when useful.
 
 ---
 
-## 4. Architecture and Component Analysis
+### 4. Architecture and Component Analysis
 
 For each major subsystem or architectural component, explain:
 
@@ -509,7 +520,7 @@ Explain:
 - what each major subsystem owns;
 - what it depends on;
 - what contracts or abstractions it exposes;
-- how responsibilities are divided across the repository;
+- how responsibilities are divided across the project;
 - where abstractions remain clean vs where boundaries leak.
 
 Distinguish between:
@@ -536,7 +547,7 @@ This section should answer questions such as:
 
 ---
 
-## 5. Execution Flow Analysis
+### 5. Execution Flow Analysis
 
 Trace important runtime behaviors step-by-step as they actually execute.
 
@@ -590,7 +601,7 @@ This section should answer questions such as:
 
 ---
 
-## 6. State and Persistence Model
+### 6. State and Persistence Model
 
 Explain:
 
@@ -607,7 +618,7 @@ Explain:
 
 ---
 
-## 7. Coordination and Control Semantics
+### 7. Coordination and Control Semantics
 
 Explain how execution authority, coordination, scheduling, and control are organized across the system.
 
@@ -638,7 +649,7 @@ Analyze mechanisms such as:
 - concurrency boundaries;
 - execution-control hierarchies.
 
-Explain the repository’s real execution-control topology:
+Explain the project’s real execution-control topology:
 
 - centralized vs distributed coordination;
 - synchronous vs asynchronous control;
@@ -657,7 +668,7 @@ This section should answer questions such as:
 
 ---
 
-## 8. Configuration and Environment Model
+### 8. Configuration and Environment Model
 
 Explain:
 
@@ -678,7 +689,7 @@ Distinguish:
 
 ---
 
-## 9. Operational Usage Model
+### 9. Operational Usage Model
 
 Reconstruct how the system is ACTUALLY intended to be used.
 
@@ -699,7 +710,7 @@ Focus on operational reality, not README marketing.
 
 ---
 
-## 10. Extension and Customization Architecture
+### 10. Extension and Customization Architecture
 
 Explain:
 
@@ -718,7 +729,7 @@ Describe how the system expects to evolve.
 
 ---
 
-## 11. Key Architectural Decisions and Tradeoffs
+### 11. Key Architectural Decisions and Tradeoffs
 
 Identify:
 
@@ -735,7 +746,7 @@ Ground observations in evidence.
 
 ---
 
-## 12. Weaknesses, Gaps, Inconsistencies, and Technical Debt
+### 12. Weaknesses, Gaps, Inconsistencies, and Technical Debt
 
 Identify:
 
@@ -755,15 +766,15 @@ Ground all observations.
 
 ---
 
-## 13. Practical Usage Guide
+### 13. Practical Usage Guide
 
 Provide a practical engineer-focused guide including:
 
-### Minimal Viable Usage
+#### Minimal Viable Usage
 
 Smallest working setup.
 
-### Operational Assumptions
+#### Operational Assumptions
 
 Explain implicit operational assumptions such as:
 
@@ -775,37 +786,37 @@ Explain implicit operational assumptions such as:
 - expected workflow discipline;
 - expected persistence durability.
 
-### Canonical Workflow
+#### Canonical Workflow
 
 Typical intended workflow.
 
-### Advanced Usage
+#### Advanced Usage
 
 Advanced workflows and power-user capabilities.
 
-### Extension Workflow
+#### Extension Workflow
 
 How developers are expected to extend/customize the system.
 
-### Debugging Workflow
+#### Debugging Workflow
 
 How to diagnose problems effectively.
 
-### Observability
+#### Observability
 
 Logs, traces, metrics, inspection points, debugging hooks.
 
-### Failure Modes
+#### Failure Modes
 
 Most important operational failures and how the system behaves.
 
-### Performance Considerations
+#### Performance Considerations
 
 Bottlenecks, scaling assumptions, expensive paths.
 
 ---
 
-## 14. Repository Navigation Guide
+### 14. Project Navigation Guide
 
 Provide:
 
@@ -822,11 +833,11 @@ Optimize for rapid onboarding. Assume the reader will continue working inside th
 
 ---
 
-## 15. Concise Deep Technical Synthesis
+### 15. Concise Deep Technical Synthesis
 
 Provide a dense technical synthesis:
 
-- what this repository fundamentally is;
+- what this project fundamentally is;
 - what architectural pattern it embodies;
 - what operational model it embodies;
 - what makes it distinctive;
@@ -835,7 +846,95 @@ Provide a dense technical synthesis:
 
 ---
 
-# Important Constraints
+## Onboarding Report Template
+
+Produce the final analysis as a structured Markdown onboarding report.
+
+Use the following structure:
+
+```markdown
+---
+repo: [USER]/[REPO]
+---
+
+# [Project Title] Onboarding Report
+
+## 1. Repository Purpose
+...
+```
+
+**Rules**:
+
+* Only add YAML front matter if the target project is a git repository.
+* Generate "Project Title" in order of preference:
+    * repository name (`[REPO]`);
+    * title defined in root `README.md`;
+    * root project directory name.
+* Use Markdown headings for all major sections.
+* Use subheadings for important subsections.
+* Preserve stable heading hierarchy for reliable navigation and future incremental updates.
+* Prefer dense, information-rich technical writing over conversational prose.
+* Prefer operationally useful synthesis over exhaustive enumeration.
+
+---
+
+## ONBOARDING.md
+
+Create or update an `ONBOARDING.md` file in the project root.
+
+The purpose of `ONBOARDING.md` is NOT to duplicate the full onboarding report.
+
+Its purpose is to provide a compact, high-signal operational orientation layer for future coding agents and developers working in the repository. Prioritize behavioral and architectural knowledge over framework and dependency descriptions.
+
+`ONBOARDING.md` SHOULD capture stable, high-value project knowledge such as:
+
+- actual project purpose;
+- dominant architectural identity;
+- semantic centers;
+- core orchestration/runtime model;
+- important execution flows;
+- state ownership model;
+- major subsystem boundaries;
+- extension mechanisms;
+- critical entry points;
+- important operational assumptions;
+- debugging/observability guidance;
+- repository navigation guidance;
+- important architectural constraints or invariants;
+- known implementation gaps or sharp edges.
+
+Prioritize:
+
+- operational usefulness;
+- architectural clarity;
+- rapid orientation;
+- high information density;
+- stable long-lived knowledge.
+
+Avoid:
+
+- exhaustive implementation details;
+- boilerplate;
+- low-level repetition;
+- large API inventories;
+- mechanically generated summaries;
+- copying the full onboarding report.
+
+When updating an existing `ONBOARDING.md`:
+
+- preserve still-correct information;
+- update outdated sections;
+- merge new findings incrementally;
+- avoid unnecessary rewrites or churn;
+- maintain stable structure where practical.
+
+Prefer concise technical synthesis over verbose prose.
+
+Write `ONBOARDING.md` assuming future coding agents will use it as startup context before performing development tasks.
+
+---
+
+## Important Constraints
 
 Do NOT:
 
