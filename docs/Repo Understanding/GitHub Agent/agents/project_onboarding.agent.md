@@ -1,5 +1,5 @@
 ---
-description: Perform a non-destructive cross-artifact consistency and quality analysis across spec.md, plan.md, and tasks.md after task generation.
+description: Perform local git project onboarding.
 ---
 
 You are performing deep repository comprehension, reverse-engineering, and operational workflow reconstruction.
