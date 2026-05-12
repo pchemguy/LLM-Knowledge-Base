@@ -2,7 +2,7 @@
 repo: https://github.com/zhurudong/andrej-karpathy-llm-wiki
 ---
 
-**1. Repository Purpose**
+## 1. Repository Purpose
 
 This repository does not implement an LLM knowledge base as a running application. It packages a reusable operating pattern for one. The concrete deliverables are a bootstrap script in install.sh, bilingual prompt schemas in CLAUDE.en.md and CLAUDE.md, and a worked example in examples.
 
@@ -12,7 +12,7 @@ Scope boundaries are tight:
 - In scope: directory conventions, page types, lifecycle rules, bootstrapping, cross-CLI compatibility, example outputs.
 - Out of scope: automatic ingestion pipeline, search service, vector DB, web backend, local daemon, deterministic compiler, validation tooling.
 
-**2. High-Level System Model**
+## 2. High-Level System Model
 
 The best mental model is: a prompt-programmed, filesystem-native knowledge compiler whose execution engine is outsourced to whichever LLM CLI reads the schema.
 
@@ -32,7 +32,7 @@ The semantic center is the contract between page types and workflows:
 - Cross-links as the graph.
 - Git and editor tooling as the operational shell.
 
-**3. Conceptual Capability Mapping**
+## 3. Conceptual Capability Mapping
 
 | Capability | Status | Where Implemented | Execution Semantics | Limits |
 |---|---|---|---|---|
@@ -46,7 +46,7 @@ The semantic center is the contract between page types and workflows:
 | Multilingual templates | Implemented | CLAUDE.en.md, CLAUDE.md, README.md, README.zh-CN.md | Installer chooses `en` or `zh` template | Example corpus is Chinese-only |
 | Optional search/slide/plugin tooling | Not implemented here | Only mentioned conceptually in user idea, not shipped in repo | External addition expected | No integrated search or presentation generation |
 
-**4. Architecture and Component Analysis**
+## 4. Architecture and Component Analysis
 
 The repository has four meaningful components.
 
@@ -77,7 +77,7 @@ Incidental rather than central:
 - .github contains Copilot prompt/agent metadata for this workspace, not part of the published wiki pattern.
 - There are no tests, libraries, services, package manifests, or CI workflows governing the wiki logic.
 
-**5. Execution Flow Analysis**
+## 5. Execution Flow Analysis
 
 Startup and bootstrap:
 - Operator runs the installer from install.sh, typically via the curl pipe shown in README.md.
@@ -116,7 +116,7 @@ Recovery and regeneration:
 - Synthesis is treated differently: it is query-derived and retained.
 - This gives the system a recoverable derived layer without needing a separate database.
 
-**6. State and Persistence Model**
+## 6. State and Persistence Model
 
 State is entirely file-backed.
 
@@ -146,7 +146,7 @@ Persistence semantics:
 
 A notable design choice is that source provenance is page-local and human-readable rather than normalized into a machine-enforced schema. That keeps the system transparent but weakens deterministic tooling.
 
-**7. Coordination and Control Semantics**
+## 7. Coordination and Control Semantics
 
 Execution authority is centralized in the external LLM agent, guided by the template and triggered by the human.
 
@@ -174,7 +174,7 @@ Failure propagation:
 
 This is the repo’s core tradeoff: centralized semantic control through instructions, decentralized execution through whatever agent/tool stack the operator happens to use.
 
-**8. Configuration and Environment Model**
+## 8. Configuration and Environment Model
 
 Required configuration is minimal:
 - Directory name and template language are provided to install.sh.
@@ -200,7 +200,7 @@ Notably absent:
 
 Windows-specific inference: because the only installer is Bash and it relies on symlinks, the repo is friendlier to macOS/Linux or Windows with WSL/Git Bash than to native PowerShell-only environments.
 
-**9. Operational Usage Model**
+## 9. Operational Usage Model
 
 The intended workflow is lightweight and conversational rather than system-administrative.
 
@@ -219,7 +219,7 @@ The repo itself is used in two different ways:
 
 This is not a production deployment model. There is no daemon, no API endpoint, and no background service. The practical usage model is “LLM-assisted authoring inside a normal folder.”
 
-**10. Extension and Customization Architecture**
+## 10. Extension and Customization Architecture
 
 Customization is prompt-first.
 
@@ -245,7 +245,7 @@ What is not present:
 
 Inference: the system expects to evolve mostly by editing instructions, not by adding software components.
 
-**11. Key Architectural Decisions and Tradeoffs**
+## 11. Key Architectural Decisions and Tradeoffs
 
 The biggest decision is to encode behavior in markdown instructions rather than executable logic.
 - Benefit: extreme portability, transparency, and hackability.
@@ -267,7 +267,7 @@ The fifth is multilingual templates.
 - Benefit: broader usability.
 - Cost: doubles prompt-maintenance surface and invites divergence over time.
 
-**12. Weaknesses, Gaps, Inconsistencies, and Technical Debt**
+## 12. Weaknesses, Gaps, Inconsistencies, and Technical Debt
 
 The largest gap is that almost all operational guarantees are advisory, not enforced. CLAUDE.en.md describes deduplication, link correctness, frontmatter, and lint behavior, but the repo ships no validator to ensure those things happen.
 
@@ -291,7 +291,7 @@ A documentation inconsistency: README.md claims MIT licensing, but the repositor
 
 Small ambiguity: CLAUDE.md resolves as a relative reference to the shared template rather than a standalone copy. Inference: the example is intended to share the root template via symlink or link-like file entry. That is efficient, but it can be brittle across platforms and tooling.
 
-**13. Practical Usage Guide**
+## 13. Practical Usage Guide
 
 Minimal viable usage:
 - Run the bootstrap command from README.md.
@@ -349,7 +349,7 @@ Performance considerations:
 - Human review, not computation, is the main bottleneck.
 - As corpus size grows, lack of built-in search becomes the likely pain point before storage or compute do.
 
-**14. Repository Navigation Guide**
+## 14. Repository Navigation Guide
 
 Best reading order for a new engineer:
 1. README.md to understand product positioning and operator expectations.
@@ -370,7 +370,7 @@ Where abstractions become concrete:
 - The workflow model becomes agent instructions in CLAUDE.en.md.
 - The intended outputs become concrete in wiki.
 
-**15. Concise Deep Technical Synthesis**
+## 15. Concise Deep Technical Synthesis
 
 Fundamentally, this repository is a prompt-defined operating system for a markdown knowledge base. It is not an app, service, or ingestion engine; it is a compact protocol that tells a general-purpose LLM agent how to behave like a disciplined wiki maintainer over a folder tree. Its distinctive choice is to treat the rules file as the runtime, the filesystem as the database, wiki-links as the graph, and Git/editor tooling as the surrounding platform. That makes it unusually portable and transparent, and also unusually dependent on human discipline and agent compliance. It appears optimized for technically literate users who value inspectable artifacts and low infrastructure overhead more than deterministic automation.
 
