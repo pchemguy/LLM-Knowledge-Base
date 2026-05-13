@@ -965,6 +965,7 @@ repo: [USER]/[REPO]
     * root project directory name.
 * Use Markdown headings for all major sections.
 * Use subheadings for important subsections.
+* Each Markdown heading must be followed by a blank line.
 * Preserve stable heading hierarchy for reliable navigation and future incremental updates.
 * Prefer dense, information-rich technical writing over conversational prose.
 * Prefer operationally useful synthesis over exhaustive enumeration.
