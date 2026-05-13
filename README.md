@@ -10,13 +10,13 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | #   | Name                                 | URL                                                   | Class       | README                                                                 |
 | --- | ------------------------------------ | ----------------------------------------------------- | ----------- | ---------------------------------------------------------------------- |
 | 1   | Link                                 | https://github.com/gowtham0992/link                   | Significant | [README](implementations/gowtham0992/Link/README.md)                   |
-| 2   | SwarmVault                           | https://github.com/swarmclawai/swarmvault             | Significant |                                                                        |
-| 3   | Synthadoc                            | https://github.com/axoviq-ai/synthadoc                | Significant |                                                                        |
-| 4   | OmegaWiki                            | https://github.com/skyllwt/OmegaWiki                  | Significant |                                                                        |
-| 5   | LLM Wiki                             | https://github.com/nvk/llm-wiki                       | Significant |                                                                        |
-| 6   | yopedia                              | https://github.com/yologdev/karpathy-llm-wiki         | Significant |                                                                        |
-| 7   | Understand Anything                  | https://github.com/Lum1104/Understand-Anything        | Significant |                                                                        |
-| 8   | AgentMemory                          | https://github.com/rohitg00/agentmemory               | Significant |                                                                        |
+| 2   | SwarmVault                           | https://github.com/swarmclawai/swarmvault             | Significant | [README](implementations/SwarmClawAI/SwarmVault/README.md)             |
+| 3   | Synthadoc                            | https://github.com/axoviq-ai/synthadoc                | Significant | [README](implementations/axoviq-ai/Synthadoc/README.md)                |
+| 4   | OmegaWiki                            | https://github.com/skyllwt/OmegaWiki                  | Significant | [README](implementations/skyllwt/OmegaWiki/README.md)                  |
+| 5   | LLM Wiki                             | https://github.com/nvk/llm-wiki                       | Significant | [README](implementations/nvk/LLM-Wiki-nvk/README.md)                   |
+| 6   | yopedia                              | https://github.com/yologdev/karpathy-llm-wiki         | Significant | [README](implementations/yologdev/yopedia/README.md)                   |
+| 7   | Understand Anything                  | https://github.com/Lum1104/Understand-Anything        | Significant | [README](implementations/Lum1104/Understand-Anything/README.md)        |
+| 8   | AgentMemory                          | https://github.com/rohitg00/agentmemory               | Significant | [README](implementations/rohitg00/AgentMemory/README.md)               |
 | 9   | Karpathy-Inspired LLM Knowledge Base | https://github.com/zhurudong/andrej-karpathy-llm-wiki | Small       | [README](implementations/zhurudong/andrej-karpathy-llm-wiki/README.md) |
 | 10  | LLM Wiki Manager                     | https://github.com/sametbrr/llm-wiki-manager          | Small       | [README](implementations/sametbrr/LLM-Wiki-Manager/README.md)          |
 | 11  | PulseOS-Lite                         | https://github.com/jp-carrilloe/pulseOS-lite          | Small       | [README](implementations/jp-carrilloe/PulseOS-Lite/README.md)          |
