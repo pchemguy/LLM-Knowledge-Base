@@ -10,6 +10,7 @@
 :MAIN
 
 SetLocal EnableExtensions EnableDelayedExpansion
+set "ExitStatus=0"
 
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
@@ -17,7 +18,7 @@ set "SUBS=%PROJECT_ROOT%\implementations"
 cd /d "%SUBS%"
 
 set "STDOUTLOG=%SUBS%\stdout.log"
-set "STDERRLOG=%SUBS%\sstderr.log"
+set "STDERRLOG=%SUBS%\stderr.log"
 del "%STDOUTLOG%" 2>nul
 del "%STDERRLOG%" 2>nul
 
@@ -25,14 +26,19 @@ del "%STDERRLOG%" 2>nul
 (
     call :TIMESTAMP
 
-    for /d %%D in (*) do (call :ONBOARD_SUBMODULE "%%~D")
+    for /d %%D in (*) do (
+        call :ONBOARD_SUBMODULE "%%~D"
+        if not "!ERRORLEVEL!"=="0" (set "ExitStatus=1")
+    )
+
 
 ) 1>>"%STDOUTLOG%" 2>>"%STDERRLOG%"
 
 
 :MAIN_EXIT
+if not defined ErrorStatus (set "ErrorStatus=0")
 EndLocal
-exit /b 0
+exit /b %ErrorStatus%
 :: ============================================================================ 
 :: ============================================================================ MAIN END
 
@@ -59,7 +65,7 @@ exit /b 0
 ::   - %1 - Submodule OWNER
 ::
 SetLocal
-pushd
+pushd "%CD%" || exit /b 1
 
 set "SUB_OWNER=%~1"
 set "PREFIX=%PROJECT_ROOT%\implementations\%SUB_OWNER%"
@@ -115,8 +121,14 @@ if not "%ERRORLEVEL%"=="0" (
 
 :: Run onboarding
 
-type "%~dp0..\docs\karpathy\llm-wiki.md" | copilot ^
-    --allow-tool="shell(git:*), write" ^
+if not exist "%PROJECT_ROOT%\docs\karpathy\llm-wiki.md" (
+    echo ERROR Missing input prompt.
+    set "ErrorStatus=1"
+    goto :ONBOARD_SUBMODULE_EXIT
+)
+
+call type "%PROJECT_ROOT%\docs\karpathy\llm-wiki.md" | copilot ^
+    --allow-tool="shell(git:*),write" ^
     --model gpt-5.4 ^
     --effort medium ^
     --agent "project_onboarding" ^
@@ -129,14 +141,14 @@ if not "%ERRORLEVEL%"=="0" (
   goto :ONBOARD_SUBMODULE_EXIT
 )
 
-if exist "OnboardingReport.md" move "OnboardingReport.md" ..
+if exist "OnboardingReport.md" move /Y "OnboardingReport.md" ..
 if not "%ERRORLEVEL%"=="0" (
   set "ErrorStatus=%ERRORLEVEL%"
   echo ERROR Failed to move "OnboardingReport.md"...
   goto :ONBOARD_SUBMODULE_EXIT
 )
 
-if exist "ONBOARDING.md" move "ONBOARDING.md" ..
+if exist "ONBOARDING.md" move /Y "ONBOARDING.md" ..
 if not "%ERRORLEVEL%"=="0" (
   set "ErrorStatus=%ERRORLEVEL%"
   echo ERROR Failed to move "ONBOARDING.md"...
