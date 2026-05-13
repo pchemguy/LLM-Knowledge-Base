@@ -15,6 +15,9 @@ set "ExitStatus=0"
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
+set "PROJECT_DESCRIPTION=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
+set "TGNOTIFY=%PROJECT_DESCRIPTION%\scripts\tgnotify.bat"
+if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 cd /d "%SUBS%"
 
 set "STDOUTLOG=%SUBS%\stdout.log"
@@ -23,14 +26,24 @@ del "%STDOUTLOG%" 2>nul
 del "%STDERRLOG%" 2>nul
 
 
+:: Abort if project description is not available
+
+if not exist "%PROJECT_DESCRIPTION%" (
+    echo ERROR Missing input prompt.
+    set "ErrorStatus=1"
+    goto :ONBOARD_SUBMODULE_EXIT
+)
+
 (
     call :TIMESTAMP
 
     for /d %%D in (*) do (
         call :ONBOARD_SUBMODULE "%%~D"
-        if not "!ERRORLEVEL!"=="0" (set "ExitStatus=1")
+        if not "!ERRORLEVEL!"=="0" (
+            set "ExitStatus=!ERRORLEVEL!"
+            goto :MAIN_EXIT
+        )
     )
-
 )
 ::) 1^>^>"%STDOUTLOG%" 2^>^>"%STDERRLOG%"
 
@@ -121,13 +134,9 @@ if not "%ERRORLEVEL%"=="0" (
 
 :: Run onboarding
 
-if not exist "%PROJECT_ROOT%\docs\karpathy\llm-wiki.md" (
-    echo ERROR Missing input prompt.
-    set "ErrorStatus=1"
-    goto :ONBOARD_SUBMODULE_EXIT
-)
+if defined TGNOTIFY ("%TGNOTIFY%" "**[ONBOARDING START]**: %SUB_OWNER%/%SUB_REPO%")
 
-call type "%PROJECT_ROOT%\docs\karpathy\llm-wiki.md" | copilot ^
+call type "%PROJECT_DESCRIPTION%" | copilot ^
     --allow-tool="shell(git:*),write" ^
     --model gpt-5.4 ^
     --effort medium ^
@@ -138,6 +147,7 @@ set "ErrorStatus=%ERRORLEVEL%"
 
 if not "%ERRORLEVEL%"=="0" (
   echo ERROR Failed to complete onboarding via Copilot CLI. Skipping submodule...
+  if defined TGNOTIFY ("%TGNOTIFY%" "**[ONBOARDING FAILED]**: %SUB_OWNER%/%SUB_REPO%")
   goto :ONBOARD_SUBMODULE_EXIT
 )
 
@@ -155,6 +165,7 @@ if not "%ERRORLEVEL%"=="0" (
   goto :ONBOARD_SUBMODULE_EXIT
 )
 
+if defined TGNOTIFY ("%TGNOTIFY%" "**[ONBOARDING COMPLETE]**: %SUB_OWNER%/%SUB_REPO%")
 
 :ONBOARD_SUBMODULE_EXIT
 echo _____________________________________________________________

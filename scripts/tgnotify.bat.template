@@ -1,0 +1,10 @@
+@echo off
+
+@echo off
+set "BOT_TOKEN=0123456789:ABCDEFGHIJKLMNOPQRSTUVWXYZ012334567"
+set "CHAT_ID=012345678"
+
+curl -s -X POST "https://api.telegram.org/bot%BOT_TOKEN%/sendMessage" ^
+     -d "chat_id=%CHAT_ID%" ^
+     -d "parse_mode=MarkdownV2" ^
+     -d "text=%~1"
