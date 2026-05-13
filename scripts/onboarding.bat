@@ -31,8 +31,8 @@ del "%STDERRLOG%" 2>nul
         if not "!ERRORLEVEL!"=="0" (set "ExitStatus=1")
     )
 
-
-) 1>>"%STDOUTLOG%" 2>>"%STDERRLOG%"
+)
+::) 1^>^>"%STDOUTLOG%" 2^>^>"%STDERRLOG%"
 
 
 :MAIN_EXIT
