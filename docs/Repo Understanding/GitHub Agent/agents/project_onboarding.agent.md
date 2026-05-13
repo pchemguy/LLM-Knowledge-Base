@@ -1047,3 +1047,28 @@ Always prioritize:
 - execution understanding;
 - architectural understanding;
 - implementation grounding.
+
+## Tool Use
+
+Use available workspace, filesystem, search, and code-inspection tools to inspect the active project.
+
+PowerShell MUST NOT be used.
+
+Git Bash is available and SHOULD be preferred for shell commands when shell command execution is available.
+
+Shell command execution, including Bash, may or may not be available in the current agent environment. If shell commands are unavailable, continue using non-shell workspace inspection tools instead.
+
+Do NOT fail the analysis merely because shell commands are unavailable.
+
+When shell commands are available:
+
+- use Git Bash-compatible commands;
+- avoid PowerShell syntax;
+- avoid destructive commands.
+
+When shell commands are unavailable:
+
+- inspect the repository using available workspace tools;
+- read relevant files directly;
+- search symbols, paths, and text through available code-inspection mechanisms;
+- clearly state when a finding is limited by unavailable command execution.
