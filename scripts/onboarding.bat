@@ -16,7 +16,7 @@ cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
 set "PROJECT_DESCRIPTION=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
-set "TGNOTIFY=%PROJECT_DESCRIPTION%\scripts\tgnotify.bat"
+set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 cd /d "%SUBS%"
 
@@ -134,9 +134,12 @@ if not "%ERRORLEVEL%"=="0" (
 
 :: Run onboarding
 
-if defined TGNOTIFY ("%TGNOTIFY%" "**[ONBOARDING START]**: %SUB_OWNER%/%SUB_REPO%")
+set "TGPROJECT=%SUB_OWNER%/%SUB_REPO%"
+set "TGPROJECT=%%%%0A%TGPROJECT:-=~%"
 
-call type "%PROJECT_DESCRIPTION%" | copilot ^
+if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING START]**: %TGPROJECT%")
+
+type "%PROJECT_DESCRIPTION%" | copilot ^
     --allow-tool="shell(git:*),write" ^
     --model gpt-5.4 ^
     --effort medium ^
@@ -147,7 +150,7 @@ set "ErrorStatus=%ERRORLEVEL%"
 
 if not "%ERRORLEVEL%"=="0" (
   echo ERROR Failed to complete onboarding via Copilot CLI. Skipping submodule...
-  if defined TGNOTIFY ("%TGNOTIFY%" "**[ONBOARDING FAILED]**: %SUB_OWNER%/%SUB_REPO%")
+  if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING FAILED]**: %TGPROJECT%")
   goto :ONBOARD_SUBMODULE_EXIT
 )
 
@@ -165,7 +168,7 @@ if not "%ERRORLEVEL%"=="0" (
   goto :ONBOARD_SUBMODULE_EXIT
 )
 
-if defined TGNOTIFY ("%TGNOTIFY%" "**[ONBOARDING COMPLETE]**: %SUB_OWNER%/%SUB_REPO%")
+if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING COMPLETE]**: %TGPROJECT%")
 
 :ONBOARD_SUBMODULE_EXIT
 echo _____________________________________________________________
