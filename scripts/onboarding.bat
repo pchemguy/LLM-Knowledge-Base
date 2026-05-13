@@ -138,7 +138,7 @@ set "TGPROJECT=%SUB_OWNER%/%SUB_REPO%"
 set "TGPROJECT=%%%%0A%TGPROJECT:-=~%"
 
 rundll32 user32.dll,MessageBeep
-timeout /T 60
+"%WINDIR%\System32\timeout.exe" /T 60
 if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING START]**: %TGPROJECT%")
 
 type "%PROJECT_DESCRIPTION%" | copilot ^
