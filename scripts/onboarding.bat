@@ -43,6 +43,8 @@ if not exist "%PROJECT_DESCRIPTION%" (
             set "ExitStatus=!ERRORLEVEL!"
             goto :MAIN_EXIT
         )
+        rundll32 user32.dll,MessageBeep
+        timeout /T 60
     )
 )
 ::) 1^>^>"%STDOUTLOG%" 2^>^>"%STDERRLOG%"
