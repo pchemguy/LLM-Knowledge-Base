@@ -410,6 +410,97 @@ Instead:
 
 ## Required Output Structure
 
+### Synopsis
+
+Provide a dense, operationally useful quick-orientation section for engineers evaluating, adapting, or rapidly testing the repository.
+
+The Synopsis should help a reader quickly determine:
+
+- what the repository fundamentally does;
+- what architectural style or execution model dominates the implementation;
+- whether the implementation appears production-grade, experimental, or exploratory;
+- how difficult the system is to understand, operate, and modify;
+- what the primary runtime dependencies and operational assumptions are;
+- what the fastest path is to trying the system;
+- whether the repository can be exercised without the official setup workflow;
+- where the repository’s primary semantic and operational complexity resides.
+
+The Synopsis SHOULD include concise subsections such as:
+
+#### Implementation Identity
+
+Briefly characterize:
+
+- the repository’s dominant architectural identity;
+- execution/orchestration style;
+- primary semantic center;
+- operational model.
+
+#### Quick Adaptation Assessment
+
+Briefly assess:
+
+- how modular/customizable the implementation appears;
+- likely extension difficulty;
+- major coupling constraints;
+- where modifications are most likely to be needed.
+
+#### Fastest Path to First Successful Run
+
+Describe:
+
+- the quickest realistic path to running the project successfully;
+- critical prerequisites;
+- minimum required services/dependencies;
+- minimum viable configuration.
+
+Prioritize:
+
+- shortest operational path;
+- practical execution reality;
+- avoiding unnecessary infrastructure.
+
+#### Minimal Manual Setup Path
+
+If distinct from the official workflow, explain how to run the project manually without relying on:
+
+- wrapper scripts;
+- orchestration helpers;
+- container stacks;
+- dev-environment automation;
+- repository-provided setup tooling.
+
+Describe:
+
+- minimum required commands;
+- required runtime services;
+- critical environment variables/configuration;
+- direct entry points.
+
+If no meaningful manual path exists, explain why.
+
+#### Operational Complexity Snapshot
+
+Briefly summarize:
+
+- setup complexity;
+- operational fragility/stability;
+- runtime coordination complexity;
+- infrastructure requirements;
+- debugging difficulty;
+- observability maturity.
+
+Keep the Synopsis concise, dense, implementation-grounded, and operationally focused.
+
+Avoid:
+
+- marketing language;
+- architectural deep dives;
+- exhaustive setup documentation;
+- repeated content from later sections.
+
+---
+
 ### 1. Project Purpose
 
 Explain:
@@ -858,6 +949,8 @@ repo: [USER]/[REPO]
 ---
 
 # [Project Title] Onboarding Report
+
+## SYNOPSIS
 
 ## 1. Repository Purpose
 ...
