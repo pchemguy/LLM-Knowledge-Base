@@ -43,8 +43,6 @@ if not exist "%PROJECT_DESCRIPTION%" (
             set "ExitStatus=!ERRORLEVEL!"
             goto :MAIN_EXIT
         )
-        rundll32 user32.dll,MessageBeep
-        timeout /T 60
     )
 )
 ::) 1^>^>"%STDOUTLOG%" 2^>^>"%STDERRLOG%"
@@ -139,6 +137,8 @@ if not "%ERRORLEVEL%"=="0" (
 set "TGPROJECT=%SUB_OWNER%/%SUB_REPO%"
 set "TGPROJECT=%%%%0A%TGPROJECT:-=~%"
 
+rundll32 user32.dll,MessageBeep
+timeout /T 60
 if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING START]**: %TGPROJECT%")
 
 type "%PROJECT_DESCRIPTION%" | copilot ^
