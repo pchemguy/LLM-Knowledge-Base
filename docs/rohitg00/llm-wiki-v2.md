@@ -1,6 +1,6 @@
 ---
 title: LLM Wiki v2 — extending Karpathy's LLM Wiki pattern with lessons from building agentmemory
-source: https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2?utm_source=chatgpt.com
+source: https://gist.github.com/rohitg00/2067ab416f7bbe447c1977edaaa681e2
 author: Rohit Ghumare
 published:
 created: 2026-05-11

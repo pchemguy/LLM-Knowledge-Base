@@ -1,6 +1,6 @@
 ---
 title: llm-wiki
-source: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f?utm_source=chatgpt.com
+source: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
 author: Andrej Karpathy
 published:
 created: 2026-05-10
