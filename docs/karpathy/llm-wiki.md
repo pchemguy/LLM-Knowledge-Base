@@ -5,8 +5,6 @@ author: Andrej Karpathy
 published:
 created: 2026-05-10
 description: "llm-wiki. GitHub Gist: instantly share code, notes, and snippets."
-tags:
-  - clippings
 ---
 > [!WARNING] Usage
 > 
