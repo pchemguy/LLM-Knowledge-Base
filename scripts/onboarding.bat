@@ -17,7 +17,8 @@ set "ErrorStatus=0"
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
-set "IDEA_FILE=docs\karpathy\llm-wiki.md"
+set "IDEA_FILE_SRC=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
+set "IDEA_FILE=llm-wiki-karpathy.md"
 set "PROMPT=Run project onboarding analysis for the active workspace using concept description from the file `%IDEA_FILE%`."
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
@@ -31,7 +32,7 @@ del "%STDERRLOG%" 2>nul
 
 :: Abort if project description is not available
 
-if not exist "%PROJECT_ROOT%\%IDEA_FILE%" (
+if not exist "%IDEA_FILE_SRC%" (
     echo ERROR Missing prompt file.
     set "ErrorStatus=1"
     goto :MAIN_EXIT
@@ -118,13 +119,20 @@ if exist "OnboardingReport.md" (
 for /d %%D in (*) do (set "SUB_REPO=%%~D")
 cd /d "%SUB_REPO%"
 
-:: Copy custom onboarding agent to submodule repository
+:: Copy custom onboarding agent to submodule repository and project description
 
 call "%~dp0add_agents.bat"
 if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to copy onboarding agent to submodule repository. Skipping submodule...
-  goto :ONBOARD_SUBMODULE_EXIT
+    set "ErrorStatus=%ERRORLEVEL%"
+    echo ERROR Failed to copy onboarding agent to submodule repository. Skipping submodule...
+    goto :ONBOARD_SUBMODULE_EXIT
+)
+
+copy /Y /B "%IDEA_FILE_SRC%" "%TARGET_ROOT%\%IDEA_FILE%"
+if not "%ERRORLEVEL%"=="0" (
+    set "ErrorStatus=%ERRORLEVEL%"
+    echo ERROR Failed to copy project description. Skipping submodule...
+    goto :ONBOARD_SUBMODULE_EXIT
 )
 
 :: Run onboarding
@@ -146,23 +154,23 @@ echo "%PROMPT%" | copilot ^
 set "ErrorStatus=%ERRORLEVEL%"
 
 if not "%ERRORLEVEL%"=="0" (
-  echo ERROR Failed to complete onboarding via Copilot CLI. Skipping submodule...
-  if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING FAILED]**: %TARGET%")
-  goto :ONBOARD_SUBMODULE_EXIT
+    echo ERROR Failed to complete onboarding via Copilot CLI. Skipping submodule...
+    if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING FAILED]**: %TARGET%")
+    goto :ONBOARD_SUBMODULE_EXIT
 )
 
 if exist "OnboardingReport.md" move /Y "OnboardingReport.md" ..
 if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to move "OnboardingReport.md"...
-  goto :ONBOARD_SUBMODULE_EXIT
+    set "ErrorStatus=%ERRORLEVEL%"
+    echo ERROR Failed to move "OnboardingReport.md"...
+    goto :ONBOARD_SUBMODULE_EXIT
 )
 
 if exist "ONBOARDING.md" move /Y "ONBOARDING.md" ..
 if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to move "ONBOARDING.md"...
-  goto :ONBOARD_SUBMODULE_EXIT
+    set "ErrorStatus=%ERRORLEVEL%"
+    echo ERROR Failed to move "ONBOARDING.md"...
+    goto :ONBOARD_SUBMODULE_EXIT
 )
 
 if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING COMPLETE]**: %TARGET%")
@@ -186,18 +194,18 @@ SetLocal
 set CommandText=time /T
 set Output=
 for /f "Usebackq delims=" %%i in (`%CommandText%`) do (
-  if "/!Output!/"=="//" (
-    set Output=%%i
-  )
+    if "/!Output!/"=="//" (
+        set Output=%%i
+    )
 )
 set CurTime=%Output%
 
 set CommandText=date /T
 set Output=
 for /f "Usebackq delims=" %%i in (`%CommandText%`) do (
-  if "/!Output!/"=="//" (
-    set Output=%%i
-  )
+    if "/!Output!/"=="//" (
+        set Output=%%i
+    )
 )
 set CurDate=%Output%
 
