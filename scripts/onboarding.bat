@@ -30,8 +30,8 @@ del "%STDERRLOG%" 2>nul
 
 :: Abort if project description is not available
 
-if not exist "%IDEA_FILE_SRC%" (
-    echo ERROR Missing prompt file.
+if not exist "%IDEA_FILE%" (
+    echo ERROR Project description file.
     set "ErrorStatus=1"
     goto :MAIN_EXIT
 )
