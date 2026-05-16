@@ -1,5 +1,5 @@
 :: ============================================================================
-:: Iterates through submodules in "implementations" and runs project onboarding
+:: Synthesizes results of implementation analysis.
 ::
 :: https://chatgpt.com/c/6a045362-cb44-83eb-abdd-d7d04f67e030
 :: ============================================================================
@@ -16,36 +16,43 @@ set "ExitStatus=0"
 
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
-set "SUBS=%PROJECT_ROOT%\implementations"
-set "PROMPT_FILE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
+set "PROMPT_FILE=%PROJECT_ROOT%\implementations\SynthesisPrompt.md"
+set "REPORT_FILE=%PROJECT_ROOT%\implementations\REVIEW.md"
+set "PROJECT_BASELINE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
+set "PROJECT_EXTENSION=%PROJECT_ROOT%\docs\rohitg00\llm-wiki-v2.md"
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
-cd /d "%SUBS%"
 
-set "STDOUTLOG=%SUBS%\stdout.log"
-set "STDERRLOG=%SUBS%\stderr.log"
+set "STDOUTLOG=%PROJECT_ROOT%\stdout.log"
+set "STDERRLOG=%PROJECT_ROOT%\stderr.log"
 del "%STDOUTLOG%" 2>nul
 del "%STDERRLOG%" 2>nul
 
 
-:: Abort if project description is not available
+:: Abort if project description or prompt file is not available
 
 if not exist "%PROMPT_FILE%" (
     echo ERROR Missing prompt file.
     set "ErrorStatus=1"
-    goto :ONBOARD_SUBMODULE_EXIT
+    goto :MAIN_EXIT
+)
+
+if not exist "%PROJECT_BASELINE%" (
+    echo ERROR Missing baseline description.
+    set "ErrorStatus=1"
+    goto :MAIN_EXIT
+)
+
+if not exist "%PROJECT_EXTENSION%" (
+    echo ERROR Missing missing extended description.
+    set "ErrorStatus=1"
+    goto :MAIN_EXIT
 )
 
 (
     call :TIMESTAMP
-
-    for /d %%D in (*) do (
-        call :ONBOARD_SUBMODULE "%%~D"
-        if not "!ERRORLEVEL!"=="0" (
-            set "ExitStatus=!ERRORLEVEL!"
-            goto :MAIN_EXIT
-        )
-    )
+    call :SYNTHESIS
+    set "ExitStatus=!ERRORLEVEL!"
 )
 ::) 1^>^>"%STDOUTLOG%" 2^>^>"%STDERRLOG%"
 
@@ -58,90 +65,77 @@ exit /b %ErrorStatus%
 :: ============================================================================ MAIN END
 
 
-:: ============================================================================ ONBOARD_SUBMODULE BEGIN
+:: ============================================================================ SYNTHESIS BEGIN
 :: ============================================================================
-:ONBOARD_SUBMODULE
-:: Runs onboarding analysis on submodule.
+:SYNTHESIS
+:: Runs implementation synthesis.
 ::
 :: Analysis uses a custom Copilot agent "project_onboarding".
 ::
 :: Script must copy the contents
 ::    of "docs/Repo Understanding/GitHub Agent"
-::    to implementations/[SUB_OWNER]/[SUB_REPO]/.github
+::    to .github
 ::
 :: Expects: 
 ::   - each submodule to be analyzed is in [REPO_ROOT]/implementations/[SUB_OWNER]/[SUB_REPO];
 ::   - [SUB_REPO] is the only directory in its parent directory (no sibling directories);
-::   - [SUB_OWNER] contains:
-::       - before onboarding: no files
-::       - after onboarding: OnboardingReport.md and ONBOARDING.md 
+::   - [SUB_OWNER] contains OnboardingReport.md and ONBOARDING.md
 ::
 :: Call this sub with argument(s):
-::   - %1 - Submodule OWNER
+::   - None
 ::
 SetLocal
 pushd "%CD%" || exit /b 1
 
-set "SUB_OWNER=%~1"
-set "PREFIX=%PROJECT_ROOT%\implementations\%SUB_OWNER%"
 set "ErrorStatus=0"
 
-echo ======================== ONBOARDING =========================
+echo ======================== SYNTHESIS ==========================
 echo =============================================================
-echo ----- SUBMODULE: "%SUB_OWNER%"
 echo -------------------------------------------------------------
 echo:
 call :TIMESTAMP
 echo:
 
-:: Skip submodule onboarding if directory does not exists.
+:: Abort if any analysis file is missing.
 
-if not exist "%PREFIX%" (
-    echo ERROR: Submodule directory "%PREFIX%" NOT FOUND.
-    echo Skipping submodule onboarding.
-    set "ErrorStatus=1"
-    goto :ONBOARD_SUBMODULE_EXIT
-)
-cd /d "%PREFIX%"
+set "SUBS=%PROJECT_ROOT%\implementations"
 
-:: Skip submodule onboarding if exists "%SUB_OWNER%\OnboardingReport.md"
-
-if exist "OnboardingReport.md" (
-    echo Found existing "OnboardingReport.md".
-    echo Skipping submodule onboarding.
-    set "ErrorStatus=0"
-    goto :ONBOARD_SUBMODULE_EXIT
+for /d %%D in (*) do (
+    if not exist "%SUBS%\%%D\OnboardingReport.md" (
+        echo [ERROR] "%SUBS%\%%D\OnboardingReport.md" is not found. Aborting...
+        set "ExitStatus=1"
+        goto :SYNTHESIS_EXIT
+    )
+    if not exist "%SUBS%\%%D\ONBOARDING.md" (
+        echo [ERROR] "%SUBS%\%%D\ONBOARDING.md" is not found. Aborting...
+        set "ExitStatus=1"
+        goto :SYNTHESIS_EXIT
+    )
 )
 
-:: Get [SUB_REPO]
+:: Make .github
 
-for /d %%D in (*) do (set "SUB_REPO=%%~D")
-cd /d "%SUB_REPO%"
-
-if not exist ".github" mkdir ".github"
+if not exist "%PROJECT_ROOT%\.github" mkdir "%PROJECT_ROOT%\.github"
 if not "%ERRORLEVEL%"=="0" (
   set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to create ".github". Skipping submodule...
+  echo ERROR Failed to create ".github". Aborting...
+  goto :SYNTHESIS_EXIT
+)
+
+:: Copy custom onboarding agent
+
+xcopy /H /Y /B /E /Q "%PROJECT_ROOT%\docs\Repo Understanding\GitHub Agent\*" "%PROJECT_ROOT%\.github"
+if not "%ERRORLEVEL%"=="0" (
+  set "ErrorStatus=%ERRORLEVEL%"
+  echo ERROR Failed to copy onboarding agent. Aborting...
   goto :ONBOARD_SUBMODULE_EXIT
 )
 
-:: Copy custom onboarding agent to submodule repository
-
-xcopy /H /Y /B /E /Q "%PROJECT_ROOT%\docs\Repo Understanding\GitHub Agent\*" ".github"
-if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to copy onboarding agent to submodule repository. Skipping submodule...
-  goto :ONBOARD_SUBMODULE_EXIT
-)
-
-:: Run onboarding
-
-set "TARGET=%SUB_OWNER%/%SUB_REPO%"
-set "TARGET=%%%%0A%TARGET:-=~%"
+:: Run synthesis
 
 rundll32 user32.dll,MessageBeep
 "%WINDIR%\System32\timeout.exe" /T 60
-if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING START]**: %TARGET%")
+if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS START]**")
 
 type "%PROMPT_FILE%" | copilot ^
     --allow-tool="shell(git:*),write" ^
@@ -153,35 +147,29 @@ type "%PROMPT_FILE%" | copilot ^
 set "ErrorStatus=%ERRORLEVEL%"
 
 if not "%ERRORLEVEL%"=="0" (
-  echo ERROR Failed to complete onboarding via Copilot CLI. Skipping submodule...
-  if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING FAILED]**: %TARGET%")
-  goto :ONBOARD_SUBMODULE_EXIT
+  set "ExitStatus=1"
+  echo ERROR Failed to complete synthesis via Copilot CLI.
+  if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS FAILED]**")
+  goto :SYNTHESIS_EXIT
 )
 
-if exist "OnboardingReport.md" move /Y "OnboardingReport.md" ..
-if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to move "OnboardingReport.md"...
-  goto :ONBOARD_SUBMODULE_EXIT
+if not exist "%REPORT_FILE%" (
+  set "ExitStatus=1"
+  echo ERROR Failed to complete synthesis via Copilot CLI: missing report "%REPORT_FILE%".
+  if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS FAILED]**: No report file.")
+  goto :SYNTHESIS_EXIT
 )
 
-if exist "ONBOARDING.md" move /Y "ONBOARDING.md" ..
-if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to move "ONBOARDING.md"...
-  goto :ONBOARD_SUBMODULE_EXIT
-)
+if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS COMPLETE]**: %%0AReport in '%REPORT_FILE%'")
 
-if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING COMPLETE]**: %TARGET%")
-
-:ONBOARD_SUBMODULE_EXIT
+:SYNTHESIS_EXIT
 echo _____________________________________________________________
 echo:
 popd
 if not defined ErrorStatus (set "ErrorStatus=0")
 EndLocal & exit /b %ErrorStatus%
 :: ============================================================================ 
-:: ============================================================================ ONBOARD_SUBMODULE END
+:: ============================================================================ SYNTHESIS END
 
 
 :: ============================================================================ TIMESTAMP BEGIN
