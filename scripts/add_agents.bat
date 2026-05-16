@@ -2,6 +2,8 @@
 :: Adds custom agents from templates templates/commands
 ::
 :: Must be executed from the root of the target repo with .git
+::
+:: https://chatgpt.com/c/6a045362-cb44-83eb-abdd-d7d04f67e030
 :: ============================================================================
 ::
 @echo off
@@ -21,9 +23,7 @@ echo ===========================================================================
 echo:
 
 set "TARGET_ROOT=%CD%"
-set "SOURCE_PREFIX=%~dp0$$"
-set "SOURCE_PREFIX=%SOURCE_PREFIX:\scripts\$$=%"
-set "SOURCE_PREFIX=%SOURCE_PREFIX%\templates\commands"
+set "SOURCE_PREFIX=%~dp0..\templates\commands"
 set "ErrorStatus=0"
 
 :: Verify that the current directory is the root of the target repo with .git
@@ -58,10 +58,10 @@ for %%D in ("agents" "prompts") do (
 
 :: Copy agents
 
-for %%F in (%SOURCE_PREFIX%\*) do (
+for %%F in ("%SOURCE_PREFIX%\*") do (
     copy /Y /B "%%~F" "%TARGET_ROOT%\.github\agents\%%~nF.agent%%~xF"
     if not "!ERRORLEVEL!"=="0" (
-        set "ErrorStatus=!ERRORLEVEL!%"
+        set "ErrorStatus=!ERRORLEVEL!"
         echo ERROR Failed to install agent. Aborting...
         goto :MAIN_EXIT
     )
@@ -82,7 +82,6 @@ set "ErrorStatus=0"
 
 :MAIN_EXIT
 if not defined ErrorStatus (set "ErrorStatus=0")
-EndLocal
-exit /b %ErrorStatus%
+EndLocal & exit /b %ErrorStatus%
 :: ============================================================================ 
 :: ============================================================================ MAIN END

@@ -52,8 +52,7 @@ if not exist "%PROMPT_FILE%" (
 
 :MAIN_EXIT
 if not defined ErrorStatus (set "ErrorStatus=0")
-EndLocal
-exit /b %ErrorStatus%
+EndLocal & exit /b %ErrorStatus%
 :: ============================================================================ 
 :: ============================================================================ MAIN END
 
