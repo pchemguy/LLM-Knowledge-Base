@@ -17,9 +17,7 @@ set "ErrorStatus=0"
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
-set "IDEA_FILE_SRC=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
-set "IDEA_FILE=.github\llm-wiki-karpathy.md"
-set "PROMPT=Run project onboarding analysis for the active workspace using concept description from the file `%IDEA_FILE%`. You MUST read the entire file before beginning analysis."
+set "IDEA_FILE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 cd /d "%SUBS%"
@@ -119,7 +117,7 @@ if exist "OnboardingReport.md" (
 for /d %%D in (*) do (set "SUB_REPO=%%~D")
 cd /d "%SUB_REPO%"
 
-:: Copy custom onboarding agent to submodule repository and project description
+:: Copy custom onboarding agent to submodule repository.
 
 pushd "%CD%"
 call "%~dp0add_agents.bat"
@@ -130,13 +128,6 @@ if not "%ERRORLEVEL%"=="0" (
 )
 popd
 
-copy /Y /B "%IDEA_FILE_SRC%" "%IDEA_FILE%"
-if not "%ERRORLEVEL%"=="0" (
-    set "ErrorStatus=%ERRORLEVEL%"
-    echo ERROR Failed to copy project description. Skipping submodule...
-    goto :ONBOARD_SUBMODULE_EXIT
-)
-
 :: Run onboarding
 
 set "TARGET=%SUB_OWNER%/%SUB_REPO%"
@@ -146,7 +137,7 @@ rundll32 user32.dll,MessageBeep
 "%WINDIR%\System32\timeout.exe" /T 60
 if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING START]**: %TARGET%")
 
-echo "%PROMPT%" | copilot ^
+type "%IDEA_FILE%" | copilot ^
     --allow-tool="shell(git:*),write" ^
     --model gpt-5.4 ^
     --effort medium ^
