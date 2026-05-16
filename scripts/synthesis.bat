@@ -161,7 +161,7 @@ if not exist "%REPORT_FILE%" (
   goto :SYNTHESIS_EXIT
 )
 
-if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS COMPLETE]**: %%0AReport in '%REPORT_FILE%'")
+if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS COMPLETE]**: %%%%0AReport in '%REPORT_FILE%'")
 
 :SYNTHESIS_EXIT
 echo _____________________________________________________________
