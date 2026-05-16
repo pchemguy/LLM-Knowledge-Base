@@ -33,7 +33,7 @@ del "%STDERRLOG%" 2>nul
 if not exist "%PROMPT_FILE%" (
     echo ERROR Missing prompt file.
     set "ErrorStatus=1"
-    goto :ONBOARD_SUBMODULE_EXIT
+    goto :MAIN_EXIT
 )
 
 (
