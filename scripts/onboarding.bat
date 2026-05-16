@@ -18,7 +18,7 @@ cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
 set "IDEA_FILE_SRC=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
-set "IDEA_FILE=llm-wiki-karpathy.md"
+set "IDEA_FILE=.github\llm-wiki-karpathy.md"
 set "PROMPT=Run project onboarding analysis for the active workspace using concept description from the file `%IDEA_FILE%`. You MUST read the entire file before beginning analysis."
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
