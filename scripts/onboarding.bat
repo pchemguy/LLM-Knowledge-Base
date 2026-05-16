@@ -12,7 +12,7 @@
 :MAIN
 
 SetLocal EnableExtensions EnableDelayedExpansion
-set "ExitStatus=0"
+set "ErrorStatus=0"
 
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
@@ -42,7 +42,7 @@ if not exist "%PROMPT_FILE%" (
     for /d %%D in (*) do (
         call :ONBOARD_SUBMODULE "%%~D"
         if not "!ERRORLEVEL!"=="0" (
-            set "ExitStatus=!ERRORLEVEL!"
+            set "ErrorStatus=!ERRORLEVEL!"
             goto :MAIN_EXIT
         )
     )

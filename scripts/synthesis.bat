@@ -12,7 +12,7 @@
 :MAIN
 
 SetLocal EnableExtensions EnableDelayedExpansion
-set "ExitStatus=0"
+set "ErrorStatus=0"
 
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
@@ -52,7 +52,7 @@ if not exist "%PROJECT_EXTENSION%" (
 (
     call :TIMESTAMP
     call :SYNTHESIS
-    set "ExitStatus=!ERRORLEVEL!"
+    set "ErrorStatus=!ERRORLEVEL!"
 )
 ::) 1^>^>"%STDOUTLOG%" 2^>^>"%STDERRLOG%"
 
@@ -100,26 +100,27 @@ echo:
 
 set "SUBS=%PROJECT_ROOT%\implementations"
 
-for /d %%D in (*) do (
-    if not exist "%SUBS%\%%D\OnboardingReport.md" (
-        echo [ERROR] "%SUBS%\%%D\OnboardingReport.md" is not found. Aborting...
-        set "ExitStatus=1"
+for /d %%D in (%SUBS%\*) do (
+    if not exist "%%~D\OnboardingReport.md" (
+        echo [ERROR] "%%~D\OnboardingReport.md" is not found. Aborting...
+        set "ErrorStatus=1"
         goto :SYNTHESIS_EXIT
     )
-    if not exist "%SUBS%\%%D\ONBOARDING.md" (
-        echo [ERROR] "%SUBS%\%%D\ONBOARDING.md" is not found. Aborting...
-        set "ExitStatus=1"
+    if not exist "%%~D\ONBOARDING.md" (
+        echo [ERROR] "%SUBS%\%%~D\ONBOARDING.md" is not found. Aborting...
+        set "ErrorStatus=1"
         goto :SYNTHESIS_EXIT
     )
 )
 
 :: Make .github
 
-if not exist "%PROJECT_ROOT%\.github" mkdir "%PROJECT_ROOT%\.github"
-if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to create ".github". Aborting...
-  goto :SYNTHESIS_EXIT
+if not exist "%PROJECT_ROOT%\.github" (
+    mkdir "%PROJECT_ROOT%\.github" || (
+        set "ErrorStatus=!ERRORLEVEL!"
+        echo ERROR Failed to create ".github". Aborting...
+        goto :SYNTHESIS_EXIT
+    )
 )
 
 :: Copy custom onboarding agent
@@ -128,7 +129,7 @@ xcopy /H /Y /B /E /Q "%PROJECT_ROOT%\docs\Repo Understanding\GitHub Agent\*" "%P
 if not "%ERRORLEVEL%"=="0" (
   set "ErrorStatus=%ERRORLEVEL%"
   echo ERROR Failed to copy onboarding agent. Aborting...
-  goto :ONBOARD_SUBMODULE_EXIT
+  goto :SYNTHESIS_EXIT
 )
 
 :: Run synthesis
@@ -147,14 +148,14 @@ type "%PROMPT_FILE%" | copilot ^
 set "ErrorStatus=%ERRORLEVEL%"
 
 if not "%ERRORLEVEL%"=="0" (
-  set "ExitStatus=1"
+  set "ErrorStatus=1"
   echo ERROR Failed to complete synthesis via Copilot CLI.
   if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS FAILED]**")
   goto :SYNTHESIS_EXIT
 )
 
 if not exist "%REPORT_FILE%" (
-  set "ExitStatus=1"
+  set "ErrorStatus=1"
   echo ERROR Failed to complete synthesis via Copilot CLI: missing report "%REPORT_FILE%".
   if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS FAILED]**: No report file.")
   goto :SYNTHESIS_EXIT
