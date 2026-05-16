@@ -4,7 +4,7 @@ Your task is to compare alternative implementations of the "LLM Wiki" project co
 
 Each of the target implementations has been already analyzed via the `project_onboarding` agent yielding distinct `OnboardingReport.md` and `ONBOARDING.md` for each analyzed implementation. These two files were moved one level up from `implementations/[OWNER]/[REPO]/` to `implementations/[OWNER]/`. You MUST rely on these files as your primary source of truth about individual implementations. You MUST NOT perform a from-scratch analysis for individual target implementations and only refer to actual projects as a focused back up option, if at all.
 
-You need to create `implementations/REVIEW.md` document comparing the individual implementations and synthesizing findings choosing appropriate robust communication formats. The reader of this `REVIEW.md` document is an expert understanding the underline project concept description.
+You MUST create `implementations/REVIEW.md` document comparing the individual implementations and synthesizing prior analysis findings choosing appropriate robust communication formats. The reader of this `REVIEW.md` document is an expert understanding the underline project concept description.
 
 For each of these implementations, the reader needs to be able to quickly
 
