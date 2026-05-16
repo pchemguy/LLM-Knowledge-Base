@@ -1,3 +1,7 @@
+---
+url: https://chatgpt.com/c/6a031ab1-2be4-83eb-ae7e-a67efb9123c8
+---
+
 # Software Implementation Comparison
 
 Your task is to compare alternative implementations of the "LLM Wiki" project concept included in a collection of select implementations and synthesize findings. The original reference description of the "LLM Wiki" project concept is `docs/karpathy/llm-wiki.md` and its further discussion is included as `docs/rohitg00/llm-wiki-v2.md`. The target implementations to be compared are included as this LLM-Knowledge-Base project's Git submodules namespaced as `implementations/[OWNER]/[REPO]/`.
