@@ -1,5 +1,9 @@
 ---
 description: Perform local git project onboarding.
+urls:
+  - https://chatgpt.com/c/6a031ab1-2be4-83eb-ae7e-a67efb9123c8
+  - https://chatgpt.com/c/6a089162-0c74-83eb-a31a-717d8115fe16
+prompt_template: Run project onboarding analysis for the active workspace using concept description from the file `[path]`.
 ---
 
 # Software Project Onboarding

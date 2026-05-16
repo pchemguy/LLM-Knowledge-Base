@@ -17,7 +17,8 @@ set "ErrorStatus=0"
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
-set "PROMPT_FILE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
+set "IDEA_FILE=docs\karpathy\llm-wiki.md"
+set "PROMPT=Run project onboarding analysis for the active workspace using concept description from the file `%IDEA_FILE%`."
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 cd /d "%SUBS%"
@@ -30,7 +31,7 @@ del "%STDERRLOG%" 2>nul
 
 :: Abort if project description is not available
 
-if not exist "%PROMPT_FILE%" (
+if not exist "%PROJECT_ROOT%\%IDEA_FILE%" (
     echo ERROR Missing prompt file.
     set "ErrorStatus=1"
     goto :MAIN_EXIT
@@ -117,16 +118,9 @@ if exist "OnboardingReport.md" (
 for /d %%D in (*) do (set "SUB_REPO=%%~D")
 cd /d "%SUB_REPO%"
 
-if not exist ".github" mkdir ".github"
-if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to create ".github". Skipping submodule...
-  goto :ONBOARD_SUBMODULE_EXIT
-)
-
 :: Copy custom onboarding agent to submodule repository
 
-xcopy /H /Y /B /E /Q "%PROJECT_ROOT%\docs\Repo Understanding\GitHub Agent\*" ".github"
+call "%~dp0add_agents.bat"
 if not "%ERRORLEVEL%"=="0" (
   set "ErrorStatus=%ERRORLEVEL%"
   echo ERROR Failed to copy onboarding agent to submodule repository. Skipping submodule...
@@ -142,7 +136,7 @@ rundll32 user32.dll,MessageBeep
 "%WINDIR%\System32\timeout.exe" /T 60
 if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING START]**: %TARGET%")
 
-type "%PROMPT_FILE%" | copilot ^
+echo "%PROMPT%" | copilot ^
     --allow-tool="shell(git:*),write" ^
     --model gpt-5.4 ^
     --effort medium ^
