@@ -19,7 +19,7 @@ set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
 set "IDEA_FILE_SRC=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
 set "IDEA_FILE=llm-wiki-karpathy.md"
-set "PROMPT=Run project onboarding analysis for the active workspace using concept description from the file `%IDEA_FILE%`."
+set "PROMPT=Run project onboarding analysis for the active workspace using concept description from the file `%IDEA_FILE%`. You MUST read the entire file before beginning analysis."
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 cd /d "%SUBS%"
@@ -121,14 +121,16 @@ cd /d "%SUB_REPO%"
 
 :: Copy custom onboarding agent to submodule repository and project description
 
+pushd "%CD%"
 call "%~dp0add_agents.bat"
 if not "%ERRORLEVEL%"=="0" (
     set "ErrorStatus=%ERRORLEVEL%"
     echo ERROR Failed to copy onboarding agent to submodule repository. Skipping submodule...
     goto :ONBOARD_SUBMODULE_EXIT
 )
+popd
 
-copy /Y /B "%IDEA_FILE_SRC%" "%TARGET_ROOT%\%IDEA_FILE%"
+copy /Y /B "%IDEA_FILE_SRC%" "%IDEA_FILE%"
 if not "%ERRORLEVEL%"=="0" (
     set "ErrorStatus=%ERRORLEVEL%"
     echo ERROR Failed to copy project description. Skipping submodule...
