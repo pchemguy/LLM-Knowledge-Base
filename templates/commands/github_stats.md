@@ -403,5 +403,6 @@ Including:
 - You have full terminal access via `Git Bash` and `cmd`.
 - `PowerShell` use is absolutely prohibited regardless of version.
 - `Python` is available and ready for use.
+- `gh` CLI and GitHub MCP server are available.
 
 ---
