@@ -76,7 +76,6 @@ for /d %%O in ("%SUBS%\*") do (
     )
 )
 
-exit
 rundll32 user32.dll,MessageBeep
 "%TIMEOUT%" /T 60
 if defined TGNOTIFY (call "%TGNOTIFY%" "*[GitHub Stats START]*")
