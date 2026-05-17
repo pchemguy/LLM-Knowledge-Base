@@ -31,6 +31,8 @@ into a unified final analysis saved as Markdown-formatted, structured, human-rea
 implementations/GitHubStats.md
 ```
 
+**IMPORTANT:** You are NOT allowed to delegate any tasks to subagents. You MUST read `GitHubStats.md` after it was written and confirm its contents is complete. You MUST not complete the job, until `GitHubStats.md` verification is complete. If the file is not created or incomplete - your mission is a failure!
+
 ---
 
 ## Data Integrity and Anti-BS Requirements
