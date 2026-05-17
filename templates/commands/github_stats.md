@@ -253,7 +253,26 @@ Derived heuristics:
 
 ## Output Requirements
 
-Generate a structured report in Markdown.
+Generate a structured report in Markdown. Use the following skeletal template:
+
+```
+# GitHub Repository Metrics Report
+
+## Methodology
+
+## Notes _(if appropriate)_
+
+## Cross-Repository Comparative Tables
+
+### [TABLE NAME] _(Repeat section for each table)_
+
+## Repository Analyses
+
+### [OWNER/REPO] _(Repeat section for each repository)_
+
+```
+
+Note, each repository subsection MUST follow template in **Individual Repository Information**.
 
 ---
 
@@ -325,9 +344,9 @@ The generated `GitHubStats.md` MUST be fully self-contained and include:
 For each repository include:
 
 ```markdown
-## OWNER/REPO
+### OWNER/REPO
 
-### Summary
+#### Summary
 
 | Metric            | Value |
 | ----------------- | ----- |
@@ -338,24 +357,24 @@ For each repository include:
 | Contributors      |       |
 | Primary Languages |       |
 
-### Languages
+#### Languages
 
 | Language | Fraction |
 | -------- | -------- |
 
-### Activity
+#### Activity
 
 ...
 
-### Stack Detection
+#### Stack Detection
 
 ...
 
-### Documentation
+#### Documentation
 
 ...
 
-### AI/Agent Assessment
+#### AI/Agent Assessment
 
 ...
 ```
