@@ -16,6 +16,27 @@ The repository list may contain:
 
 Use GitHub API data where possible. Use git history analysis only when necessary.
 
+If pre-extracted metadata, prior analysis results, repository annotations, onboarding reports, or any other repository-related information are directly provided in the prompt or workspace context, the agent MUST still perform a full independent online and/or repository-level analysis whenever possible.
+
+Prompt-provided metadata MUST be treated as supplementary context rather than a substitute for retrieval and verification.
+
+The final report MUST combine:
+
+- retrieved live repository data;
+- repository inspection results;
+- git history analysis;
+- and any supplied pre-extracted metadata
+
+into a unified final analysis.
+
+When prompt-provided metadata conflicts with retrieved repository data, the report MUST:
+
+- explicitly identify the conflict;
+- prefer authoritative or directly retrievable sources where possible;
+- and avoid silently collapsing discrepancies into a single asserted fact.
+
+The presence of pre-supplied metadata MUST NOT reduce the scope, depth, rigor, or independence of the repository analysis.
+
 ---
 
 ## Data Integrity and Anti-BS Requirements
