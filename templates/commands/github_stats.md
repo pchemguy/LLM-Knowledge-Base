@@ -393,3 +393,10 @@ Including:
 * AI-agent suitability ranking
 
 ---
+
+## Tool Use Constraints
+
+- `PowerShell` use is absolutely prohibited regardless of version.
+- `Bash`, `cmd`, and `Python` are allowed.
+
+---
