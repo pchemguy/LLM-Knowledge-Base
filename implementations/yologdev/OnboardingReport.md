@@ -1,5 +1,5 @@
 ---
-repo: yologdev/karpathy-llm-wiki
+repo: yologdev/yopedia
 ---
 
 # karpathy-llm-wiki Onboarding Report
