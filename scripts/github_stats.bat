@@ -145,8 +145,56 @@ echo ----- REPO: "%ORIGIN%"
 echo -------------------------------------------------------------
 echo:
 
-set "HOMEPAGE=%ORIGIN:/=~%"
-"%CHROME_BIN%" --headless --dump-dom "%URL%" > "../../%HOMEPAGE%.html"
+set "HOMEPAGE=../../%ORIGIN:/=~%.html"
+if not exist "%HOMEPAGE%" ("%CHROME_BIN%" --headless --dump-dom "%URL%" > "%HOMEPAGE%")
+
+set "META="
+
+:: Extract fork count
+
+set "FORK_COUNT="
+set "PATTERN=s/.*id=.repo-network-counter.[^>]*title=.\([0-9,][0-9,]*\).*/\1/p"
+for /f "usebackq delims=" %%M in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
+    set "FORK_COUNT=%%M"
+)
+set "FORK_COUNT=%FORK_COUNT:,=%"
+set "META=%META%, "forks": %FORK_COUNT%"
+
+:: Extract star count
+
+set "STAR_COUNT="
+set "PATTERN=s/.*id=.repo-stars-counter-star.[^>]*title=.\([0-9,][0-9,]*\).*/\1/p"
+for /f "usebackq delims=" %%M in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
+    set "STAR_COUNT=%%M"
+)
+set "STAR_COUNT=%STAR_COUNT:,=%"
+set "META=%META%, "stars": %STAR_COUNT%"
+
+set "RELEASES="
+set "PATTERN=/\/releases/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*\/releases[^>]*>[ \t]*Releases.*<span[^>]*title=.\([0-9,]*\).*/\1/p;}"
+for /f "usebackq" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
+    set "RELEASES=%%A"
+)
+if not defined RELEASES (set "RELEASES=0")
+set "META=%META%, "releases": %RELEASES%"
+
+set "LNGS="
+set "PATTERN=/search?l=/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*search?l=[^>]*>.*text-bold[^>]*>\([^<]*\)<\/span>[ \t]*<span>\([^<]*\)<\/span>.*/\1|\2/p;}"
+for /f "usebackq tokens=1,2 delims=|" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
+    set "LNGS=!LNGS!, "%%A": "%%B""
+)
+if defined LNGS (
+    set "LNGS={%LNGS:~2%}"
+) else (
+    set "LNGS={}"
+)
+
+set "META=%META%, "languages": %LNGS%"
+
+set "META={%META:~2%}"
+
+echo %META%
+
 "%TIMEOUT%" /T 5
 
 echo:
