@@ -16,9 +16,7 @@ The repository list may contain:
 
 Use GitHub API data where possible. Use git history analysis only when necessary.
 
-If pre-extracted metadata, prior analysis results, repository annotations, onboarding reports, or any other repository-related information are directly provided in the prompt or workspace context, the agent MUST still perform a full independent online and/or repository-level analysis whenever possible.
-
-Prompt-provided metadata MUST be treated as supplementary context rather than a substitute for retrieval and verification.
+If pre-extracted metadata, prior analysis results, repository annotations, onboarding reports, or any other repository-related information are directly provided in the prompt or workspace context, the agent MUST MUST treat it as supplementary context rather than a substitute for retrieval and verification and still perform a full independent online and/or repository-level analysis whenever possible. The presence of pre-supplied metadata MUST NOT reduce the scope, depth, rigor, or independence of the repository analysis. 
 
 The final report MUST combine:
 
@@ -27,15 +25,11 @@ The final report MUST combine:
 - git history analysis;
 - and any supplied pre-extracted metadata
 
-into a unified final analysis.
+into a unified final analysis saved as Markdown-formatted, structured, human-readable file
 
-When prompt-provided metadata conflicts with retrieved repository data, the report MUST:
-
-- explicitly identify the conflict;
-- prefer authoritative or directly retrievable sources where possible;
-- and avoid silently collapsing discrepancies into a single asserted fact.
-
-The presence of pre-supplied metadata MUST NOT reduce the scope, depth, rigor, or independence of the repository analysis.
+```text
+implementations/GitHubStats.md
+```
 
 ---
 
@@ -260,6 +254,44 @@ Derived heuristics:
 ## Output Requirements
 
 Generate a structured report in Markdown.
+
+---
+
+### Final Output Format Requirements
+
+The input repository list and associated metadata MAY include partially structured or machine-readable artifacts, including JSON fragments, serialized metadata, API responses, extracted statistics, or intermediate analysis data.
+
+Such machine-readable content is provided solely as a convenience for analysis and retrieval.
+
+The agent MAY:
+
+- parse structured metadata;
+- use machine-readable intermediate representations internally;
+- generate temporary structured artifacts during analysis;
+- or aggregate data in JSON-like forms during processing.
+
+However, the FINAL deliverable MUST be a fully human-readable structured Markdown report.
+
+The final report MUST:
+
+- prioritize readability for human reviewers;
+- use Markdown headings, tables, lists, and prose explanations;
+- include narrative interpretation where appropriate;
+- and present repository analysis as a readable technical report.
+
+The final report MUST NOT:
+
+- consist primarily of raw JSON;
+- dump machine-readable blobs;
+- emit raw API responses;
+- output serialized intermediate structures;
+- or present the report as a machine-oriented artifact.
+
+Machine-readable intermediate artifacts are NOT acceptable as the final deliverable.
+
+Structured Markdown intended for direct human consumption is REQUIRED.
+
+---
 
 ### Output File Requirement
 
