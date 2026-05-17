@@ -21,26 +21,26 @@ Generated: 2026-05-17
 
 ### Popularity Ranking
 
-| Rank | Repository | Stars | Forks | Open issues |
-| --- | --- | ---: | ---: | ---: |
-| 1 | Lum1104/Understand-Anything | 14922 | 1390 | 15 |
-| 2 | rohitg00/agentmemory | 10989 | 926 | 98 |
-| 3 | Ar9av/obsidian-wiki | 1312 | 151 | 8 |
-| 4 | lucasastorian/llmwiki | 912 | 146 | 5 |
-| 5 | Astro-Han/karpathy-llm-wiki | 845 | 114 | 2 |
-| 6 | skyllwt/OmegaWiki | 673 | 103 | 3 |
-| 7 | swarmclawai/swarmvault | 457 | 52 | 2 |
-| 8 | nvk/llm-wiki | 428 | 56 | 4 |
-| 9 | NicholasSpisak/second-brain | 324 | 57 | 0 |
-| 10 | axoviq-ai/synthadoc | 314 | 32 | 1 |
-| 11 | ussumant/llm-wiki-compiler | 261 | 25 | 1 |
-| 12 | Ss1024sS/LLM-wiki | 101 | 24 | 0 |
-| 13 | MehmetGoekce/llm-wiki | 89 | 11 | 0 |
-| 14 | yologdev/karpathy-llm-wiki -> yologdev/yopedia | 56 | 8 | 6 |
-| 15 | gowtham0992/link | 42 | 8 | 0 |
-| 16 | zhurudong/andrej-karpathy-llm-wiki | 12 | 2 | 1 |
-| 17 | jp-carrilloe/pulseOS-lite | 11 | 1 | 0 |
-| 18 | sametbrr/llm-wiki-manager | 7 | 2 | 0 |
+| Rank | Repository                                     | Stars | Forks | Open issues |
+| ---- | ---------------------------------------------- | ----: | ----: | ----------: |
+| 1    | Lum1104/Understand-Anything                    | 14922 |  1390 |          15 |
+| 2    | rohitg00/agentmemory                           | 10989 |   926 |          98 |
+| 3    | Ar9av/obsidian-wiki                            |  1312 |   151 |           8 |
+| 4    | lucasastorian/llmwiki                          |   912 |   146 |           5 |
+| 5    | Astro-Han/karpathy-llm-wiki                    |   845 |   114 |           2 |
+| 6    | skyllwt/OmegaWiki                              |   673 |   103 |           3 |
+| 7    | swarmclawai/swarmvault                         |   457 |    52 |           2 |
+| 8    | nvk/llm-wiki                                   |   428 |    56 |           4 |
+| 9    | NicholasSpisak/second-brain                    |   324 |    57 |           0 |
+| 10   | axoviq-ai/synthadoc                            |   314 |    32 |           1 |
+| 11   | ussumant/llm-wiki-compiler                     |   261 |    25 |           1 |
+| 12   | Ss1024sS/LLM-wiki                              |   101 |    24 |           0 |
+| 13   | MehmetGoekce/llm-wiki                          |    89 |    11 |           0 |
+| 14   | yologdev/karpathy-llm-wiki -> yologdev/yopedia |    56 |     8 |           6 |
+| 15   | gowtham0992/link                               |    42 |     8 |           0 |
+| 16   | zhurudong/andrej-karpathy-llm-wiki             |    12 |     2 |           1 |
+| 17   | jp-carrilloe/pulseOS-lite                      |    11 |     1 |           0 |
+| 18   | sametbrr/llm-wiki-manager                      |     7 |     2 |           0 |
 
 ### Activity Ranking
 
