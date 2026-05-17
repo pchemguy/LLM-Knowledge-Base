@@ -385,6 +385,7 @@ At the end, generate comparative analysis.
 
 Including:
 
+* compact comparison table ranked by stars, recency, and contributor count
 * popularity ranking
 * activity ranking
 * maintenance ranking
