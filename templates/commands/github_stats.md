@@ -11,7 +11,8 @@ The repository list may contain:
 
 * full GitHub URLs;
 * `OWNER/REPO` identifiers;
-* local git remotes resolvable to GitHub repositories.
+* local git remotes resolvable to GitHub repositories;
+* select pre-extracted metadata requested by the analysis below, which may not be readily available via API.
 
 Use GitHub API data where possible. Use git history analysis only when necessary.
 
