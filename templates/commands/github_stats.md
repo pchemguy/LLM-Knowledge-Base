@@ -260,19 +260,22 @@ Generate a structured report in Markdown. Use the following skeletal template:
 
 ## Methodology
 
-## Notes _(if appropriate)_
+## Notes
 
 ## Cross-Repository Comparative Tables
 
-### [TABLE NAME] _(Repeat section for each table)_
+### [TABLE NAME]
 
 ## Repository Analyses
 
-### [OWNER/REPO] _(Repeat section for each repository)_
+### [OWNER/REPO]
 
 ```
 
-Note, each repository subsection MUST follow template in **Individual Repository Information**.
+Note:
+
+- Repeat `### [TABLE NAME]` and `### [OWNER/REPO]` for each table and repo as appropriate.
+- Each repository subsection MUST follow template in **Individual Repository Information**.
 
 ---
 
