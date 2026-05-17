@@ -41,7 +41,7 @@
 	path = implementations/Ss1024sS/LLM-Wiki-Ss1024sS
 	url = https://github.com/Ss1024sS/LLM-wiki.git
 [submodule "yopedia"]
-	path = implementations/yologdev/yopedia
+	path = implementations/yologdev/karpathy-llm-wiki
 	url = https://github.com/yologdev/karpathy-llm-wiki.git
 [submodule "LLM-Wiki-MehmetGoekce"]
 	path = implementations/MehmetGoekce/LLM-Wiki-MehmetGoekce
