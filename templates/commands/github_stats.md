@@ -12,9 +12,56 @@ The repository list may contain:
 * full GitHub URLs;
 * `OWNER/REPO` identifiers;
 * local git remotes resolvable to GitHub repositories;
-* select pre-extracted metadata requested by the analysis below, which may not be readily available via API.
+* pre-extracted metadata, which may not be readily available via API.
 
 Use GitHub API data where possible. Use git history analysis only when necessary.
+
+---
+
+## Data Integrity and Anti-BS Requirements
+
+Every factual statistic, repository attribute, metadata field, timestamp, count, language fraction, activity signal, and derived input MUST be grounded in actually retrieved information.
+
+Acceptable grounding sources include:
+
+- GitHub API responses;
+- GitHub CLI/API output;
+- local `git` history inspection;
+- directly inspected repository files;
+- pre-extracted metadata explicitly provided in the repository list;
+- tool output generated during the run.
+
+The agent MUST NOT fabricate, guess, interpolate, or silently infer factual statistics.
+
+If any item for any repository is unavailable, inaccessible, ambiguous, rate-limited, unsupported by the available tools, or cannot be reliably retrieved, the report MUST clearly indicate this with one of:
+
+- `N/A`
+- `Unknown`
+- `Unavailable`
+- `Not reliably retrievable`
+
+Missing or unavailable data MUST NEVER be replaced with:
+
+- guessed values;
+- placeholder numbers;
+- optimistic assumptions;
+- or implied certainty.
+
+When heuristics are used, the report MUST:
+
+- identify them as heuristics;
+- briefly describe the basis used;
+- and avoid overstating confidence.
+
+Any heuristic classification MUST identify the factual signals used as its basis. For example:
+
+- `Dormancy heuristic: inferred from last commit date and commit frequency`
+- `Bus factor heuristic: inferred from contributor concentration`
+- `Onboarding friendliness heuristic: inferred from README, setup docs, tests, CI, and examples`
+
+If the required factual basis for a heuristic is unavailable, the heuristic result MUST be reported as `N/A` or `Not reliably retrievable`.
+
+The final report MUST prioritize correctness, traceability, and explicit missing-data handling over completeness.
 
 ---
 
@@ -189,57 +236,6 @@ Derived heuristics:
 
 ---
 
-## Data Integrity and Anti-Hallucination Requirements
-
-All reported statistics, metadata, classifications, heuristics, and derived conclusions MUST be grounded in actually retrieved repository data, GitHub API responses, git history analysis, or directly inspected repository contents.
-
-The agent MUST NOT:
-
-- fabricate values;
-- estimate unavailable statistics without explicit labeling;
-- infer precise numeric values from incomplete evidence;
-- present assumptions as facts;
-- silently substitute missing data.
-
-If any metric, field, statistic, heuristic input, or repository attribute cannot be reliably retrieved, verified, or derived, the report MUST explicitly indicate this using one of:
-
-- `N/A`
-- `Unknown`
-- `Unavailable`
-- `Not reliably retrievable`
-
-as appropriate.
-
-Missing or unavailable data MUST NEVER be replaced with:
-
-- guessed values;
-- placeholder numbers;
-- optimistic assumptions;
-- or implied certainty.
-
-Any heuristic, inference, classification, or interpretation MUST be clearly distinguishable from raw factual repository data.
-
-When heuristics are used, the report MUST:
-
-- identify them as heuristics;
-- briefly describe the basis used;
-- and avoid overstating confidence.
-
-Examples:
-
-- "Bus factor heuristic: Low confidence"
-- "Dormancy classification inferred from commit recency"
-- "Technology stack inferred from dependency manifests"
-
-If conflicting signals are detected across sources, the report MUST:
-
-- explicitly mention the conflict;
-- prefer authoritative sources;
-- and avoid collapsing ambiguity into a false definitive conclusion.
-
-The report MUST prioritize correctness, traceability, and epistemic honesty over completeness.
-
----
 ## Output Requirements
 
 Generate a structured report in Markdown.
