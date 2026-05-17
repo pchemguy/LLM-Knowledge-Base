@@ -82,7 +82,7 @@ if defined TGNOTIFY (call "%TGNOTIFY%" "*[GitHub Stats START]*")
 cd /d "%PROJECT_ROOT%"
 
 type "%REPO_LIST%" | copilot ^
-    --allow-tool="shell(git:*),write" ^
+    --allow-tool="shell(git:*),shell(python:*),shell(bash:*),write" ^
     --model gpt-5.4 ^
     --effort medium ^
     --agent "github_stats" ^
