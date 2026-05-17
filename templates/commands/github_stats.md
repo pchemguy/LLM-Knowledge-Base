@@ -26,10 +26,6 @@ Use GitHub API data where possible. Use git history analysis only when necessary
 * GitHub URL
 * description
 * primary topic tags
-* license
-* default branch
-* archived status
-* fork status (whether this repo itself is a fork)
 
 ---
 
@@ -37,15 +33,7 @@ Use GitHub API data where possible. Use git history analysis only when necessary
 
 * star count
 * fork count
-* watcher count
 * open issue count
-* GitHub dependent repositories count (if available)
-* GitHub dependent packages count (if available)
-
-Optional:
-
-* traffic popularity indicators if accessible
-* notable downstream forks or adopters
 
 ---
 
@@ -74,16 +62,6 @@ Derived heuristics:
 ### Contributor Activity
 
 * total contributor count
-* active contributors in last 90 days
-* bus factor heuristic
-* top contributor commit share percentage
-* maintainer concentration heuristic
-
-Optional:
-
-* maintainer responsiveness
-* median PR merge time
-* issue response latency
 
 ---
 
@@ -93,7 +71,6 @@ Optional:
 * commits in last year
 * release count
 * latest release date
-* release cadence
 * open pull request count
 * merged pull requests in last 90 days
 
@@ -115,14 +92,6 @@ For each language:
 * language name
 * percentage
 * byte count if available
-
-Additionally collect:
-
-* estimated repository size
-* lines of code estimate if available
-* monorepo heuristic
-* generated-code heuristic
-* vendored-code heuristic
 
 ---
 
@@ -190,22 +159,6 @@ Check for:
 Derived heuristic:
 
 * onboarding friendliness score
-
----
-
-### Ecosystem and Maintenance Signals
-
-Detect:
-
-* GitHub Actions usage
-* stale dependencies heuristic
-* recent dependency updates
-* security policy
-* CODEOWNERS
-* issue templates
-* PR templates
-* semantic versioning usage
-* changelog maintenance
 
 ---
 

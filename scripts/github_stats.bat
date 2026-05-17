@@ -7,11 +7,14 @@
 @echo off
 
 :: ============================================================================ MAIN BEGIN
-:: ============================================================================
+:: ----------------------------------------------------------------------------
 :MAIN
 
 SetLocal EnableExtensions EnableDelayedExpansion
 set "ErrorStatus=0"
+
+set "CHROME_BIN=G:\ProgramsMisc\Chromium\bin\sync\chrome.exe"
+set "TIMEOUT=%WINDIR%\System32\timeout.exe"
 
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
@@ -34,6 +37,14 @@ if not exist "%SUBS%" (
     goto :MAIN_EXIT
 )
 
+:: Abort if chrome reference is invalid
+
+if not exist "%CHROME_BIN%" (
+    echo {ERROR} Chrome reference is not valid "%CHROME_BIN%"
+    set "ErrorStatus=1"
+    goto :MAIN_EXIT
+)
+
 :: Copy custom Copilot agents to repository.
 
 call "%~dp0add_agents.bat"
@@ -50,32 +61,24 @@ if exist "%REPO_LIST%" (
     if not "!ERRORLEVEL!"=="0" (
         set "ErrorStatus=!ERRORLEVEL!"
         echo {ERROR} Failed to delete repository list file.
-        goto :MAIN_EXIT
+        goto :REPOS_EXIT
     )
 )
 
 for /d %%O in ("%SUBS%\*") do (
     for /d %%R in ("%%~fO\*") do (
         cd /d "%%~R"
-        set "ORIGIN="
-        for /f %%I in ('git remote get-url origin') do (set "ORIGIN=%%I")
-        if "!ORIGIN!"=="" (
-            set "ErrorStatus=1"
-            echo {ERROR} Failed to identify REPO/OWNER for "%%~R". Aborting...
-            goto :MAIN_EXIT
-        )
-        set "ORIGIN=!ORIGIN:~19,-4!"
-        echo - !ORIGIN! >>"%REPO_LIST%"
-        if not "!ERRORLEVEL!"=="0" (
+        call :PROCESS_REPO || (
             set "ErrorStatus=!ERRORLEVEL!"
-            echo {ERROR} Failed to update repository list file.
+            echo {ERROR} Failed to perform repo preprocessing "%%~R".
             goto :MAIN_EXIT
         )
     )
 )
 
+exit
 rundll32 user32.dll,MessageBeep
-"%WINDIR%\System32\timeout.exe" /T 60
+"%TIMEOUT%" /T 60
 if defined TGNOTIFY (call "%TGNOTIFY%" "*[GitHub Stats START]*")
 cd /d "%PROJECT_ROOT%"
 
@@ -108,5 +111,51 @@ if defined TGNOTIFY (call "%TGNOTIFY%" "*[GitHub Stats COMPLETE]*")
 :MAIN_EXIT
 if not defined ErrorStatus (set "ErrorStatus=0")
 EndLocal & exit /b %ErrorStatus%
-:: ============================================================================ 
+:: ---------------------------------------------------------------------------- 
 :: ============================================================================ MAIN END
+
+
+:: ============================================================================ PROCESS_REPO BEGIN
+:: ----------------------------------------------------------------------------
+:PROCESS_REPO
+::
+SetLocal
+set "ErrorStatus=0"
+
+set "ORIGIN="
+for /f %%I in ('git remote get-url origin') do (set "URL=%%I")
+if "%URL%"=="" (
+    set "ErrorStatus=1"
+    echo {ERROR} Failed to identify REPO/OWNER. Aborting...
+    goto :PROCESS_REPO_EXIT
+)
+set "URL=%URL:~0,-4%"
+set "ORIGIN=%URL:~19%"
+echo - %ORIGIN% >>"%REPO_LIST%"
+if not "%ERRORLEVEL%"=="0" (
+    set "ErrorStatus=%ERRORLEVEL%"
+    echo {ERROR} Failed to update repository list file.
+    goto :PROCESS_REPO_EXIT
+)
+
+echo:
+echo ====================== PROCESSING REPO ======================
+echo =============================================================
+echo ----- REPO: "%ORIGIN%"
+echo -------------------------------------------------------------
+echo:
+
+set "HOMEPAGE=%ORIGIN:/=~%"
+"%CHROME_BIN%" --headless --dump-dom "%URL%" > "../../%HOMEPAGE%.html"
+"%TIMEOUT%" /T 5
+
+echo:
+echo ----- DONE: "%ORIGIN%"
+echo -------------------------------------------------------------
+echo:
+
+:PROCESS_REPO_EXIT
+if not defined ErrorStatus (set "ErrorStatus=0")
+EndLocal & exit /b %ErrorStatus%
+:: ---------------------------------------------------------------------------- 
+:: ============================================================================ PROCESS_REPO END
