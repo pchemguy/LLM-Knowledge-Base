@@ -397,7 +397,8 @@ Including:
 
 ## Tool Use Constraints
 
+- You have full terminal access via `Git Bash` and `cmd`.
 - `PowerShell` use is absolutely prohibited regardless of version.
-- `Bash`, `cmd`, and `Python` are allowed.
+- `Python` is available and ready for use.
 
 ---
