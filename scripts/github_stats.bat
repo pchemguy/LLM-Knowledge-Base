@@ -82,7 +82,7 @@ if defined TGNOTIFY (call "%TGNOTIFY%" "*[GitHub Stats START]*")
 cd /d "%PROJECT_ROOT%"
 
 type "%REPO_LIST%" | copilot ^
-    --allow-tool="shell(git:*),shell(python:*),shell(bash:*),write" ^
+    --allow-tool="shell(git:*),shell(python:*),shell(bash:*),github(*),write" ^
     --model gpt-5.4 ^
     --effort medium ^
     --agent "github_stats" ^
@@ -145,7 +145,10 @@ echo -------------------------------------------------------------
 echo:
 
 set "HOMEPAGE=../../%ORIGIN:/=~%.html"
-if not exist "%HOMEPAGE%" ("%CHROME_BIN%" --headless --dump-dom "%URL%" > "%HOMEPAGE%")
+if not exist "%HOMEPAGE%" (
+    "%CHROME_BIN%" --headless --dump-dom "%URL%" > "%HOMEPAGE%"
+    "%TIMEOUT%" /T 5
+)
 
 set "META={"repo":"%ORIGIN%""
 
@@ -159,7 +162,7 @@ for /f "usebackq delims=" %%M in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
 set "FORK_COUNT=%FORK_COUNT:,=%"
 set "META=%META%, "forks": %FORK_COUNT%"
 
-:: Extract star count
+:: REPO Star Count
 
 set "STAR_COUNT="
 set "PATTERN=s/.*id=.repo-stars-counter-star.[^>]*title=.\([0-9,][0-9,]*\).*/\1/p"
@@ -169,6 +172,8 @@ for /f "usebackq delims=" %%M in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
 set "STAR_COUNT=%STAR_COUNT:,=%"
 set "META=%META%, "stars": %STAR_COUNT%"
 
+:: REPO Releases Count
+
 set "RELEASES="
 set "PATTERN=/\/releases/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*\/releases[^>]*>[ \t]*Releases.*<span[^>]*title=.\([0-9,]*\).*/\1/p;}"
 for /f "usebackq" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
@@ -176,6 +181,8 @@ for /f "usebackq" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
 )
 if not defined RELEASES (set "RELEASES=0")
 set "META=%META%, "releases": %RELEASES%"
+
+:: REPO Contributors Count
 
 set "CONTRIBUTORS="
 set "PATTERN=/\/contributors/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*\/contributors[^>]*>[ \t]*Contributors.*<span[^>]*title=.\([0-9,]*\).*/\1/p;}"
@@ -185,12 +192,16 @@ for /f "usebackq" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
 if not defined CONTRIBUTORS (set "CONTRIBUTORS=0")
 set "META=%META%, "contributors": %CONTRIBUTORS%"
 
+:: REPO Watchers Count
+
 set "WATCHERS="
 set "PATTERN=/\/watchers/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*\/watchers[^>]*>.*<strong>\([0-9,]*\)<\/strong>.*/\1/p;}"
 for /f "usebackq" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
     set "WATCHERS=%%A"
 )
 set "META=%META%, "watchers": %WATCHERS%"
+
+:: REPO Languages
 
 set "LNGS="
 set "PATTERN=/search?l=/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*search?l=[^>]*>.*text-bold[^>]*>\([^<]*\)<\/span>[ \t]*<span>\([^<]*\)<\/span>.*/\1|\2/p;}"
@@ -204,6 +215,8 @@ if defined LNGS (
 )
 set "META=%META%, "languages": %LNGS%"
 
+:: REPO First and Last commits on the default branch
+
 for /f "delims=" %%R in ('git symbolic-ref refs/remotes/origin/HEAD 2^>nul') do (set "BRANCH=origin/%%~nxR")
 for /f "delims=" %%C in ('git log --reverse --format^="%%ci %%h %%s" "%BRANCH%" ^| head -n 1') do (set "FIRSTC=%%C")
 for /f "delims=" %%C in ('git log -1 --format^="%%ci %%h %%s" "%BRANCH%"') do (set "LASTC=%%C")
@@ -213,8 +226,6 @@ set "META=%META%, "first_commit": "%FIRSTC%", "last_commit": "%LASTC%""
 set "META=%META%}"
 
 echo   %META% >>"%REPO_LIST%"
-
-"%TIMEOUT%" /T 5
 
 echo:
 echo ----- DONE: "%ORIGIN%"
