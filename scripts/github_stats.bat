@@ -148,7 +148,7 @@ echo:
 set "HOMEPAGE=../../%ORIGIN:/=~%.html"
 if not exist "%HOMEPAGE%" ("%CHROME_BIN%" --headless --dump-dom "%URL%" > "%HOMEPAGE%")
 
-set "META="
+set "META={"repo":"%ORIGIN%""
 
 :: Extract fork count
 
@@ -178,6 +178,21 @@ for /f "usebackq" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
 if not defined RELEASES (set "RELEASES=0")
 set "META=%META%, "releases": %RELEASES%"
 
+set "CONTRIBUTORS="
+set "PATTERN=/\/contributors/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*\/contributors[^>]*>[ \t]*Contributors.*<span[^>]*title=.\([0-9,]*\).*/\1/p;}"
+for /f "usebackq" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
+    set "CONTRIBUTORS=%%A"
+)
+if not defined CONTRIBUTORS (set "CONTRIBUTORS=0")
+set "META=%META%, "contributors": %CONTRIBUTORS%"
+
+set "WATCHERS="
+set "PATTERN=/\/watchers/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*\/watchers[^>]*>.*<strong>\([0-9,]*\)<\/strong>.*/\1/p;}"
+for /f "usebackq" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
+    set "WATCHERS=%%A"
+)
+set "META=%META%, "watchers": %WATCHERS%"
+
 set "LNGS="
 set "PATTERN=/search?l=/{:loop; /<\/a>/b match; N; b loop; :match; s/\n//g; s/.*search?l=[^>]*>.*text-bold[^>]*>\([^<]*\)<\/span>[ \t]*<span>\([^<]*\)<\/span>.*/\1|\2/p;}"
 for /f "usebackq tokens=1,2 delims=|" %%A in (`sed -n "%PATTERN%" "%HOMEPAGE%"`) do (
@@ -191,9 +206,9 @@ if defined LNGS (
 
 set "META=%META%, "languages": %LNGS%"
 
-set "META={%META:~2%}"
+set "META=%META%}"
 
-echo %META%
+echo   %META% >>"%REPO_LIST%"
 
 "%TIMEOUT%" /T 5
 
