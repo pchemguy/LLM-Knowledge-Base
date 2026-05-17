@@ -82,10 +82,11 @@ if defined TGNOTIFY (call "%TGNOTIFY%" "*[GitHub Stats START]*")
 cd /d "%PROJECT_ROOT%"
 
 type "%REPO_LIST%" | copilot ^
-    --allow-tool="shell(git:*),shell(python:*),shell(bash:*),shell(cmd:*),shell(gh:*),shell(curl:*),shell(web_fetch:*),github(*),write" ^
     --model gpt-5.4 ^
     --effort medium ^
     --agent "github_stats" ^
+    --allow-tool="shell(git:*),shell(python:*),shell(bash:*),shell(cmd:*),shell(gh:*),shell(curl:*),shell(web_fetch:*),github(*),write" ^
+    --add-github-mcp-toolset=all ^
     --no-ask-user
 
 set "ErrorStatus=%ERRORLEVEL%"
