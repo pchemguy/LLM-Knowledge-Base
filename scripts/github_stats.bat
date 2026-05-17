@@ -208,7 +208,7 @@ for /f "delims=" %%R in ('git symbolic-ref refs/remotes/origin/HEAD 2^>nul') do 
 for /f "delims=" %%C in ('git log --reverse --format^="%%ci %%h %%s" "%BRANCH%" ^| head -n 1') do (set "FIRSTC=%%C")
 for /f "delims=" %%C in ('git log -1 --format^="%%ci %%h %%s" "%BRANCH%"') do (set "LASTC=%%C")
 
-set "META=%META%, "first_commit": %FIRSTC%, "last_commit": %LASTC%"
+set "META=%META%, "first_commit": "%FIRSTC%", "last_commit": "%LASTC%""
 
 set "META=%META%}"
 
