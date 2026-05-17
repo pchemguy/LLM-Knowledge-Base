@@ -56,7 +56,16 @@ if exist "%REPO_LIST%" (
 
 for /d %%O in ("%SUBS%\*") do (
     for /d %%R in ("%%~fO\*") do (
-        echo - %%~nxO/%%~nxR >>"%REPO_LIST%"
+        cd /d "%%~R"
+        set "ORIGIN="
+        for /f %%I in ('git remote get-url origin') do (set "ORIGIN=%%I")
+        if "!ORIGIN!"=="" (
+            set "ErrorStatus=1"
+            echo {ERROR} Failed to identify REPO/OWNER for "%%~R". Aborting...
+            goto :MAIN_EXIT
+        )
+        set "ORIGIN=!ORIGIN:~19,-4!"
+        echo - !ORIGIN! >>"%REPO_LIST%"
         if not "!ERRORLEVEL!"=="0" (
             set "ErrorStatus=!ERRORLEVEL!"
             echo {ERROR} Failed to update repository list file.
