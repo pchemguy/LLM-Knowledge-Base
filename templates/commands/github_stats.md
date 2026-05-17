@@ -235,6 +235,57 @@ Derived heuristics:
 
 ---
 
+## Data Integrity and Anti-Hallucination Requirements
+
+All reported statistics, metadata, classifications, heuristics, and derived conclusions MUST be grounded in actually retrieved repository data, GitHub API responses, git history analysis, or directly inspected repository contents.
+
+The agent MUST NOT:
+
+- fabricate values;
+- estimate unavailable statistics without explicit labeling;
+- infer precise numeric values from incomplete evidence;
+- present assumptions as facts;
+- silently substitute missing data.
+
+If any metric, field, statistic, heuristic input, or repository attribute cannot be reliably retrieved, verified, or derived, the report MUST explicitly indicate this using one of:
+
+- `N/A`
+- `Unknown`
+- `Unavailable`
+- `Not reliably retrievable`
+
+as appropriate.
+
+Missing or unavailable data MUST NEVER be replaced with:
+
+- guessed values;
+- placeholder numbers;
+- optimistic assumptions;
+- or implied certainty.
+
+Any heuristic, inference, classification, or interpretation MUST be clearly distinguishable from raw factual repository data.
+
+When heuristics are used, the report MUST:
+
+- identify them as heuristics;
+- briefly describe the basis used;
+- and avoid overstating confidence.
+
+Examples:
+
+- "Bus factor heuristic: Low confidence"
+- "Dormancy classification inferred from commit recency"
+- "Technology stack inferred from dependency manifests"
+
+If conflicting signals are detected across sources, the report MUST:
+
+- explicitly mention the conflict;
+- prefer authoritative sources;
+- and avoid collapsing ambiguity into a false definitive conclusion.
+
+The report MUST prioritize correctness, traceability, and epistemic honesty over completeness.
+
+---
 ## Output Requirements
 
 Generate a structured report in Markdown.
