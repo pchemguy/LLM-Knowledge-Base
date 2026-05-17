@@ -20,7 +20,6 @@ set "SUBS=%PROJECT_ROOT%\implementations"
 set "IDEA_FILE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
-cd /d "%SUBS%"
 
 set "STDOUTLOG=%SUBS%\stdout.log"
 set "STDERRLOG=%SUBS%\stderr.log"
@@ -31,7 +30,7 @@ del "%STDERRLOG%" 2>nul
 :: Abort if project description is not available
 
 if not exist "%IDEA_FILE%" (
-    echo ERROR Project description file.
+    echo {ERROR} Project description file.
     set "ErrorStatus=1"
     goto :MAIN_EXIT
 )
@@ -39,6 +38,7 @@ if not exist "%IDEA_FILE%" (
 (
     call :TIMESTAMP
 
+    cd /d "%SUBS%"
     for /d %%D in (*) do (
         call :ONBOARD_SUBMODULE "%%~D"
         if not "!ERRORLEVEL!"=="0" (
@@ -123,7 +123,7 @@ pushd "%CD%"
 call "%~dp0add_agents.bat"
 if not "%ERRORLEVEL%"=="0" (
     set "ErrorStatus=%ERRORLEVEL%"
-    echo ERROR Failed to copy onboarding agent to submodule repository. Skipping submodule...
+    echo {ERROR} Failed to copy onboarding agent to submodule repository. Skipping submodule...
     goto :ONBOARD_SUBMODULE_EXIT
 )
 popd
@@ -135,7 +135,7 @@ set "TARGET=%%%%0A%TARGET:-=~%"
 
 rundll32 user32.dll,MessageBeep
 "%WINDIR%\System32\timeout.exe" /T 60
-if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING START]**: %TARGET%")
+if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING START]*: %TARGET%")
 
 type "%IDEA_FILE%" | copilot ^
     --allow-tool="shell(git:*),write" ^
@@ -144,29 +144,28 @@ type "%IDEA_FILE%" | copilot ^
     --agent "project_onboarding" ^
     --no-ask-user
 
-set "ErrorStatus=%ERRORLEVEL%"
-
 if not "%ERRORLEVEL%"=="0" (
-    echo ERROR Failed to complete onboarding via Copilot CLI. Skipping submodule...
-    if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING FAILED]**: %TARGET%")
+    set "ErrorStatus=%ERRORLEVEL%"
+    echo {ERROR} Failed to complete onboarding via Copilot CLI. Skipping submodule...
+    if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING FAILED]*: %TARGET%")
     goto :ONBOARD_SUBMODULE_EXIT
 )
 
 if exist "OnboardingReport.md" move /Y "OnboardingReport.md" ..
 if not "%ERRORLEVEL%"=="0" (
     set "ErrorStatus=%ERRORLEVEL%"
-    echo ERROR Failed to move "OnboardingReport.md"...
+    echo {ERROR} Failed to move "OnboardingReport.md"...
     goto :ONBOARD_SUBMODULE_EXIT
 )
 
 if exist "ONBOARDING.md" move /Y "ONBOARDING.md" ..
 if not "%ERRORLEVEL%"=="0" (
     set "ErrorStatus=%ERRORLEVEL%"
-    echo ERROR Failed to move "ONBOARDING.md"...
+    echo {ERROR} Failed to move "ONBOARDING.md"...
     goto :ONBOARD_SUBMODULE_EXIT
 )
 
-if defined TGNOTIFY (call "%TGNOTIFY%" "**[ONBOARDING COMPLETE]**: %TARGET%")
+if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING COMPLETE]*: %TARGET%")
 
 :ONBOARD_SUBMODULE_EXIT
 echo _____________________________________________________________
