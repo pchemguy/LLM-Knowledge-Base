@@ -60,11 +60,15 @@ Version: v2.1.4
 
 In response, Copilot code review can invoke the memory storage tool to create a memory like this:
 
-```
+```json
 {
   subject: "API version synchronization", 
   fact: "API version must match between client SDK, server routes, and documentation.",
-  citations: ["src/client/sdk/constants.ts:12", "server/routes/api.go:8", "docs/api-reference.md:37"], 
+  citations: [
+      "src/client/sdk/constants.ts:12",
+      "server/routes/api.go:8",
+      "docs/api-reference.md:37"
+  ], 
   reason: "If the API version is not kept properly synchronized, the integration can fail or exhibit subtle bugs. Remembering these locations will help ensure they are kept syncronized in future updates."
 }
 ```
