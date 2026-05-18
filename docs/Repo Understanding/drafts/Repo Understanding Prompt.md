@@ -2,6 +2,8 @@
 url: https://chatgpt.com/c/6a031ab1-2be4-83eb-ae7e-a67efb9123c8
 ---
 
+> [!WARNING] This version is not maintained. See [project_onboarding.md](templates/commands/project_onboarding.md)
+
 You are performing deep repository comprehension, reverse-engineering, and operational workflow reconstruction.
 
 You will be given:
