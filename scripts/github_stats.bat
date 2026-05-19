@@ -21,6 +21,17 @@ set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
 set "REPO_LIST=%SUBS%\repo_list.md"
 set "REPORT=%SUBS%\GitHubStats.md"
+set "AGENT=github_stats"
+set AGENT_TOOLS=github(*), write, memory,^
+    shell(bash:*),^
+    shell(cmd:*),^
+    shell(python:*),^
+    shell(npm:*), ^
+    shell(git:*),^
+    shell(gh:*),^
+    shell(curl:*),^
+    shell(web_fetch:*)
+
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 
@@ -47,12 +58,14 @@ if not exist "%CHROME_BIN%" (
 
 :: Copy custom Copilot agents to repository.
 
+pushd "%CD%"
 call "%~dp0add_agents.bat"
 if not "%ERRORLEVEL%"=="0" (
     set "ErrorStatus=%ERRORLEVEL%"
     echo {ERROR} Failed to install custom agents.
     goto :MAIN_EXIT
 )
+popd
 
 :: Generate repository list.
 
@@ -82,11 +95,14 @@ if defined TGNOTIFY (call "%TGNOTIFY%" "*[GitHub Stats START]*")
 cd /d "%PROJECT_ROOT%"
 
 type "%REPO_LIST%" | copilot ^
-    --model gpt-5.4 ^
-    --effort medium ^
-    --agent "github_stats" ^
-    --allow-tool="shell(git:*),shell(python:*),shell(bash:*),shell(cmd:*),shell(gh:*),shell(curl:*),shell(web_fetch:*),github(*),write" ^
-    --add-github-mcp-toolset=all ^
+    --model=gpt-5.4 ^
+    --effort=medium ^
+    --reasoning-effort=medium ^
+    --agent="%AGENT%" ^
+    --allow-tool="%AGENT_TOOLS%" ^
+    --allow-all-urls ^
+    --enable-all-github-mcp-tools ^
+    --log-level=all ^
     --no-ask-user
 
 set "ErrorStatus=%ERRORLEVEL%"
