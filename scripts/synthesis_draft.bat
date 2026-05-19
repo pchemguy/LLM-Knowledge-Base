@@ -16,10 +16,10 @@ set "ErrorStatus=0"
 
 cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
-set "PROMPT_FILE=%PROJECT_ROOT%\implementations\SynthesisPrompt.md"
-set "REPORT_FILE=%PROJECT_ROOT%\implementations\REVIEW.md"
+set "PROMPT_FILE=%PROJECT_ROOT%\scripts\SynthesisPrompt.md"
 set "PROJECT_BASELINE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
 set "PROJECT_EXTENSION=%PROJECT_ROOT%\docs\rohitg00\llm-wiki-v2.md"
+set "REPORT_FILE=%PROJECT_ROOT%\implementations\REVIEW.md"
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 

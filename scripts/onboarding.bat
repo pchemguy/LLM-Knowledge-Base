@@ -18,6 +18,17 @@ cd /d "%~dp0.."
 set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
 set "IDEA_FILE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
+set "AGENT=project_onboarding"
+set AGENT_TOOLS=github(*), write, memory,^
+    shell(bash:*),^
+    shell(cmd:*),^
+    shell(python:*),^
+    shell(npm:*), ^
+    shell(git:*),^
+    shell(gh:*),^
+    shell(curl:*),^
+    shell(web_fetch:*)
+
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 
@@ -131,23 +142,28 @@ popd
 :: Run onboarding
 
 set "TARGET=%SUB_OWNER%/%SUB_REPO%"
-set "TARGET=%%%%0A%TARGET:-=~%"
+set "TARGET=%TARGET:-=~%"
+set "NL=%%%%0A"
 
 rundll32 user32.dll,MessageBeep
 "%WINDIR%\System32\timeout.exe" /T 60
-if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING START]*: %TARGET%")
+if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING START]*: %NL%%TARGET%")
 
 type "%IDEA_FILE%" | copilot ^
-    --allow-tool="shell(git:*),write" ^
-    --model gpt-5.4 ^
-    --effort medium ^
-    --agent "project_onboarding" ^
+    --model=gpt-5.4 ^
+    --effort=medium ^
+    --reasoning-effort=medium ^
+    --agent="%AGENT%" ^
+    --allow-tool="%AGENT_TOOLS%" ^
+    --allow-all-urls ^
+    --enable-all-github-mcp-tools ^
+    --log-level=all ^
     --no-ask-user
 
 if not "%ERRORLEVEL%"=="0" (
     set "ErrorStatus=%ERRORLEVEL%"
     echo {ERROR} Failed to complete onboarding via Copilot CLI. Skipping submodule...
-    if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING FAILED]*: %TARGET%")
+    if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING FAILED]*: %NL%%TARGET%")
     goto :ONBOARD_SUBMODULE_EXIT
 )
 
@@ -165,7 +181,7 @@ if not "%ERRORLEVEL%"=="0" (
     goto :ONBOARD_SUBMODULE_EXIT
 )
 
-if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING COMPLETE]*: %TARGET%")
+if defined TGNOTIFY (call "%TGNOTIFY%" "*[ONBOARDING COMPLETE]*: %NL%%TARGET%")
 
 :ONBOARD_SUBMODULE_EXIT
 echo _____________________________________________________________

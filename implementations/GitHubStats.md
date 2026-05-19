@@ -11,15 +11,15 @@
 ### Heuristic definitions
 
 - **Activity heuristic**
-  - **Active:** last commit within 14 days and meaningful recent commit volume.
-  - **Low activity:** last commit within 30 days, but low recent commit volume.
-  - **Dormant:** no commits in the last 30 days or last commit older than 30 days.
-  - **Abandoned:** no commits in the last 90 days. None of these repositories met that threshold.
+    - **Active:** last commit within 14 days and meaningful recent commit volume.
+    - **Low activity:** last commit within 30 days, but low recent commit volume.
+    - **Dormant:** no commits in the last 30 days or last commit older than 30 days.
+    - **Abandoned:** no commits in the last 90 days. None of these repositories met that threshold.
 - **Development velocity heuristic**
-  - **Rapid iteration:** very high recent commit volume and/or high merged PR throughput.
-  - **Stable maintenance:** steady updates with releases, docs, fixes, or moderate PR throughput.
-  - **Maintenance-only:** low change volume, mostly polishing/docs/fixes.
-  - **Experimental:** young repository with low contributor diversity and limited release/process maturity.
+    - **Rapid iteration:** very high recent commit volume and/or high merged PR throughput.
+    - **Stable maintenance:** steady updates with releases, docs, fixes, or moderate PR throughput.
+    - **Maintenance-only:** low change volume, mostly polishing/docs/fixes.
+    - **Experimental:** young repository with low contributor diversity and limited release/process maturity.
 - **Onboarding friendliness score (1-10):** heuristic based on README quality, install instructions, quick start, examples, docs, CI/tests, and contributor guidance.
 - **Implementation complexity / AI suitability rankings:** heuristic rankings grounded in visible repository structure, stack breadth, tooling, monorepo surface area, explicit agent docs, setup reproducibility, and testing signals.
 
