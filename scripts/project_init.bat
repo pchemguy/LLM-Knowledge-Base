@@ -13,6 +13,7 @@
 SetLocal EnableExtensions EnableDelayedExpansion
 set "ErrorStatus=0"
 
+set "Path=%Path:C:\Windows\System32\WindowsPowerShell\v1.0;=%"
 set "TIMEOUT=%WINDIR%\System32\timeout.exe"
 
 cd /d "%~dp0.."
