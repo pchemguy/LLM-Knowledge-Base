@@ -82,7 +82,7 @@ The objective is NOT to summarize the project. The objective is to provide high-
 Only include sections that provide meaningful project-specific value.
 
 ```markdown
-# Project Guidelines
+# Agent Instructions for [PROJECT TITLE]
 
 ## Architecture
 
