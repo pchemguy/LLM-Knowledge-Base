@@ -20,6 +20,17 @@ set "PROMPT_FILE=%PROJECT_ROOT%\scripts\SynthesisPrompt.md"
 set "PROJECT_BASELINE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
 set "PROJECT_EXTENSION=%PROJECT_ROOT%\docs\rohitg00\llm-wiki-v2.md"
 set "REPORT_FILE=%PROJECT_ROOT%\implementations\REVIEW.md"
+set "AGENT=project_onboarding"
+set AGENT_TOOLS=github(*), write, memory,^
+    shell(bash:*),^
+    shell(cmd:*),^
+    shell(python:*),^
+    shell(npm:*), ^
+    shell(git:*),^
+    shell(gh:*),^
+    shell(curl:*),^
+    shell(web_fetch:*)
+
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
 
@@ -125,12 +136,14 @@ if not exist "%PROJECT_ROOT%\.github" (
 
 :: Copy custom onboarding agent
 
-xcopy /H /Y /B /E /Q "%PROJECT_ROOT%\docs\Repo Understanding\GitHub Agent\*" "%PROJECT_ROOT%\.github"
+pushd "%CD%"
+call "%~dp0add_agents.bat"
 if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=%ERRORLEVEL%"
-  echo ERROR Failed to copy onboarding agent. Aborting...
-  goto :SYNTHESIS_EXIT
+    set "ErrorStatus=%ERRORLEVEL%"
+    echo {ERROR} Failed to install custom agents.
+    goto :MAIN_EXIT
 )
+popd
 
 :: Run synthesis
 
@@ -139,26 +152,30 @@ rundll32 user32.dll,MessageBeep
 if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS START]**")
 
 type "%PROMPT_FILE%" | copilot ^
-    --allow-tool="shell(git:*),write" ^
-    --model gpt-5.4 ^
-    --effort medium ^
-    --agent "project_onboarding" ^
+    --model=gpt-5.4 ^
+    --effort=medium ^
+    --reasoning-effort=medium ^
+    --agent="%AGENT%" ^
+    --allow-tool="%AGENT_TOOLS%" ^
+    --allow-all-urls ^
+    --enable-all-github-mcp-tools ^
+    --log-level=all ^
     --no-ask-user
 
 set "ErrorStatus=%ERRORLEVEL%"
 
 if not "%ERRORLEVEL%"=="0" (
-  set "ErrorStatus=1"
-  echo ERROR Failed to complete synthesis via Copilot CLI.
-  if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS FAILED]**")
-  goto :SYNTHESIS_EXIT
+    set "ErrorStatus=1"
+    echo ERROR Failed to complete synthesis via Copilot CLI.
+    if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS FAILED]**")
+    goto :SYNTHESIS_EXIT
 )
 
 if not exist "%REPORT_FILE%" (
-  set "ErrorStatus=1"
-  echo ERROR Failed to complete synthesis via Copilot CLI: missing report "%REPORT_FILE%".
-  if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS FAILED]**: No report file.")
-  goto :SYNTHESIS_EXIT
+    set "ErrorStatus=1"
+    echo ERROR Failed to complete synthesis via Copilot CLI: missing report "%REPORT_FILE%".
+    if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS FAILED]**: No report file.")
+    goto :SYNTHESIS_EXIT
 )
 
 if defined TGNOTIFY (call "%TGNOTIFY%" "**[SYNTHESIS COMPLETE]**: %%%%0AReport in '%REPORT_FILE%'")
@@ -182,18 +199,18 @@ SetLocal
 set CommandText=time /T
 set Output=
 for /f "Usebackq delims=" %%i in (`%CommandText%`) do (
-  if "/!Output!/"=="//" (
-    set Output=%%i
-  )
+    if "/!Output!/"=="//" (
+      set Output=%%i
+    )
 )
 set CurTime=%Output%
 
 set CommandText=date /T
 set Output=
 for /f "Usebackq delims=" %%i in (`%CommandText%`) do (
-  if "/!Output!/"=="//" (
-    set Output=%%i
-  )
+    if "/!Output!/"=="//" (
+      set Output=%%i
+    )
 )
 set CurDate=%Output%
 
