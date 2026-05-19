@@ -19,15 +19,15 @@ set "PROJECT_ROOT=%CD%"
 set "SUBS=%PROJECT_ROOT%\implementations"
 set "IDEA_FILE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
 set "AGENT=project_onboarding"
-set AGENT_TOOLS=github(*), write, memory,^
+set AGENT_TOOLS=github(*), write, memory, web_fetch, web_search, skill, sql,^
     shell(bash:*),^
     shell(cmd:*),^
     shell(python:*),^
+    shell(pytest:*),^
     shell(npm:*), ^
     shell(git:*),^
     shell(gh:*),^
-    shell(curl:*),^
-    shell(web_fetch:*)
+    shell(curl:*)    
 
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")

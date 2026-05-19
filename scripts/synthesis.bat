@@ -21,15 +21,15 @@ set "PROJECT_BASELINE=%PROJECT_ROOT%\docs\karpathy\llm-wiki.md"
 set "PROJECT_EXTENSION=%PROJECT_ROOT%\docs\rohitg00\llm-wiki-v2.md"
 set "REPORT_FILE=%PROJECT_ROOT%\implementations\REVIEW.md"
 set "AGENT=project_onboarding"
-set AGENT_TOOLS=github(*), write, memory,^
+set AGENT_TOOLS=github(*), write, memory, web_fetch, web_search, skill, sql,^
     shell(bash:*),^
     shell(cmd:*),^
     shell(python:*),^
+    shell(pytest:*),^
     shell(npm:*), ^
     shell(git:*),^
     shell(gh:*),^
-    shell(curl:*),^
-    shell(web_fetch:*)
+    shell(curl:*)    
 
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")

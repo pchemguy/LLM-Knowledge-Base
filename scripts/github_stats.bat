@@ -22,15 +22,15 @@ set "SUBS=%PROJECT_ROOT%\implementations"
 set "REPO_LIST=%SUBS%\repo_list.md"
 set "REPORT=%SUBS%\GitHubStats.md"
 set "AGENT=github_stats"
-set AGENT_TOOLS=github(*), write, memory,^
+set AGENT_TOOLS=github(*), write, memory, web_fetch, web_search, skill, sql,^
     shell(bash:*),^
     shell(cmd:*),^
     shell(python:*),^
+    shell(pytest:*),^
     shell(npm:*), ^
     shell(git:*),^
     shell(gh:*),^
-    shell(curl:*),^
-    shell(web_fetch:*)
+    shell(curl:*)    
 
 set "TGNOTIFY=%PROJECT_ROOT%\scripts\tgnotify.bat"
 if not exist "%TGNOTIFY%" (set "TGNOTIFY=")
