@@ -143,6 +143,8 @@ Also inventory existing documentation:
 
 Distinguish actively maintained operational documentation from stale, aspirational, or historical documentation.
 
+Generally, skip conventional low-value paths, e.g., `node_modules`, `dist`, or build outputs. 
+
 ### Evidence Grounding
 
 Ground all important claims in:
@@ -176,6 +178,8 @@ Clearly distinguish between:
 - directly observed implementation behavior;
 - inferred architectural intent;
 - speculative interpretation.
+
+If a conceptual capability mentioned in the prompt is entirely missing from the codebase, explicitly state 'NOT IMPLEMENTED' rather than trying to guess how it might be built.
 
 Mark uncertainty explicitly.
 
@@ -462,6 +466,60 @@ Instead:
 - compress repetitive patterns;
 - expand architecturally important mechanisms;
 - focus on leverage points and semantic centers.
+
+---
+
+## Required Execution Protocol
+
+### Phase 1: Exploration (Mandatory)
+
+Before generating any onboarding reports, the agent MUST perform a structured exploration of the active project workspace.  
+The goal is to gather evidence-grounded understanding of the codebase and its operational semantics.
+
+**Exploration Requirements:**
+
+- Inspect the following workspace elements:
+    - Core source modules and entry points
+    - Runtime flows and orchestration loops
+    - State ownership and persistence mechanisms
+    - Configuration and environment files
+    - Scripts, build/test/lint commands
+    - Documentation and operational guidance files
+- Use available tools (Git Bash, m2-base POSIX shell, workspace code-inspection tools) to gather information.
+- PowerShell MUST NOT be used.
+- Shell command execution may or may not be available; if unavailable, rely on non-shell inspection methods.
+- Record intermediate observations, notes, and structured logs of:
+    - semantic centers
+    - critical control flows
+    - module responsibilities
+    - entry/exit points
+    - extension or plugin hooks
+    - known constraints or fragile areas
+
+**Exploration Iterations:**
+
+- Repeat over multiple iterations (recommended 3-4 “turns”) to ensure depth.
+- Each iteration should progressively refine understanding, focusing on high-value behavioral and orchestration elements first.
+
+**Constraints:**
+
+- DO NOT generate OnboardingReport.md or ONBOARDING.md content until exploration is complete.
+- Avoid superficial summaries or shallow reading of README.md, package manifests, or minor files.
+- Capture all relevant observations that will inform the final analysis and operational synthesis.
+
+---
+
+### Phase 2: Report Generation
+
+- Use only the evidence collected in Phase 1.
+- Generate:
+    - **OnboardingReport.md** following the Onboarding Report Template
+    - **ONBOARDING.md** as the persistent, high-signal operational knowledge layer
+- Prioritize:
+    - semantic grounding
+    - operational workflows
+    - runtime behavior
+    - architectural significance
 
 ---
 
