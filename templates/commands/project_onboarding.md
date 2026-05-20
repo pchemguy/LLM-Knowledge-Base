@@ -282,6 +282,7 @@ Identify evidence of:
 - abandoned patterns;
 - legacy compatibility layers;
 - dead extension points;
+- unclear or missing operational guidance;
 - divergence between documentation and implementation.
 
 Distinguish actively used mechanisms from nominal structure.
@@ -993,6 +994,7 @@ repo: [USER]/[REPO]
 * Preserve stable heading hierarchy for reliable navigation and future incremental updates.
 * Prefer dense, information-rich technical writing over conversational prose.
 * Prefer operationally useful synthesis over exhaustive enumeration.
+* Include subsections reflecting project decomposition (e.g. frontend/backend/tests/infrastructure) when appropriate.
 
 ---
 
