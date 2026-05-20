@@ -473,8 +473,7 @@ Instead:
 
 ### Phase 1: Exploration (Mandatory)
 
-Perform a structured, iterative multi-turn exploration of the active project workspace **before generating any reports**.  
-Use guidance from **Discover Existing Guidance**, **Explore the Codebase**, **Evidence Grounding**, and **Tool Use** to examine:
+Perform a structured, iterative multi-turn exploration of the active project workspace **before generating any reports**. Follow all instructions in this prompt meticulously and comprehensively. Inspect the workspace to gather evidence on::
 
 - core source modules and entry points  
 - execution and orchestration flows  
