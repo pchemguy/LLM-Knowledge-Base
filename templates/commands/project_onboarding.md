@@ -473,53 +473,33 @@ Instead:
 
 ### Phase 1: Exploration (Mandatory)
 
-Before generating any onboarding reports, the agent MUST perform a structured exploration of the active project workspace.  
-The goal is to gather evidence-grounded understanding of the codebase and its operational semantics.
+Perform a structured, iterative multi-turn exploration of the active project workspace **before generating any reports**.  
+Use guidance from **Discover Existing Guidance**, **Explore the Codebase**, **Evidence Grounding**, and **Tool Use** to examine:
 
-**Exploration Requirements:**
+- core source modules and entry points  
+- execution and orchestration flows  
+- state ownership and persistence  
+- configuration and environment files  
+- scripts and runtime commands  
+- documentation and operational guidance
 
-- Inspect the following workspace elements:
-    - Core source modules and entry points
-    - Runtime flows and orchestration loops
-    - State ownership and persistence mechanisms
-    - Configuration and environment files
-    - Scripts, build/test/lint commands
-    - Documentation and operational guidance files
-- Use available tools (Git Bash, m2-base POSIX shell, workspace code-inspection tools) to gather information.
-- PowerShell MUST NOT be used.
-- Shell command execution may or may not be available; if unavailable, rely on non-shell inspection methods.
-- Record intermediate observations, notes, and structured logs of:
-    - semantic centers
-    - critical control flows
-    - module responsibilities
-    - entry/exit points
-    - extension or plugin hooks
-    - known constraints or fragile areas
-
-**Exploration Iterations:**
-
-- Repeat over multiple iterations (recommended 3-4 “turns”) to ensure depth.
-- Each iteration should progressively refine understanding, focusing on high-value behavioral and orchestration elements first.
-
-**Constraints:**
-
-- DO NOT generate OnboardingReport.md or ONBOARDING.md content until exploration is complete.
-- Avoid superficial summaries or shallow reading of README.md, package manifests, or minor files.
-- Capture all relevant observations that will inform the final analysis and operational synthesis.
+Record structured observations and intermediate notes. **Do not generate any part of OnboardingReport.md or ONBOARDING.md at this stage**, even partial content.
 
 ---
 
 ### Phase 2: Report Generation
 
-- Use only the evidence collected in Phase 1.
-- Generate:
-    - **OnboardingReport.md** following the Onboarding Report Template
-    - **ONBOARDING.md** as the persistent, high-signal operational knowledge layer
-- Prioritize:
-    - semantic grounding
-    - operational workflows
-    - runtime behavior
-    - architectural significance
+Use only the evidence collected during Phase 1 to produce:
+
+- **OnboardingReport.md** (detailed full report)  
+- **ONBOARDING.md** (compact, high-signal operational knowledge layer)
+
+Prioritize:
+
+- semantic grounding  
+- runtime behavior  
+- operational workflows  
+- architectural significance
 
 ---
 
