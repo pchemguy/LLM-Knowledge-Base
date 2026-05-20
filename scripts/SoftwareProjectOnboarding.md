@@ -40,7 +40,7 @@ The objective is NOT to summarize the project. The objective is to provide high-
     - Areas with unusually high complexity, fragility, or coupling
     
     Also inventory existing documentation:
-    - `docs/**/*.md`
+    - `*.md` recursively under `docs/`
     - `CONTRIBUTING.md`
     - `ARCHITECTURE.md`
     - `DEVELOPMENT.md`
