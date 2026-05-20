@@ -73,7 +73,7 @@ Build an evidence-grounded mental model of the project.
 
 The result should allow an engineer to:
 
-- rapidly understand the repo deeply;
+- rapidly understand the project deeply;
 - navigate the codebase efficiently;
 - identify core abstractions and execution flows;
 - understand architectural intent;
@@ -84,7 +84,7 @@ The result should allow an engineer to:
 You MUST:
 
 - follow **Analysis Rules**
-- prepare information according to **Required Output Structure
+- prepare information according to **Required Output Structure**
 - generate in the project root:
     - **OnboardingReport.md** following **Onboarding Report Template** - detailed full report;
     - **ONBOARDING.md** - compact, high-signal, persistent operational knowledge layer intended for future repository work.
@@ -107,6 +107,41 @@ Search for:
         - `.github/instructions/*.instructions.md`
 - agent definitions, e.g., `.github/agents/*.agent.md`
 - skills, e.g., `.skills/` or `.github/skills/`
+
+Prioritize:  
+
+1. Active repository-wide operational guidance.  
+2. Tool/runtime-specific instructions.  
+3. Agent definitions and workflow prompts.  
+4. Historical or auxiliary prompt artifacts.
+
+Treat discovered instruction, prompt, agent, and skill files as high-value sources of repository-specific operational expectations, workflows, conventions, and agent behaviors.
+
+### Explore the Codebase
+
+Identify information that materially improves future agent task execution:
+
+- Project-specific conventions that differ from ecosystem defaults
+- Architecture boundaries and subsystem responsibilities
+- Build/test/lint/typecheck commands
+- Development workflow expectations
+- Important dependency relationships
+- Key files/directories that demonstrate canonical patterns
+- Common pitfalls, hidden constraints, or environment issues
+- Areas with unusually high complexity, fragility, or coupling
+
+Use these findings to guide analysis prioritization and onboarding artifact generation.
+
+Also inventory existing documentation:
+
+- `*.md` recursively under `docs/`
+- `CONTRIBUTING.md`
+- `ARCHITECTURE.md`
+- `DEVELOPMENT.md`
+- `TESTING.md`
+- similar project docs
+
+Distinguish actively maintained operational documentation from stale, aspirational, or historical documentation.
 
 ### Evidence Grounding
 
@@ -434,7 +469,7 @@ Instead:
 
 ### Synopsis
 
-Provide a dense, operationally useful quick-orientation section for engineers evaluating, adapting, or rapidly testing the repository.
+Provide a dense, operationally useful quick-orientation section for engineers evaluating, adapting, or rapidly testing the repository. 
 
 The Synopsis should help a reader quickly determine:
 
@@ -446,6 +481,8 @@ The Synopsis should help a reader quickly determine:
 - what the fastest path is to trying the system;
 - whether the repository can be exercised without the official setup workflow;
 - where the repository’s primary semantic and operational complexity resides.
+
+The Synopsis is a rapid evaluation and orientation layer, not a full tutorial or setup manual.
 
 The Synopsis SHOULD include concise subsections such as:
 
@@ -529,7 +566,7 @@ Explain:
 
 - Actual implemented purpose.
 - Relationship to conceptual description.
-- What problem the repo is really solving.
+- What problem the project is really solving.
 - Target use cases.
 - Scope boundaries.
 
@@ -977,7 +1014,7 @@ repo: [USER]/[REPO]
 
 ## SYNOPSIS
 
-## 1. Repository Purpose
+## 1. Project Purpose
 ...
 ```
 
@@ -1052,37 +1089,13 @@ Prefer concise technical synthesis over verbose prose.
 
 Write `ONBOARDING.md` assuming future coding agents will use it as startup context before performing development tasks.
 
----
-
-## Important Constraints
-
-Always prioritize:
-
-- semantic, execution, and architectural understanding;
-- implementation grounding;
-- operational relevance
-  Include information that materially improves agent task execution quality.
-- project-specific over generic
-  Prefer repository-specific guidance over general best practices.
-
-Do NOT:
-
-- rewrite README content;
-- produce shallow framework summaries;
-- describe trivial utilities unless architecturally important;
-- describe libraries without semantic relevance;
-- invent undocumented behavior;
-- hallucinate intent without marking inference;
-- confuse planned features with implemented behavior;
-- over-focus on boilerplate.
-
 ## Tool Use
 
 Use available workspace, filesystem, search, and code-inspection tools to inspect the active project.
 
 PowerShell MUST NOT be used.
 
-Git Bash is available and SHOULD be preferred for shell commands when shell command execution is available.
+Git Bash and `m2-base` (Conda/MSYS2 environment) are available and SHOULD be preferred when shell command execution is available. The environment provides POSIX-style shell semantics, MSYS2 runtime compatibility, and standard Unix command-line utilities.
 
 Shell command execution, including Bash, may or may not be available in the current agent environment. If shell commands are unavailable, continue using non-shell workspace inspection tools instead.
 
@@ -1096,7 +1109,31 @@ When shell commands are available:
 
 When shell commands are unavailable:
 
-- inspect the repository using available workspace tools;
+- inspect the project using available workspace tools;
 - read relevant files directly;
 - search symbols, paths, and text through available code-inspection mechanisms;
 - clearly state when a finding is limited by unavailable command execution.
+
+---
+
+## Important Constraints
+
+Always prioritize:
+
+- semantic, execution, and architectural understanding;
+- implementation grounding;
+- operational relevance
+  Include information that materially improves agent task execution quality.
+- project-specific over generic
+  Prefer project-specific guidance over general best practices.
+
+Do NOT:
+
+- rewrite README content;
+- produce shallow framework summaries;
+- describe trivial utilities unless architecturally important;
+- describe libraries without semantic relevance;
+- invent undocumented behavior;
+- hallucinate intent without marking inference;
+- confuse planned features with implemented behavior;
+- over-focus on boilerplate.
