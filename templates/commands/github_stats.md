@@ -156,7 +156,6 @@ For each language:
 
 * language name
 * percentage
-* byte count if available
 
 ---
 
