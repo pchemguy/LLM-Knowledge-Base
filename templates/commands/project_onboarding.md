@@ -618,6 +618,7 @@ For each major subsystem or architectural component, explain:
 - ownership boundaries;
 - dependency relationships;
 - important abstractions and internal model;
+- conventions;
 - lifecycle role;
 - state/control relationships;
 - extension points;
@@ -646,6 +647,7 @@ Distinguish between:
 Prioritize analysis effort toward architecturally significant components and semantic centers.
 
 Avoid converting this section into:
+
 - runtime tracing;
 - operational workflow explanation;
 - execution-sequence narration.
@@ -697,6 +699,7 @@ For each flow:
 Reference concrete implementation locations where possible.
 
 Prioritize:
+
 - architecturally significant flows;
 - orchestration-critical paths;
 - lifecycle-critical paths;
