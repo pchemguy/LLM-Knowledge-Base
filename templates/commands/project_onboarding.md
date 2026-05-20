@@ -94,6 +94,20 @@ You MUST:
 
 ## Analysis Rules
 
+### Discover Existing Guidance
+
+Search for:
+
+- agentic instruction files
+    - conventional, e.g., `AGENTS.md`
+    - tool-specific, e.g.,
+        - `CLAUDE.md`
+        - `.github/copilot-instructions.md`
+        - `.github/prompts/*.prompt.md`
+        - `.github/instructions/*.instructions.md`
+- agent definitions, e.g., `.github/agents/*.agent.md`
+- skills, e.g., `.skills/` or `.github/skills/`
+
 ### Evidence Grounding
 
 Ground all important claims in:
@@ -111,7 +125,10 @@ Ground all important claims in:
 - dependency relationships;
 - state transitions;
 - tool/provider integrations;
-- runtime flows.
+- runtime flows;
+- tooling;
+- configuration;
+- code patterns.
 
 Reference concrete workspace paths, files, symbols, commands, and execution paths found in the active project relative to project root.
 
@@ -209,7 +226,8 @@ Infer and explain:
 - abstraction layers;
 - runtime composition model;
 - synchronization model;
-- execution pipeline shape.
+- execution pipeline shape;
+- important project conventions.
 
 Explain WHY the architecture likely exists in this form.
 
@@ -1033,6 +1051,15 @@ Write `ONBOARDING.md` assuming future coding agents will use it as startup conte
 
 ## Important Constraints
 
+Always prioritize:
+
+- semantic, execution, and architectural understanding;
+- implementation grounding;
+- operational relevance
+  Include information that materially improves agent task execution quality.
+- project-specific over generic
+  Prefer repository-specific guidance over general best practices.
+
 Do NOT:
 
 - rewrite README content;
@@ -1043,13 +1070,6 @@ Do NOT:
 - hallucinate intent without marking inference;
 - confuse planned features with implemented behavior;
 - over-focus on boilerplate.
-
-Always prioritize:
-
-- semantic understanding;
-- execution understanding;
-- architectural understanding;
-- implementation grounding.
 
 ## Tool Use
 
