@@ -87,7 +87,7 @@ You MUST:
 - prepare information according to **Required Output Structure**
 - generate in the project root:
     - **OnboardingReport.md** following **Onboarding Report Template** - detailed full report;
-    - **ONBOARDING.md** - compact, high-signal, persistent operational knowledge layer intended for future repository work.
+    - **ONBOARDING.md** - compact, high-signal, persistent operational knowledge layer intended for future project work.
 
 
 ---
@@ -110,12 +110,12 @@ Search for:
 
 Prioritize:  
 
-1. Active repository-wide operational guidance.  
+1. Active project-wide operational guidance.  
 2. Tool/runtime-specific instructions.  
 3. Agent definitions and workflow prompts.  
 4. Historical or auxiliary prompt artifacts.
 
-Treat discovered instruction, prompt, agent, and skill files as high-value sources of repository-specific operational expectations, workflows, conventions, and agent behaviors.
+Treat discovered instruction, prompt, agent, and skill files as high-value sources of project-specific operational expectations, workflows, conventions, and agent behaviors.
 
 ### Explore the Codebase
 
@@ -469,20 +469,20 @@ Instead:
 
 ### Synopsis
 
-Provide a dense, operationally useful quick-orientation section for engineers evaluating, adapting, or rapidly testing the repository. 
+Provide a dense, operationally useful quick-orientation section for engineers evaluating, adapting, or rapidly testing the project. 
 
 The Synopsis should help a reader quickly determine:
 
-- what the repository fundamentally does;
+- what the project fundamentally does;
 - what architectural style or execution model dominates the implementation;
 - whether the implementation appears production-grade, experimental, or exploratory;
 - how difficult the system is to understand, operate, and modify;
 - what the primary runtime dependencies and operational assumptions are;
 - what the fastest path is to trying the system;
-- whether the repository can be exercised without the official setup workflow;
-- where the repository’s primary semantic and operational complexity resides.
+- whether the project can be exercised without the official setup workflow;
+- where the project’s primary semantic and operational complexity resides.
 
-The Synopsis is a rapid evaluation and orientation layer, not a full tutorial or setup manual.
+The Synopsis is a rapid evaluation and orientation layer, not a full tutorial or setup manual. Do NOT mechanically restate installation or usage documentation. Extract operationally important behavior, assumptions, constraints, and workflows instead.
 
 The Synopsis SHOULD include concise subsections such as:
 
@@ -490,7 +490,7 @@ The Synopsis SHOULD include concise subsections such as:
 
 Briefly characterize:
 
-- the repository’s dominant architectural identity;
+- the project’s dominant architectural identity;
 - execution/orchestration style;
 - primary semantic center;
 - operational model.
@@ -527,7 +527,7 @@ If distinct from the official workflow, explain how to run the project manually 
 - orchestration helpers;
 - container stacks;
 - dev-environment automation;
-- repository-provided setup tooling.
+- project-provided setup tooling.
 
 Describe:
 
@@ -1041,7 +1041,7 @@ Create or update an `ONBOARDING.md` file in the project root.
 
 The purpose of `ONBOARDING.md` is NOT to duplicate the full onboarding report.
 
-Its purpose is to provide a compact, high-signal operational orientation layer for future coding agents and developers working in the repository. Prioritize behavioral and architectural knowledge over framework and dependency descriptions.
+Its purpose is to provide a compact, high-signal operational orientation layer for future coding agents and developers working on the project. Prioritize behavioral and architectural knowledge over framework and dependency descriptions.
 
 `ONBOARDING.md` SHOULD capture stable, high-value project knowledge such as:
 
@@ -1105,7 +1105,7 @@ When shell commands are available:
 
 - use Git Bash-compatible commands;
 - avoid PowerShell syntax;
-- avoid destructive commands.
+- avoid destructive or workspace-altering commands unless explicitly required for onboarding artifact generation.
 
 When shell commands are unavailable:
 
@@ -1122,10 +1122,10 @@ Always prioritize:
 
 - semantic, execution, and architectural understanding;
 - implementation grounding;
-- operational relevance
-  Include information that materially improves agent task execution quality.
-- project-specific over generic
-  Prefer project-specific guidance over general best practices.
+- operational relevance;
+  include information that materially improves agent task execution quality.
+- project-specific over generic;
+  prefer project-specific guidance over general best practices.
 
 Do NOT:
 
