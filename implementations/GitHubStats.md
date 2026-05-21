@@ -126,26 +126,26 @@
 
 ### Onboarding friendliness ranking
 
-| Rank | Repo | Score | Basis |
-| --- | --- | ---: | --- |
-| 1 | rohitg00/agentmemory | 9.5 | very large README/docs set, governance, benchmarks, examples, plugins, Docker, tests |
-| 2 | Lum1104/Understand-Anything | 9.0 | README, docs, translated READMEs, plugin packaging, install scripts, CI/tooling |
-| 3 | Ar9av/obsidian-wiki | 9.0 | README + SETUP, AGENTS/CLAUDE docs, setup script, CI, multi-agent install surface |
-| 4 | axoviq-ai/synthadoc | 9.0 | extensive README, docs, tests, plugin, hooks, packaging |
-| 5 | nvk/llm-wiki | 9.0 | AGENTS/CLAUDE, plugins, tests, scripts, release-heavy project maturity |
-| 6 | swarmclawai/swarmvault | 9.0 | multilingual READMEs, docs, stability/scale docs, templates, validation suites |
-| 7 | MehmetGoekce/llm-wiki | 8.5 | README, docs, examples, diagrams, contributing, OpenSpec coverage |
-| 8 | gowtham0992/link | 8.5 | README, docs, CONTRIBUTING, SECURITY, tests, integrations, packaging |
-| 9 | skyllwt/OmegaWiki | 8.0 | README, docs, config/app split, CLAUDE guidance, setup scripts |
-| 10 | yologdev/yopedia | 8.0 | README, SCHEMA, deploy docs, Docker, lint/test configs |
-| 11 | Ss1024sS/LLM-wiki | 8.0 | README, docs, tests, commands, plugin packaging, security docs |
-| 12 | jp-carrilloe/pulseOS-lite | 8.0 | large numbered how-to docs, AGENTS/CLAUDE, docs and scripts |
-| 13 | lucasastorian/llmwiki | 7.5 | README, tests, Docker, API/web split, but less explicit onboarding scaffolding |
-| 14 | ussumant/llm-wiki-compiler | 7.0 | large README and plugin packaging, but thinner repo surface otherwise |
-| 15 | Astro-Han/karpathy-llm-wiki | 7.0 | concise README + SKILL/examples, but limited operational scaffolding |
-| 16 | NicholasSpisak/second-brain | 7.0 | README/docs/tests present, but small surface and limited process docs |
-| 17 | zhurudong/andrej-karpathy-llm-wiki | 7.0 | bilingual README, examples, install script, template-first simplicity |
-| 18 | sametbrr/llm-wiki-manager | 6.5 | README + SKILL only, smaller docs/process surface |
+| Rank | Repo                               | Score | Basis                                                                                |
+| ---- | ---------------------------------- | ----: | ------------------------------------------------------------------------------------ |
+| 1    | rohitg00/agentmemory               |   9.5 | very large README/docs set, governance, benchmarks, examples, plugins, Docker, tests |
+| 2    | Lum1104/Understand-Anything        |   9.0 | README, docs, translated READMEs, plugin packaging, install scripts, CI/tooling      |
+| 3    | Ar9av/obsidian-wiki                |   9.0 | README + SETUP, AGENTS/CLAUDE docs, setup script, CI, multi-agent install surface    |
+| 4    | axoviq-ai/synthadoc                |   9.0 | extensive README, docs, tests, plugin, hooks, packaging                              |
+| 5    | nvk/llm-wiki                       |   9.0 | AGENTS/CLAUDE, plugins, tests, scripts, release-heavy project maturity               |
+| 6    | swarmclawai/swarmvault             |   9.0 | multilingual READMEs, docs, stability/scale docs, templates, validation suites       |
+| 7    | MehmetGoekce/llm-wiki              |   8.5 | README, docs, examples, diagrams, contributing, OpenSpec coverage                    |
+| 8    | gowtham0992/link                   |   8.5 | README, docs, CONTRIBUTING, SECURITY, tests, integrations, packaging                 |
+| 9    | skyllwt/OmegaWiki                  |   8.0 | README, docs, config/app split, CLAUDE guidance, setup scripts                       |
+| 10   | yologdev/yopedia                   |   8.0 | README, SCHEMA, deploy docs, Docker, lint/test configs                               |
+| 11   | Ss1024sS/LLM-wiki                  |   8.0 | README, docs, tests, commands, plugin packaging, security docs                       |
+| 12   | jp-carrilloe/pulseOS-lite          |   8.0 | large numbered how-to docs, AGENTS/CLAUDE, docs and scripts                          |
+| 13   | lucasastorian/llmwiki              |   7.5 | README, tests, Docker, API/web split, but less explicit onboarding scaffolding       |
+| 14   | ussumant/llm-wiki-compiler         |   7.0 | large README and plugin packaging, but thinner repo surface otherwise                |
+| 15   | Astro-Han/karpathy-llm-wiki        |   7.0 | concise README + SKILL/examples, but limited operational scaffolding                 |
+| 16   | NicholasSpisak/second-brain        |   7.0 | README/docs/tests present, but small surface and limited process docs                |
+| 17   | zhurudong/andrej-karpathy-llm-wiki |   7.0 | bilingual README, examples, install script, template-first simplicity                |
+| 18   | sametbrr/llm-wiki-manager          |   6.5 | README + SKILL only, smaller docs/process surface                                    |
 
 ### Implementation complexity ranking
 
