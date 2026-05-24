@@ -38,35 +38,30 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 
 ### Important Artifacts
 
-- **Core functionality**: `understand-anything-plugin`
-- **Implementation specs**: `docs/superpowers`
-- **Core components**:
-    - **Custom agents** - Markdown
-    - **Agent skills** - Markdown
-    - **Agent hooks** - Markdown
-    - **Tree filtering**: `.gitignore` semantics
-    - **Plugin specs** - Markdown / superpowers
-    - **Deterministic and supporting infrastructure**:
-        - **Primary**: TypeScript
-        - **Agent skill scripts**: Python
+#### Core components
 
-#### Source under `understand-anything-plugin`
+- Core functionality is under `understand-anything-plugin` (path base, except for `docs`)
+- Uses `Tree-sitter`
+- **SDD**: Superpowers
+- **Tree filtering**: `.gitignore` semantics
 
-| Directory                     | Description                              |
-| ----------------------------- | ---------------------------------------- |
-| `agents`                      | Custom agents                            |
-| `hooks`                       | Hook prompts                             |
-| `packages`                    | TypeScript UI                            |
-| `packages/core/src/plugins`   | Language-specific analyzers (TypeScript) |
-| `packages/core/src/languages` | Language-specific configs (TypeScript)   |
-| `skills`                      | Agent skills                             |
+| Component                                 | Path                          | Language          |
+| ----------------------------------------- | ----------------------------- | ----------------- |
+| Implementation specs                      | `docs/superpowers`            | Markdown          |
+| Custom agents                             | `agents`                      | Markdown          |
+| Agent skills                              | `skills`                      | Markdown + Python |
+| Agent hooks                               | `hooks`                       | Markdown          |
+| Language-specific analyzers (LLM)         | `skills/understand/languages` | Markdown          |
+| UI and deterministic infrastructure       | `packages`                    | TypeScript        |
+| Language-specific analyzers (algorithmic) | `packages/core/src/plugins`   | TypeScript        |
+| Language-specific configs (algorithmic)   | `packages/core/src/languages` | TypeScript        |
 
-#### Generated in Target Repository under `.understand-anything`
+#### Generated Artifacts in Target Repository under `.understand-anything`
 
-| Target                       | Description                                         |
+| Target                       | Description                                       |
 | ---------------------------- | ------------------------------------------------- |
-| `tmp/ua-domain-generate.mjs                                                        |
-| `intermediate`           Project directory analysis results in JSON format ts  ts  |
+| `tmp/ua-domain-generate.mjs` |                                                   |
+| `intermediate`               | Project directory analysis results in JSON format |
 
 ## 1. Link - gowtham0992
 
