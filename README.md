@@ -36,7 +36,21 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
     - Clone repo and open it as an existing project / folder (Ctrl-O); then go to `plugins` and `understand-anything` should become available as a vendor in the vendor dropdown filter next to the `Search plugins` field (typically showing `Codex official` by default).
     - After installation, the plugin can be opened by clicking on it to see available skills and disabling individual skills, if desired so.
 
-**Important Artifacts under `understand-anything-plugin`**
+### Important Artifacts
+
+- **Core functionality**: `understand-anything-plugin`
+- **Implementation specs**: `docs/superpowers`
+- **Core components**:
+    - **Custom agents** - Markdown
+    - **Agent skills** - Markdown
+    - **Agent hooks** - Markdown
+    - **Tree filtering**: `.gitignore` semantics
+    - **Plugin specs** - Markdown / superpowers
+    - **Deterministic and supporting infrastructure**:
+        - **Primary**: TypeScript
+        - **Agent skill scripts**: Python
+
+#### Source under `understand-anything-plugin`
 
 | Directory                     | Description                              |
 | ----------------------------- | ---------------------------------------- |
@@ -46,6 +60,13 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | `packages/core/src/plugins`   | Language-specific analyzers (TypeScript) |
 | `packages/core/src/languages` | Language-specific configs (TypeScript)   |
 | `skills`                      | Agent skills                             |
+
+#### Generated in Target Repository under `.understand-anything`
+
+| Target                       | Description                                         |
+| ---------------------------- | ------------------------------------------------- |
+| `tmp/ua-domain-generate.mjs                                                        |
+| `intermediate`           Project directory analysis results in JSON format ts  ts  |
 
 ## 1. Link - gowtham0992
 
