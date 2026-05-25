@@ -36,7 +36,7 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 
 **repo**: https://github.com/Lum1104/Understand-Anything
 
-**Architecture**:
+### Architecture
 
 - **Analysis**:
   Target analysis and processing is performed via slash commands / skills / custom agents from within the interface provided by supported agents (such as Codex or Claude).
@@ -84,13 +84,35 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 
 **repo**: https://github.com/gowtham0992/link
 
-**Architecture**:
+### Architecture
+
+The core LLM functionality is in `LINK.md`. This module essentially defines an agent skill or a custom agent, except that it is not framed as either. The deterministic part (CLI, UI, web server, and MCP server) are code in Python, while initialization scripts are in Bash. On Windows, a Conda environment with `m2-base` and `git` packages installed provide sufficient environment. The only additional step that should be performed is copying `python.exe` to `python3.exe` (necessary for the initialization script). The agent will use MCP server, if configured, or Link CLI + `link_core` (also expects `python3`), otherwise.
+
+The target project initialization command executed from the _target project root_ as
+
+```text
+bash <PATH_TO_LINK_CLONE_ROOT>/integrations/<AGENT>/install.sh --project
+```
+
+creates 
+
+1. `raw` directory for holding the source files;
+2. `wiki` directory with scaffolding (`integrations/_shared/scaffold.sh`) for wiki files;
+3. `LINK.md` copy acting as a de facto skill definition;
+4. `link_core` copy acting as the deterministic component of the `LINK.md` skill;
+5. `AGENTS.md` or agent-specific module with contents of `integrations/_shared/link-instructions-project.md`, which wires MCP server, Link CLI + `link_core` as a fallback, and `LINK.md` as skill definition.
 
 ### Core components
 
-| Component            | Path               | Language |
-| -------------------- | ------------------ | -------- |
-| Custom agents        | `agents`           | Markdown |
+| Component                                   | Path                              | Language        |
+| ------------------------------------------- | --------------------------------- | --------------- |
+| CLI                                         | `link.py`                         | Python          |
+| Web server + UI                             | `serve.py`                        | Python          |
+| Deterministic core                          | `mcp_package/link_core`           | Python          |
+| MCP server                                  | `mcp_package/link_mcp`            | Python          |
+| LLM core                                    | `LINK.md`                         | Markdown        |
+| `AGENTS.md` template and supporting scripts | `integrations/_shared`            | Markdown + Bash |
+| Target project initialization               | `integrations/<AGENT>/install.sh` | Bash            |
 
 ---
 
