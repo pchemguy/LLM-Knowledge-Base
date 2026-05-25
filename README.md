@@ -4,6 +4,8 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 
 # LLM-Knowledge-Base
 
+## Roster
+
 [Karpathy's LLM Wiki](docs/karpathy/llm-wiki.md)
 [LLM Wiki v2 — extending Karpathy's LLM Wiki pattern](LLM%20Wiki%20v2%20—%20extending%20Karpathy's%20LLM%20Wiki%20pattern%20with%20lessons%20from%20building%20agent%20memory.md)
 
@@ -53,9 +55,10 @@ Implements plugin compatible with Claude and Codex. For Codex:
 | Agent skills                              | `skills`                      | Markdown + Python |
 | Agent hooks                               | `hooks`                       | Markdown          |
 | Language-specific analyzers (LLM)         | `skills/understand/languages` | Markdown          |
-| UI and deterministic infrastructure       | `packages`                    | TypeScript        |
+| Deterministic core                        | `packages/core`               | TypeScript        |
 | Language-specific analyzers (algorithmic) | `packages/core/src/plugins`   | TypeScript        |
 | Language-specific configs (algorithmic)   | `packages/core/src/languages` | TypeScript        |
+| UI and Local web server                   | `packages/dashboard`          | TypeScript + Vite |
 
 ### Produced Artifacts (`.understand-anything` in the  Target Repository) 
 
@@ -64,6 +67,13 @@ Implements plugin compatible with Claude and Codex. For Codex:
 | `tmp/ua-domain-generate.mjs` |                                                   |
 | `intermediate`               | Project directory analysis results in JSON format |
 | Agent skills                 | Markdown                                          |
+
+---
+
+## Link
+
+**repo**: https://github.com/gowtham0992/link
+
 
 ---
 
