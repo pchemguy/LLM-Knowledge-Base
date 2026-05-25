@@ -76,12 +76,12 @@ Implements plugin compatible with Claude and Codex. For Codex:
 - All paths are relative to SwarmVault repository root.
 - Packaged Electron App
 
-| Component                           | Path        | Language   |
-| ----------------------------------- | ----------- | ---------- |
-|                                     |             |            |
-| LLM Wiki Schema                     | `templates` | Markdown   |
-| UI and deterministic infrastructure | `packages`  | TypeScript |
-| Tutorials                           | `worked`    | Markdown   |
+| Component                           | Path                         | Language                       |
+| ----------------------------------- | ---------------------------- | ------------------------------ |
+| Language-specific target smoke      | `smoke/fixtures/tiny-matrix` | `<SUPPORTED TARGET LANGUAGES>` |
+| LLM Wiki Schema                     | `templates`                  | Markdown                       |
+| UI and deterministic infrastructure | `packages`                   | TypeScript                     |
+| Tutorials                           | `worked`                     | Markdown                       |
 
 ---
 
