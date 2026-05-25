@@ -28,6 +28,8 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 17  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       | [README](implementations/Ss1024sS/LLM-Wiki-Ss1024sS/README.md)         |
 | 18  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       | [README](implementations/MehmetGoekce/LLM-Wiki-MehmetGoekce/README.md) |
 
+---
+
 ## Understand Anything
 
 **repo**: https://github.com/Lum1104/Understand-Anything
@@ -61,6 +63,23 @@ Implements plugin compatible with Claude and Codex. For Codex:
 | ---------------------------- | ------------------------------------------------- |
 | `tmp/ua-domain-generate.mjs` |                                                   |
 | `intermediate`               | Project directory analysis results in JSON format |
+| Agent skills                 | Markdown                                          |
+
+---
+
+## SwarmVault
+
+**repo**: https://github.com/swarmclawai/swarmvault
+
+### Core components
+
+- All paths are relative to SwarmVault repository root.
+
+| Component                           | Path                          | Language          |
+| ----------------------------------- | ----------------------------- | ----------------- |
+| UI and deterministic infrastructure | `packages`                    | TypeScript        |
+
+---
 
 ## 1. Link - gowtham0992
 
