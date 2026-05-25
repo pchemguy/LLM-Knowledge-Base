@@ -32,9 +32,10 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 
 **repo**: https://github.com/Lum1104/Understand-Anything
 
-- **Codex-App-compatible plugin**
-    - Clone repo and open it as an existing project / folder (Ctrl-O); then go to `plugins` and `understand-anything` should become available as a vendor in the vendor dropdown filter next to the `Search plugins` field (typically showing `Codex official` by default).
-    - After installation, the plugin can be opened by clicking on it to see available skills and disabling individual skills, if desired so.
+Implements plugin compatible with Claude and Codex. For Codex:
+
+- Clone repo and open it as an existing project / folder (Ctrl-O); then go to `plugins` and `understand-anything` should become available as a vendor in the vendor dropdown filter next to the `Search plugins` field (typically showing `Codex official` by default).
+- After installation, the plugin can be opened by clicking on it to see available skills and disabling individual skills, if desired so.
 
 ### Core components
 
