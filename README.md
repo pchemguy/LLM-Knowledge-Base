@@ -45,7 +45,7 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 - **Development**:
   "Understand Anything" is developed via the Superpowers SDD framework. The specs are included in the source repository.
 - **Implementation**:
-  "Understand Anything" is implemented as a plugin compatible with Claude and Codex.
+  "Understand Anything" is implemented as a plugin compatible with Claude and Codex (TypeScript/Vite/Markdown + Bash/PowerShell setup).
   For Codex:
     - Clone repo and open it as an existing project / folder (Ctrl-O); then go to `plugins` and `understand-anything` should become available as a vendor in the vendor dropdown filter next to the `Search plugins` field (typically showing `Codex official` by default).
     - After installation, the plugin can be opened by clicking on it to see available skills and disabling individual skills, if desired so.
@@ -68,6 +68,7 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | Language-specific analyzers (algorithmic) | `packages/core/src/plugins`   | TypeScript        |
 | Language-specific configs (algorithmic)   | `packages/core/src/languages` | TypeScript        |
 | UI and Local web server                   | `packages/dashboard`          | TypeScript + Vite |
+| Setup scripts                             | `[REPO ROOT]`                 | Bash + PowerShell |
 
 ### Produced Artifacts (`.understand-anything` in the  Target Repository) 
 
@@ -83,6 +84,13 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 
 **repo**: https://github.com/gowtham0992/link
 
+**Architecture**:
+
+### Core components
+
+| Component            | Path               | Language |
+| -------------------- | ------------------ | -------- |
+| Custom agents        | `agents`           | Markdown |
 
 ---
 
