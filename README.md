@@ -70,7 +70,9 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | UI and Local web server                   | `packages/dashboard`          | TypeScript + Vite |
 | Setup scripts                             | `[REPO ROOT]`                 | Bash + PowerShell |
 
-### Produced Artifacts (`.understand-anything` in the  Target Repository) 
+### Produced Artifacts
+
+**Location**: `.understand-anything` in the Target Repository.
 
 | Target                       | Description                                       |
 | ---------------------------- | ------------------------------------------------- |
@@ -131,6 +133,24 @@ creates
 | LLM Wiki Schema                     | `templates`                  | Markdown                       |
 | UI and deterministic infrastructure | `packages`                   | TypeScript                     |
 | Tutorials                           | `worked`                     | Markdown                       |
+
+---
+
+## LLM Wiki Manager
+
+**repo**: https://github.com/sametbrr/llm-wiki-manager
+
+### Architecture
+
+Very basic implementation: single skill file plus several script helpers. Appears to be reasonably documented.
+
+### Core components
+
+| Component                                                                    | Path         | Language |
+| ---------------------------------------------------------------------------- | ------------ | -------- |
+| Agent skill                                                                  | `SKILL.md`   | Markdown |
+| Helper scripts for scaffold, index updates, log appends, and lint reporting. | `scripts`    | Python   |
+| Documentation                                                                | `references` | Markdown |
 
 ---
 
