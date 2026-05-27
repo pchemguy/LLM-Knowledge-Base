@@ -170,7 +170,7 @@ Supports Claude and Codex (partially).
 
 ### Architecture
 
-Agent skill file + templates + helper scripts.
+Agent skill file + templates for Obsidian and Logseq + helper scripts.
 
 ### Core components
 
