@@ -23,14 +23,15 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 10  |                                      |                                                       |             |                                                                        |
 | 11  | PulseOS-Lite                         | https://github.com/jp-carrilloe/pulseOS-lite          | Small       | [README](implementations/jp-carrilloe/PulseOS-Lite/README.md)          |
 | 12  | Second Brain                         | https://github.com/NicholasSpisak/second-brain        | Small       | [README](implementations/NicholasSpisak/Second-Brain/README.md)        |
-| 13  | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       | [README](implementations/Ar9av/Obsidian-Wiki/README.md)                |
-| 14  | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       | [README](implementations/ussumant/LLM-Wiki-Compiler/README.md)         |
+| 13  |                                      |                                                       |             |                                                                        |
+|     | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       | [README](implementations/ussumant/LLM-Wiki-Compiler/README.md)         |
 |     | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       | [README](implementations/lucasastorian/LLM-Wiki/README.md)             |
 |     |                                      |                                                       |             |                                                                        |
 |     |                                      |                                                       |             |                                                                        |
 |     | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       | [README](implementations/MehmetGoekce/LLM-Wiki-MehmetGoekce/README.md) |
 |     |                                      |                                                       |             |                                                                        |
-| 15  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       | [README](implementations/Ss1024sS/LLM-Wiki-Ss1024sS/README.md)         |
+| 14  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       | [README](implementations/Ss1024sS/LLM-Wiki-Ss1024sS/README.md)         |
+| 15  | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       | [README](implementations/Ar9av/Obsidian-Wiki/README.md)                |
 | 16  | LLM Wiki Manager                     | https://github.com/sametbrr/llm-wiki-manager          | Small       | [README](implementations/sametbrr/LLM-Wiki-Manager/README.md)          |
 | 17  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       | [README](implementations/Astro-Han/Karpathy-LLM-Wiki/README.md)        |
 | 18  | Karpathy-Inspired LLM Knowledge Base | https://github.com/zhurudong/andrej-karpathy-llm-wiki | Small       | [README](implementations/zhurudong/andrej-karpathy-llm-wiki/README.md) |
@@ -148,7 +149,7 @@ creates
 
 ### Architecture
 
-Slightly more advanced compared to [LLM Wiki Manager](https://github.com/sametbrr/llm-wiki-manager). Agent skill file + templates + helper scripts + AGNETS.md templates.
+Agent skill file + templates + helper scripts + AGNETS.md templates.
 
 ### Core components
 
@@ -157,6 +158,24 @@ Slightly more advanced compared to [LLM Wiki Manager](https://github.com/sametbr
 | Agent skill + templates + skill helper scripts | `skills/knowledge-system-bootstrap` | Markdown + Python |
 | Helper scripts                                 | `scripts`                           | Python + Bash     |
 | AGNETS.md templates                            | `UNIVERSAL.md`                      | Markdown          |
+
+---
+
+## Obsidian Wiki
+
+**repo**: https://github.com/Ar9av/obsidian-wiki
+
+### Architecture
+
+Agent skills + helper scripts + AGNETS.md onboarding.  
+Notable feature - one skill per slash command. A better design, however, would probably be having one skill or a few focused skills, with each `SKLILL.md` acting as a routing module that defines just the names of the associated slash commands and routes to individual associated modules.
+
+### Core components
+
+| Component                     | Path        | Language                 |
+| ----------------------------- | ----------- | ------------------------ |
+| Agent skills + helper scripts | `.skills`   | Markdown + Python + Bash |
+| AGNETS.md - wiki onboarding   | `AGNETS.md` | Markdown                 |
 
 ---
 
