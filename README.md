@@ -283,11 +283,6 @@ The project repository appears quite messy. Sorting it out problematic. It menti
 
 ---
 
-## 11. PulseOS-Lite - jp-carrilloe
-
-**repo**: jp-carrilloe/pulseOS-lite
-
-Note: Involves SQLite.
 
 ## 15. LLM Wiki App - lucasastorian
 
