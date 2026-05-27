@@ -110,6 +110,8 @@ creates
 4. `link_core` copy acting as the deterministic component of the `LINK.md` skill;
 5. `AGENTS.md` or agent-specific module with contents of `integrations/_shared/link-instructions-project.md`, which wires MCP server, Link CLI + `link_core` as a fallback, and `LINK.md` as skill definition.
 
+Topic research skill.  
+
 ### Core components
 
 | Component                                   | Path                              | Language        |
@@ -210,6 +212,7 @@ Agent skill file + templates + helper scripts + AGNETS.md templates.
 ### Architecture
 
 Agent skills + helper scripts + AGNETS.md onboarding.  
+Topic research skill.  
 Notable feature - one skill per slash command. A better design, however, would probably be having one skill or a few focused skills, with each `SKLILL.md` acting as a routing module that defines just the names of the associated slash commands and routes to individual associated modules.
 
 ### Core components
