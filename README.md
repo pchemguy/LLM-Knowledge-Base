@@ -21,19 +21,20 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 8   | AgentMemory                          | https://github.com/rohitg00/agentmemory               | Significant | [README](implementations/rohitg00/AgentMemory/README.md)               |
 | 9   |                                      |                                                       |             |                                                                        |
 | 10  |                                      |                                                       |             |                                                                        |
-| 11  | PulseOS-Lite                         | https://github.com/jp-carrilloe/pulseOS-lite          | Small       | [README](implementations/jp-carrilloe/PulseOS-Lite/README.md)          |
-| 12  | Second Brain                         | https://github.com/NicholasSpisak/second-brain        | Small       | [README](implementations/NicholasSpisak/Second-Brain/README.md)        |
 |     |                                      |                                                       |             |                                                                        |
-|     | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       | [README](implementations/ussumant/LLM-Wiki-Compiler/README.md)         |
+|     | Second Brain                         | https://github.com/NicholasSpisak/second-brain        | Small       | [README](implementations/NicholasSpisak/Second-Brain/README.md)        |
+|     |                                      |                                                       |             |                                                                        |
+|     |                                      |                                                       |             |                                                                        |
 |     | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       | [README](implementations/lucasastorian/LLM-Wiki/README.md)             |
 |     |                                      |                                                       |             |                                                                        |
-|     |                                      |                                                       |             |                                                                        |
-| 13  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       | [README](implementations/MehmetGoekce/LLM-Wiki-MehmetGoekce/README.md) |
-| 14  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       | [README](implementations/Ss1024sS/LLM-Wiki-Ss1024sS/README.md)         |
-| 15  | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       | [README](implementations/Ar9av/Obsidian-Wiki/README.md)                |
-| 16  | LLM Wiki Manager                     | https://github.com/sametbrr/llm-wiki-manager          | Small       | [README](implementations/sametbrr/LLM-Wiki-Manager/README.md)          |
-| 17  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       | [README](implementations/Astro-Han/Karpathy-LLM-Wiki/README.md)        |
-| 18  | Karpathy-Inspired LLM Knowledge Base | https://github.com/zhurudong/andrej-karpathy-llm-wiki | Small       | [README](implementations/zhurudong/andrej-karpathy-llm-wiki/README.md) |
+| 11  | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       | [README](implementations/ussumant/LLM-Wiki-Compiler/README.md)         |
+| 12  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       | [README](implementations/MehmetGoekce/LLM-Wiki-MehmetGoekce/README.md) |
+| 13  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       | [README](implementations/Ss1024sS/LLM-Wiki-Ss1024sS/README.md)         |
+| 14  | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       | [README](implementations/Ar9av/Obsidian-Wiki/README.md)                |
+| 15  | LLM Wiki Manager                     | https://github.com/sametbrr/llm-wiki-manager          | Small       | [README](implementations/sametbrr/LLM-Wiki-Manager/README.md)          |
+| 16  | Karpathy LLM Wiki                    | https://github.com/Astro-Han/karpathy-llm-wiki        | Small       | [README](implementations/Astro-Han/Karpathy-LLM-Wiki/README.md)        |
+| 17  | Karpathy-Inspired LLM Knowledge Base | https://github.com/zhurudong/andrej-karpathy-llm-wiki | Small       | [README](implementations/zhurudong/andrej-karpathy-llm-wiki/README.md) |
+| 18  | PulseOS-Lite                         | https://github.com/jp-carrilloe/pulseOS-lite          | Small       | [README](implementations/jp-carrilloe/PulseOS-Lite/README.md)          |
 
 ---
 
@@ -142,13 +143,34 @@ creates
 
 ---
 
+## LLM Wiki Compiler
+
+**repo**: https://github.com/ussumant/llm-wiki-compiler
+
+### Architecture
+
+Agent skill + command modules + templates + helper scripts.
+Supports Claude and Codex (partially).
+
+### Core components
+
+| Component       | Path                          | Language   |
+| --------------- | ----------------------------- | ---------- |
+| Agent skill     | `plugin/skills/wiki-compiler` | Markdown   |
+| Helper scripts  | `plugin/hooks`                | Bash       |
+| Command modules | `plugin/commands`             | Markdown   |
+| Templates       | `plugin/templates`            | Markdown   |
+| Visualizer      | `plugin/visualize`            | JavaScript |
+
+---
+
 ## LLM Wiki - MehmetGoekce
 
 **repo**: https://github.com/MehmetGoekce/llm-wiki
 
 ### Architecture
 
-Agent skill file + templates + helper scripts templates.
+Agent skill file + templates + helper scripts.
 
 ### Core components
 
@@ -249,6 +271,15 @@ Agent skill file.
 | Component   | Path                     | Language |
 | ----------- | ------------------------ | -------- |
 | Agent skill | `templates/CLAUDE.en.md` | Markdown |
+
+
+---
+
+## PulseOS-Lite
+
+**repo**: https://github.com/jp-carrilloe/pulseOS-lite
+
+The project repository appears quite messy. Sorting it out problematic. It mentions SQLite database use, but otherwise its value is unclear.
 
 ---
 
