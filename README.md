@@ -23,13 +23,12 @@ url: https://chatgpt.com/c/69ff8c5e-a7e4-83eb-9748-27e1a8646e77
 | 10  |                                      |                                                       |             |                                                                        |
 | 11  | PulseOS-Lite                         | https://github.com/jp-carrilloe/pulseOS-lite          | Small       | [README](implementations/jp-carrilloe/PulseOS-Lite/README.md)          |
 | 12  | Second Brain                         | https://github.com/NicholasSpisak/second-brain        | Small       | [README](implementations/NicholasSpisak/Second-Brain/README.md)        |
-| 13  |                                      |                                                       |             |                                                                        |
+|     |                                      |                                                       |             |                                                                        |
 |     | LLM Wiki Compiler                    | https://github.com/ussumant/llm-wiki-compiler         | Small       | [README](implementations/ussumant/LLM-Wiki-Compiler/README.md)         |
 |     | LLM Wiki                             | https://github.com/lucasastorian/llmwiki              | Small       | [README](implementations/lucasastorian/LLM-Wiki/README.md)             |
 |     |                                      |                                                       |             |                                                                        |
 |     |                                      |                                                       |             |                                                                        |
-|     | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       | [README](implementations/MehmetGoekce/LLM-Wiki-MehmetGoekce/README.md) |
-|     |                                      |                                                       |             |                                                                        |
+| 13  | LLM Wiki                             | https://github.com/MehmetGoekce/llm-wiki              | Small       | [README](implementations/MehmetGoekce/LLM-Wiki-MehmetGoekce/README.md) |
 | 14  | LLM Wiki                             | https://github.com/Ss1024sS/LLM-wiki                  | Small       | [README](implementations/Ss1024sS/LLM-Wiki-Ss1024sS/README.md)         |
 | 15  | Obsidian Wiki                        | https://github.com/Ar9av/obsidian-wiki                | Small       | [README](implementations/Ar9av/Obsidian-Wiki/README.md)                |
 | 16  | LLM Wiki Manager                     | https://github.com/sametbrr/llm-wiki-manager          | Small       | [README](implementations/sametbrr/LLM-Wiki-Manager/README.md)          |
@@ -140,6 +139,27 @@ creates
 | UI and deterministic infrastructure | `packages`                   | TypeScript                     |
 | Tutorials                           | `worked`                     | Markdown                       |
 
+
+---
+
+## LLM Wiki - MehmetGoekce
+
+**repo**: https://github.com/MehmetGoekce/llm-wiki
+
+### Architecture
+
+Agent skill file + templates + helper scripts templates.
+
+### Core components
+
+- **Dev Framework**: SDD - OpenSpec
+
+| Component                     | Path        | Language |
+| ----------------------------- | ----------- | -------- |
+| Agent skill                   | `wiki.md`   | Markdown |
+| Helper scripts (generated)    | `setup.sh`  | Python   |
+| Obsidian and Logseq templates | `templates` | Markdown |
+| Implementation specs          | `openspec`  | Markdown |
 
 ---
 
