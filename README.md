@@ -41,11 +41,13 @@ https://github.com/iamsashank09/llm-wiki-kit
 
 ---
 
-## Understand Anything
+## Project Summaries
+
+### Understand Anything
 
 **repo**: https://github.com/Lum1104/Understand-Anything
 
-### Architecture
+#### Architecture
 
 - **Analysis**:
   Target analysis and processing is performed via slash commands / skills / custom agents from within the interface provided by supported agents (such as Codex or Claude).
@@ -59,7 +61,7 @@ https://github.com/iamsashank09/llm-wiki-kit
     - Clone repo and open it as an existing project / folder (Ctrl-O); then go to `plugins` and `understand-anything` should become available as a vendor in the vendor dropdown filter next to the `Search plugins` field (typically showing `Codex official` by default).
     - After installation, the plugin can be opened by clicking on it to see available skills and disabling individual skills, if desired so.
 
-### Core components
+#### Core components
 
 - Core functionality is under `understand-anything-plugin` (path base, except for `docs`)
 - Uses `Tree-sitter`
@@ -79,7 +81,7 @@ https://github.com/iamsashank09/llm-wiki-kit
 | UI and Local web server                   | `packages/dashboard`          | TypeScript + Vite |
 | Setup scripts                             | `[REPO ROOT]`                 | Bash + PowerShell |
 
-### Produced Artifacts
+#### Produced Artifacts
 
 **Location**: `.understand-anything` in the Target Repository.
 
@@ -91,11 +93,11 @@ https://github.com/iamsashank09/llm-wiki-kit
 
 ---
 
-## Link
+### Link
 
 **repo**: https://github.com/gowtham0992/link
 
-### Architecture
+#### Architecture
 
 The core LLM functionality is in `LINK.md`. This module essentially defines an agent skill or a custom agent, except that it is not framed as either. The deterministic part (CLI, UI, web server, and MCP server) are code in Python, while initialization scripts are in Bash. On Windows, a Conda environment with `m2-base` and `git` packages installed provide sufficient environment. The only additional step that should be performed is copying `python.exe` to `python3.exe` (necessary for the initialization script). The agent will use MCP server, if configured, or Link CLI + `link_core` (also expects `python3`), otherwise.
 
@@ -115,7 +117,7 @@ creates
 
 Topic research skill.  
 
-### Core components
+#### Core components
 
 | Component                                   | Path                              | Language        |
 | ------------------------------------------- | --------------------------------- | --------------- |
@@ -129,11 +131,11 @@ Topic research skill.
 
 ---
 
-## SwarmVault
+### SwarmVault
 
 **repo**: https://github.com/swarmclawai/swarmvault
 
-### Core components
+#### Core components
 
 - All paths are relative to SwarmVault repository root.
 - Packaged Electron App
@@ -148,16 +150,16 @@ Topic research skill.
 
 ---
 
-## LLM Wiki Compiler
+### LLM Wiki Compiler
 
 **repo**: https://github.com/ussumant/llm-wiki-compiler
 
-### Architecture
+#### Architecture
 
 Agent skill + command modules + templates + helper scripts.
 Supports Claude and Codex (partially).
 
-### Core components
+#### Core components
 
 | Component       | Path                          | Language   |
 | --------------- | ----------------------------- | ---------- |
@@ -169,15 +171,15 @@ Supports Claude and Codex (partially).
 
 ---
 
-## LLM Wiki - MehmetGoekce
+### LLM Wiki - MehmetGoekce
 
 **repo**: https://github.com/MehmetGoekce/llm-wiki
 
-### Architecture
+#### Architecture
 
 Agent skill file + templates for Obsidian and Logseq + helper scripts.
 
-### Core components
+#### Core components
 
 - **Dev Framework**: SDD - OpenSpec
 
@@ -190,15 +192,15 @@ Agent skill file + templates for Obsidian and Logseq + helper scripts.
 
 ---
 
-## LLM Wiki - Ss1024sS
+### LLM Wiki - Ss1024sS
 
 **repo**: https://github.com/Ss1024sS/LLM-wiki
 
-### Architecture
+#### Architecture
 
 Agent skill file + templates + helper scripts + AGNETS.md templates.
 
-### Core components
+#### Core components
 
 | Component                                      | Path                                | Language          |
 | ---------------------------------------------- | ----------------------------------- | ----------------- |
@@ -208,17 +210,17 @@ Agent skill file + templates + helper scripts + AGNETS.md templates.
 
 ---
 
-## Obsidian Wiki
+### Obsidian Wiki
 
 **repo**: https://github.com/Ar9av/obsidian-wiki
 
-### Architecture
+#### Architecture
 
 Agent skills + helper scripts + AGNETS.md onboarding.  
 Topic research skill.  
 Notable feature - one skill per slash command. A better design, however, would probably be having one skill or a few focused skills, with each `SKLILL.md` acting as a routing module that defines just the names of the associated slash commands and routes to individual associated modules.
 
-### Core components
+#### Core components
 
 | Component                     | Path        | Language                 |
 | ----------------------------- | ----------- | ------------------------ |
@@ -227,15 +229,15 @@ Notable feature - one skill per slash command. A better design, however, would p
 
 ---
 
-## LLM Wiki Manager
+### LLM Wiki Manager
 
 **repo**: https://github.com/sametbrr/llm-wiki-manager
 
-### Architecture
+#### Architecture
 
 Agent skill file + helper scripts. Appears to be reasonably documented.
 
-### Core components
+#### Core components
 
 - **Dev Framework**: Anthropic [skill creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator).
 
@@ -247,15 +249,15 @@ Agent skill file + helper scripts. Appears to be reasonably documented.
 
 ---
 
-## Karpathy LLM Wiki
+### Karpathy LLM Wiki
 
 **repo**: https://github.com/Astro-Han/karpathy-llm-wiki
 
-### Architecture
+#### Architecture
 
 Agent skill file.
 
-### Core components
+#### Core components
 
 | Component   | Path         | Language |
 | ----------- | ------------ | -------- |
@@ -264,15 +266,15 @@ Agent skill file.
 
 ---
 
-## Karpathy-Inspired LLM Knowledge Base
+### Karpathy-Inspired LLM Knowledge Base
 
 **repo**: https://github.com/zhurudong/andrej-karpathy-llm-wiki
 
-### Architecture
+#### Architecture
 
 Agent skill file.
 
-### Core components
+#### Core components
 
 | Component   | Path                     | Language |
 | ----------- | ------------------------ | -------- |
@@ -281,7 +283,7 @@ Agent skill file.
 
 ---
 
-## PulseOS-Lite
+### PulseOS-Lite
 
 **repo**: https://github.com/jp-carrilloe/pulseOS-lite
 
@@ -290,7 +292,7 @@ The project repository appears quite messy. Sorting it out problematic. It menti
 ---
 
 
-## 15. LLM Wiki App - lucasastorian
+### 15. LLM Wiki App - lucasastorian
 
 **repo**: lucasastorian/llmwiki
 
